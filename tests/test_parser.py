@@ -41,3 +41,10 @@ def test_parse_extracts_reports_count():
     if result.status != Status.OK:
         assert result.reports is not None
         assert result.reports >= 0
+
+
+def test_parse_extracts_name_and_company_id():
+    html = _read_fixture("downdetector_ok.html")
+    result = parse_status_page(html)
+    assert result.name is not None and len(result.name) > 0
+    assert result.company_id is not None and result.company_id > 0
