@@ -1,165 +1,1166 @@
 {
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
-  "schemaVersion": 39,
-  "version": 1,
+  "schemaVersion": 41,
+  "version": 5,
+  "editable": true,
   "refresh": "30s",
-  "time": { "from": "now-1h", "to": "now" },
-  "tags": ["downdetector"],
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "tags": [
+    "downdetector"
+  ],
+  "annotations": {
+    "list": []
+  },
+  "templating": {
+    "list": []
+  },
   "panels": [
     {
       "id": 1,
       "type": "stat",
       "title": "Total de Serviços",
-      "gridPos": { "h": 5, "w": 5, "x": 0, "y": 0 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
       "targets": [
         {
+          "refId": "A",
           "queryType": "0",
-          "group": { "filter": "" },
-          "host": { "filter": "Downdetector" },
-          "application": { "filter": "" },
-          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
-          "functions": [{ "def": { "name": "count" }, "params": [] }]
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
         }
       ],
-      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
-      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#808080" } } }
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "count"
+          ],
+          "fields": "/^Last \\*$/",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          }
+        },
+        "overrides": []
+      }
     },
     {
       "id": 2,
       "type": "stat",
       "title": "Serviços Ok",
-      "gridPos": { "h": 5, "w": 5, "x": 5, "y": 0 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
       "targets": [
         {
+          "refId": "A",
           "queryType": "0",
-          "host": { "filter": "Downdetector" },
-          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
-          "functions": [
-            { "def": { "name": "filter" }, "params": ["==", "0"] },
-            { "def": { "name": "count" }, "params": [] }
-          ]
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
         }
       ],
-      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
-      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#2EB85C" } } }
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "fieldName": "Last *",
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 0.0
+                  }
+                }
+              }
+            ],
+            "type": "include",
+            "match": "any"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "count"
+          ],
+          "fields": "/^Last \\*$/",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "orientation": "auto",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "green"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
     },
     {
       "id": 3,
       "type": "stat",
       "title": "Serviços em Atenção",
-      "gridPos": { "h": 5, "w": 5, "x": 10, "y": 0 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
       "targets": [
         {
+          "refId": "A",
           "queryType": "0",
-          "host": { "filter": "Downdetector" },
-          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
-          "functions": [
-            { "def": { "name": "filter" }, "params": ["==", "1"] },
-            { "def": { "name": "count" }, "params": [] }
-          ]
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
         }
       ],
-      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
-      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#F9B115" } } }
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "fieldName": "Last *",
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 1.0
+                  }
+                }
+              }
+            ],
+            "type": "include",
+            "match": "any"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "count"
+          ],
+          "fields": "/^Last \\*$/",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "orientation": "auto",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "yellow"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
     },
     {
       "id": 4,
       "type": "stat",
       "title": "Serviços com Problema",
-      "gridPos": { "h": 5, "w": 5, "x": 15, "y": 0 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
       "targets": [
         {
+          "refId": "A",
           "queryType": "0",
-          "host": { "filter": "Downdetector" },
-          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
-          "functions": [
-            { "def": { "name": "filter" }, "params": ["==", "2"] },
-            { "def": { "name": "count" }, "params": [] }
-          ]
-        }
-      ],
-      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
-      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#E55353" } } }
-    },
-    {
-      "id": 5,
-      "type": "table",
-      "title": "Painel Downdetector",
-      "gridPos": { "h": 18, "w": 24, "x": 0, "y": 5 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
-      "targets": [
-        {
-          "queryType": "0",
-          "resultFormat": "table",
-          "host": { "filter": "Downdetector" },
-          "item": { "filter": "/downdetector\\.(name|status|reports|company_id)\\[.*\\]/" }
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
         }
       ],
       "transformations": [
-        { "id": "groupBy", "options": {} },
-        { "id": "organize", "options": {} }
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "fieldName": "Last *",
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 2.0
+                  }
+                }
+              }
+            ],
+            "type": "include",
+            "match": "any"
+          }
+        }
       ],
-      "options": { "footer": { "enablePagination": true } }
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "count"
+          ],
+          "fields": "/^Last \\*$/",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "orientation": "auto",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "red"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Desconhecido",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "fieldName": "Last *",
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": 3.0
+                  }
+                }
+              }
+            ],
+            "type": "include",
+            "match": "any"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "count"
+          ],
+          "fields": "/^Last \\*$/",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "orientation": "auto",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "purple"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
     },
     {
       "id": 6,
       "type": "stat",
-      "title": "Scraper uptime",
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 23 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
-      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.uptime" } }]
+      "title": "Bloqueios CF (5m)",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 20,
+        "y": 0
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Cloudflare blocks (5m)"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "fixedColor": "green"
+          },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 30,
+      "type": "table",
+      "title": "Status por Serviço",
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
+        },
+        {
+          "refId": "B",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: reports last hour$/"
+          },
+          "functions": []
+        },
+        {
+          "refId": "C",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: last successful check$/"
+          },
+          "functions": []
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "source": "Field",
+            "format": "auto",
+            "keepTime": false,
+            "replace": false,
+            "delimiter": ":"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Field": false
+            },
+            "renameByName": {
+              "Field": "Item",
+              "Last *": "Valor"
+            },
+            "indexByName": {}
+          }
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false,
+          "reducer": [
+            "sum"
+          ]
+        },
+        "frameIndex": 0
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*: status$"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "Ok",
+                        "color": "green",
+                        "index": 0
+                      },
+                      "1": {
+                        "text": "Atenção",
+                        "color": "yellow",
+                        "index": 1
+                      },
+                      "2": {
+                        "text": "Problema",
+                        "color": "red",
+                        "index": 2
+                      },
+                      "3": {
+                        "text": "Desconhecido",
+                        "color": "purple",
+                        "index": 3
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*: last successful check$"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": 7,
       "type": "stat",
-      "title": "Cycle seconds",
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 23 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
-      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.cycle_seconds" } }],
+      "title": "Uptime do scraper",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 15
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Scraper uptime"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          },
+          "unit": "s",
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "green", "value": null },
-              { "color": "yellow", "value": 120 }
+              {
+                "color": "blue",
+                "value": null
+              }
             ]
           }
-        }
+        },
+        "overrides": []
       }
     },
     {
       "id": 8,
       "type": "stat",
-      "title": "CF blocks (5m)",
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 23 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
-      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.blocks_5m" } }],
+      "title": "Duração do ciclo",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 15
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Last cycle duration"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "fixedColor": "blue"
+          },
+          "unit": "s",
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "green", "value": null },
-              { "color": "yellow", "value": 1 },
-              { "color": "red", "value": 10 }
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 30
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
             ]
           }
-        }
+        },
+        "overrides": []
       }
     },
     {
       "id": 9,
       "type": "stat",
-      "title": "Browser restarts",
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 23 },
-      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
-      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.restarts" } }]
+      "title": "Reinícios do browser",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 15
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Browser restarts"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 11,
+      "type": "stat",
+      "title": "Scraper saudável",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 15
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Scraper healthy"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "fixedColor": "green"
+          },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 40,
+      "type": "timeseries",
+      "title": "Relatos por serviço (última hora)",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: reports last hour$/"
+          },
+          "functions": [
+            {
+              "def": {
+                "name": "setAliasByRegex",
+                "category": "Alias",
+                "params": []
+              },
+              "params": [
+                "^(.*): reports last hour$",
+                "$1"
+              ]
+            }
+          ]
+        }
+      ],
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto",
+            "spanNulls": true,
+            "pointSize": 5
+          },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
     }
   ]
 }
