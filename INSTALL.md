@@ -7,7 +7,7 @@
 - Grafana 10+ rodando
 - Python 3.11+
 - Docker 20+ (para rodar FlareSolverr)
-- Plugin Grafana: `alexanderzobnin-zabbix-app` instalado
+- Plugins Grafana: `alexanderzobnin-zabbix-app` e `yesoreyeram-boomtable-panel` (este último é Angular — exige `angular_support_enabled = true` na seção `[security]` do `grafana.ini` para Grafana 11+)
 - `zabbix_sender` binário disponível (pacote `zabbix-sender` no apt)
 
 ## Passos
@@ -90,6 +90,13 @@ UI Zabbix → Data collection → Templates → Import → carregue:
 - `/opt/downdetector-collector/zabbix/host_downdetector.yaml`
 
 ### 6. Provisionar Grafana
+
+```bash
+# Instalar plugins
+sudo grafana-cli plugins install alexanderzobnin-zabbix-app
+sudo grafana-cli plugins install yesoreyeram-boomtable-panel
+# Habilitar Angular para o boomtable
+sudo sed -i '/^\[security\]/a angular_support_enabled = true' /etc/grafana/grafana.ini
 
 ```bash
 sudo cp /opt/downdetector-collector/grafana/provisioning/datasources/zabbix.yaml \

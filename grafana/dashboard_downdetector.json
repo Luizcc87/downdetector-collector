@@ -2,7 +2,7 @@
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
   "schemaVersion": 41,
-  "version": 10,
+  "version": 11,
   "editable": true,
   "refresh": "1h",
   "time": {
@@ -434,10 +434,10 @@
     },
     {
       "id": 30,
-      "type": "stat",
-      "title": "Painel Downdetector — Status por Serviço",
+      "type": "yesoreyeram-boomtable-panel",
+      "title": "Painel Downdetector",
       "gridPos": {
-        "h": 10,
+        "h": 14,
         "w": 24,
         "x": 0,
         "y": 6
@@ -465,187 +465,191 @@
             "filter": ""
           },
           "item": {
-            "filter": "/.*: status$/"
+            "filter": "/.*: (status|reports last hour|company id)$/"
           },
-          "functions": [
-            {
-              "def": {
-                "name": "setAliasByRegex",
-                "category": "Alias",
-                "params": []
-              },
-              "params": [
-                "^(.*): status$",
-                "$1"
-              ]
-            }
-          ]
+          "functions": []
         }
       ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": true
+      "default_title_for_rows": "Serviço",
+      "row_col_wrapper": "_",
+      "hide_first_column": false,
+      "hide_headers": false,
+      "font_size": "1rem",
+      "debug_mode": false,
+      "non_matching_cells_color_bg": "",
+      "non_matching_cells_color_text": "",
+      "non_matching_cells_text": "-",
+      "text_alignment_firstcolumn": "left",
+      "text_alignment_header": "center",
+      "text_alignment_values": "center",
+      "sorting_props": {
+        "col_index": -1,
+        "direction": "desc"
+      },
+      "default_pattern": "Default",
+      "defaultPattern": {
+        "name": "Default",
+        "pattern": "/.*/",
+        "disabled": false,
+        "delimiter": ":",
+        "row_name": "_0_",
+        "col_name": "",
+        "format": "none",
+        "decimals": 2,
+        "thresholds": "",
+        "enable_bgColor": false,
+        "bgColors": "green|orange|red",
+        "enable_bgColor_overrides": false,
+        "bgColors_overrides": "",
+        "enable_textColor": false,
+        "textColors": "green|orange|red",
+        "enable_textColor_overrides": false,
+        "textColors_overrides": "",
+        "enable_transform": false,
+        "transform_values": "_value_|_value_|_value_",
+        "enable_transform_overrides": false,
+        "transform_values_overrides": "",
+        "enable_time_based_thresholds": false,
+        "time_based_thresholds": [],
+        "enable_clickable_cells": false,
+        "clickable_cells_link": "",
+        "filter": {
+          "value_below": "",
+          "value_above": ""
         },
-        "colorMode": "background",
-        "graphMode": "none",
-        "textMode": "value_and_name",
-        "orientation": "horizontal",
-        "justifyMode": "center"
+        "null_color": "darkred",
+        "null_value": "No data",
+        "null_textcolor": "white",
+        "defaultBGColor": "",
+        "defaultTextColor": "",
+        "displayTemplate": "_value_",
+        "valueName": "current",
+        "from": "",
+        "enabledDays": []
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "0": {
-                  "text": "🟢 Ok",
-                  "color": "#2EB85C",
-                  "index": 0
-                },
-                "1": {
-                  "text": "🟠 Atenção",
-                  "color": "#F9B115",
-                  "index": 1
-                },
-                "2": {
-                  "text": "🔴 Problema",
-                  "color": "#E55353",
-                  "index": 2
-                },
-                "3": {
-                  "text": "⚪ Desconhecido",
-                  "color": "#9B59B6",
-                  "index": 3
-                }
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 1
-              },
-              {
-                "color": "#E55353",
-                "value": 2
-              },
-              {
-                "color": "#9B59B6",
-                "value": 3
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 31,
-      "type": "bargauge",
-      "title": "Painel Downdetector — Relatos por Serviço (última hora)",
-      "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 16
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
-      },
-      "targets": [
+      "patterns": [
         {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+          "name": "Status",
+          "pattern": "/.*: status$/",
+          "disabled": false,
+          "delimiter": ":",
+          "row_name": "_0_",
+          "col_name": "Status",
+          "format": "none",
+          "decimals": 0,
+          "thresholds": "1,2,3",
+          "enable_bgColor": true,
+          "bgColors": "#2EB85C|#F9B115|#E55353|#9B59B6",
+          "enable_bgColor_overrides": false,
+          "bgColors_overrides": "",
+          "enable_textColor": false,
+          "textColors": "green|orange|red",
+          "enable_textColor_overrides": false,
+          "textColors_overrides": "",
+          "enable_transform": true,
+          "transform_values": "🟢 Ok|🟠 Atenção|🔴 Problema|⚪ Desconhecido",
+          "enable_transform_overrides": false,
+          "transform_values_overrides": "",
+          "enable_time_based_thresholds": false,
+          "time_based_thresholds": [],
+          "enable_clickable_cells": false,
+          "clickable_cells_link": "",
+          "filter": {
+            "value_below": "",
+            "value_above": ""
           },
-          "group": {
-            "filter": "Downdetector"
+          "null_color": "darkred",
+          "null_value": "No data",
+          "null_textcolor": "white",
+          "defaultBGColor": "",
+          "defaultTextColor": "",
+          "displayTemplate": "_value_",
+          "valueName": "current",
+          "from": "",
+          "enabledDays": []
+        },
+        {
+          "name": "Relatos",
+          "pattern": "/.*: reports last hour$/",
+          "disabled": false,
+          "delimiter": ":",
+          "row_name": "_0_",
+          "col_name": "Relatos",
+          "format": "none",
+          "decimals": 0,
+          "thresholds": "50,100",
+          "enable_bgColor": true,
+          "bgColors": "#2EB85C|#F9B115|#E55353",
+          "enable_bgColor_overrides": false,
+          "bgColors_overrides": "",
+          "enable_textColor": false,
+          "textColors": "green|orange|red",
+          "enable_textColor_overrides": false,
+          "textColors_overrides": "",
+          "enable_transform": false,
+          "transform_values": "_value_|_value_|_value_",
+          "enable_transform_overrides": false,
+          "transform_values_overrides": "",
+          "enable_time_based_thresholds": false,
+          "time_based_thresholds": [],
+          "enable_clickable_cells": false,
+          "clickable_cells_link": "",
+          "filter": {
+            "value_below": "",
+            "value_above": ""
           },
-          "host": {
-            "filter": "Downdetector"
+          "null_color": "darkred",
+          "null_value": "No data",
+          "null_textcolor": "white",
+          "defaultBGColor": "",
+          "defaultTextColor": "",
+          "displayTemplate": "_value_",
+          "valueName": "current",
+          "from": "",
+          "enabledDays": []
+        },
+        {
+          "name": "Logo",
+          "pattern": "/.*: company id$/",
+          "disabled": false,
+          "delimiter": ":",
+          "row_name": "_0_",
+          "col_name": "Logo",
+          "format": "none",
+          "decimals": 2,
+          "thresholds": "",
+          "enable_bgColor": false,
+          "bgColors": "green|orange|red",
+          "enable_bgColor_overrides": false,
+          "bgColors_overrides": "",
+          "enable_textColor": false,
+          "textColors": "green|orange|red",
+          "enable_textColor_overrides": false,
+          "textColors_overrides": "",
+          "enable_transform": true,
+          "transform_values": "_value_|_value_|_value_",
+          "enable_transform_overrides": false,
+          "transform_values_overrides": "",
+          "enable_time_based_thresholds": false,
+          "time_based_thresholds": [],
+          "enable_clickable_cells": false,
+          "clickable_cells_link": "",
+          "filter": {
+            "value_below": "",
+            "value_above": ""
           },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "/.*: reports last hour$/"
-          },
-          "functions": [
-            {
-              "def": {
-                "name": "setAliasByRegex",
-                "category": "Alias",
-                "params": []
-              },
-              "params": [
-                "^(.*): reports last hour$",
-                "$1"
-              ]
-            }
-          ]
+          "null_color": "darkred",
+          "null_value": "No data",
+          "null_textcolor": "white",
+          "defaultBGColor": "",
+          "defaultTextColor": "",
+          "displayTemplate": "<img src=\"/public/img/downdetector/_0_.svg\" style=\"height:34px;max-width:140px;\" alt=\"_0_\" onerror=\"this.style.display='none'\" />",
+          "valueName": "current",
+          "from": "",
+          "enabledDays": []
         }
       ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": true
-        },
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "unit": "none",
-          "min": 0,
-          "max": 200,
-          "decimals": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 50
-              },
-              {
-                "color": "#E55353",
-                "value": 100
-              }
-            ]
-          }
-        },
-        "overrides": []
-      }
+      "filterNullValues": false
     },
     {
       "id": 7,
@@ -655,7 +659,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 26
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -726,7 +730,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 26
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -805,7 +809,7 @@
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 26
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -884,7 +888,7 @@
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 26
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
