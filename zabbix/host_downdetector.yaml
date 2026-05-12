@@ -1,16 +1,19 @@
 zabbix_export:
-  version: '6.0'
+  version: '7.0'
+  host_groups:
+    - uuid: 6b8d29e08ba34b6a9fbc01f12da820c1
+      name: Downdetector
   hosts:
     - host: Downdetector
       name: Downdetector
       templates:
         - name: Template Downdetector
       groups:
-        - name: Linux servers
+        - name: Downdetector
       interfaces:
-        - default: 'YES'
-          type: AGENT
+        - type: AGENT
           useip: 'YES'
           ip: 127.0.0.1
           dns: ''
           port: '10050'
+          interface_ref: if1
