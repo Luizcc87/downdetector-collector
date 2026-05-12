@@ -2,7 +2,7 @@
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
   "schemaVersion": 41,
-  "version": 12,
+  "version": 13,
   "editable": true,
   "refresh": "1h",
   "time": {
@@ -431,14 +431,14 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 1,
+        "h": 3,
         "w": 24,
         "x": 0,
         "y": 6
       },
       "options": {
         "mode": "html",
-        "content": "<h2 style=\"margin:0;padding:4px 0;\">Painel Downdetector</h2>"
+        "content": "<div style=\"display:flex;align-items:center;justify-content:flex-start;height:100%;padding-left:8px;\"><h2 style=\"margin:0;font-size:22px;font-weight:700;letter-spacing:0.5px;\">Painel Downdetector</h2></div>"
       },
       "transparent": true
     },
@@ -450,11 +450,11 @@
         "h": 2,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 9
       },
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:grid;grid-template-columns:repeat(4,1fr);font-weight:700;font-size:13px;color:#888;text-align:center;border-bottom:2px solid #444;padding:8px 0;\"><div>Serviço</div><div>Logo</div><div>Status</div><div>Relatos</div></div>"
+        "content": "<div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;font-weight:700;font-size:14px;color:#aaa;text-align:center;border-bottom:2px solid #444;padding:10px 0;\"><div>Serviço</div><div>Status</div><div>Relatos</div></div>"
       },
       "transparent": true
     },
@@ -463,42 +463,26 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;text-align:center;font-size:16px;font-weight:600;\">Google <span style=\"color:#888;margin-left:6px;font-weight:400;\">(10200)</span></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:6px;\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:48px;max-width:140px;object-fit:contain;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:15px;font-weight:600;\">Google</div><div style=\"color:#888;font-size:12px;margin-top:2px;\">(10200)</div></div>"
       },
       "transparent": false
     },
     {
       "id": 101,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 6,
-        "y": 9
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:60%;max-width:80%;object-fit:contain;\" /></div>"
-      },
-      "transparent": false
-    },
-    {
-      "id": 102,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 9
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 11
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -600,14 +584,14 @@
       }
     },
     {
-      "id": 103,
+      "id": 102,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 9
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 11
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -679,46 +663,30 @@
       }
     },
     {
-      "id": 104,
+      "id": 103,
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 14
+        "y": 17
       },
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;text-align:center;font-size:16px;font-weight:600;\">Cloudflare <span style=\"color:#888;margin-left:6px;font-weight:400;\">(32542)</span></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:6px;\"><img src=\"/public/img/downdetector/cloudflare.svg\" style=\"max-height:48px;max-width:140px;object-fit:contain;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:15px;font-weight:600;\">Cloudflare</div><div style=\"color:#888;font-size:12px;margin-top:2px;\">(32542)</div></div>"
       },
       "transparent": false
     },
     {
-      "id": 105,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 6,
-        "y": 14
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;\"><img src=\"/public/img/downdetector/cloudflare.svg\" style=\"max-height:60%;max-width:80%;object-fit:contain;\" /></div>"
-      },
-      "transparent": false
-    },
-    {
-      "id": 106,
+      "id": 104,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 14
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 17
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -820,14 +788,14 @@
       }
     },
     {
-      "id": 107,
+      "id": 105,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 14
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 17
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -899,46 +867,30 @@
       }
     },
     {
-      "id": 108,
+      "id": 106,
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 19
+        "y": 23
       },
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;text-align:center;font-size:16px;font-weight:600;\">WhatsApp <span style=\"color:#888;margin-left:6px;font-weight:400;\">(10136)</span></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;padding:6px;\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:48px;max-width:140px;object-fit:contain;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:15px;font-weight:600;\">WhatsApp</div><div style=\"color:#888;font-size:12px;margin-top:2px;\">(10136)</div></div>"
       },
       "transparent": false
     },
     {
-      "id": 109,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 6,
-        "y": 19
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:60%;max-width:80%;object-fit:contain;\" /></div>"
-      },
-      "transparent": false
-    },
-    {
-      "id": 110,
+      "id": 107,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 19
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 23
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1040,14 +992,14 @@
       }
     },
     {
-      "id": 111,
+      "id": 108,
       "type": "stat",
       "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 19
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 23
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1126,7 +1078,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 25
+        "y": 30
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1197,7 +1149,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 25
+        "y": 30
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1276,7 +1228,7 @@
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 25
+        "y": 30
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1355,7 +1307,7 @@
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 25
+        "y": 30
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",

@@ -164,41 +164,34 @@ def logo_panel():
 #   Logo (img):         w=6   x=6
 #   Status (stat):      w=6   x=12
 #   Relatos (stat):     w=6   x=18
-ROW_H = 5
-SERVICE_HEADER_Y = 6
-SECTION_TITLE_Y = 6  # the title row label inside the section
+ROW_H = 6
+# 3-column layout (24 grid cols / 3 = 8 cols each)
+COL_SERVICO_W = 8
+COL_STATUS_W = 8
+COL_RELATOS_W = 8
 
 
-def service_name_cell(panel_id, service_name, company_id, x, y):
-    """Text panel showing 'Service (id)' centered."""
-    id_part = f"({company_id})" if company_id else ""
+def service_card_cell(panel_id, service_name, company_id, logo_url, x, y):
+    """Single text panel combining logo (top) + name + (id) below."""
+    id_html = (
+        f'<div style="color:#888;font-size:12px;margin-top:2px;">'
+        f'({company_id})</div>'
+        if company_id else ""
+    )
     return {
         "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": ROW_H, "w": 6, "x": x, "y": y},
+        "gridPos": {"h": ROW_H, "w": COL_SERVICO_W, "x": x, "y": y},
         "options": {
             "mode": "html",
             "content": (
-                '<div style="display:flex;align-items:center;justify-content:center;'
-                f'height:100%;text-align:center;font-size:16px;font-weight:600;">'
-                f'{service_name} <span style="color:#888;margin-left:6px;font-weight:400;">'
-                f'{id_part}</span></div>'
-            ),
-        },
-        "transparent": False,
-    }
-
-
-def service_logo_cell(panel_id, logo_url, x, y):
-    """Text panel with <img>. logo_url is the full path like /public/img/downdetector/cloudflare.svg"""
-    return {
-        "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": ROW_H, "w": 6, "x": x, "y": y},
-        "options": {
-            "mode": "html",
-            "content": (
-                '<div style="display:flex;align-items:center;justify-content:center;'
-                f'height:100%;"><img src="{logo_url}" style="max-height:60%;'
-                'max-width:80%;object-fit:contain;" /></div>'
+                '<div style="display:flex;flex-direction:column;'
+                'align-items:center;justify-content:center;height:100%;'
+                'gap:8px;padding:6px;">'
+                f'<img src="{logo_url}" style="max-height:48px;max-width:140px;'
+                'object-fit:contain;" alt="" onerror="this.style.visibility=\'hidden\'" />'
+                f'<div style="font-size:15px;font-weight:600;">{service_name}</div>'
+                f'{id_html}'
+                '</div>'
             ),
         },
         "transparent": False,
@@ -209,7 +202,7 @@ def service_status_cell(panel_id, service_name, x, y):
     """Stat panel querying '<service>: status' item with text+color mappings."""
     return {
         "id": panel_id, "type": "stat", "title": "",
-        "gridPos": {"h": ROW_H, "w": 6, "x": x, "y": y},
+        "gridPos": {"h": ROW_H, "w": COL_STATUS_W, "x": x, "y": y},
         "datasource": ZBX_DS,
         "targets": [zbx_target(f"{service_name}: status")],
         "options": {
@@ -233,7 +226,7 @@ def service_reports_cell(panel_id, service_name, x, y):
     """Stat panel for reports count of one service."""
     return {
         "id": panel_id, "type": "stat", "title": "",
-        "gridPos": {"h": ROW_H, "w": 6, "x": x, "y": y},
+        "gridPos": {"h": ROW_H, "w": COL_RELATOS_W, "x": x, "y": y},
         "datasource": ZBX_DS,
         "targets": [zbx_target(f"{service_name}: reports last hour")],
         "options": {
@@ -260,17 +253,17 @@ def service_reports_cell(panel_id, service_name, x, y):
 
 
 def section_header(panel_id, y):
-    """Header row above the per-service panels, mimicking a table header."""
+    """Header row aligned with the 3-column service grid below (8+8+8 = 24)."""
     return {
         "id": panel_id, "type": "text", "title": "",
         "gridPos": {"h": 2, "w": 24, "x": 0, "y": y},
         "options": {
             "mode": "html",
             "content": (
-                '<div style="display:grid;grid-template-columns:repeat(4,1fr);'
-                'font-weight:700;font-size:13px;color:#888;text-align:center;'
-                'border-bottom:2px solid #444;padding:8px 0;">'
-                '<div>Serviço</div><div>Logo</div><div>Status</div><div>Relatos</div>'
+                '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;'
+                'font-weight:700;font-size:14px;color:#aaa;text-align:center;'
+                'border-bottom:2px solid #444;padding:10px 0;">'
+                '<div>Serviço</div><div>Status</div><div>Relatos</div>'
                 '</div>'
             ),
         },
@@ -281,28 +274,33 @@ def section_header(panel_id, y):
 def section_title(panel_id, y):
     return {
         "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": 1, "w": 24, "x": 0, "y": y},
+        "gridPos": {"h": 3, "w": 24, "x": 0, "y": y},
         "options": {
             "mode": "html",
-            "content": '<h2 style="margin:0;padding:4px 0;">Painel Downdetector</h2>',
+            "content": (
+                '<div style="display:flex;align-items:center;justify-content:flex-start;'
+                'height:100%;padding-left:8px;">'
+                '<h2 style="margin:0;font-size:22px;font-weight:700;letter-spacing:0.5px;">'
+                'Painel Downdetector</h2></div>'
+            ),
         },
         "transparent": True,
     }
 
 
 def build_service_rows(services, start_y, start_panel_id):
-    """Return a list of panels (4 per service)."""
+    """Return a list of panels (3 per service)."""
     panels = []
     pid = start_panel_id
     y = start_y
     for svc in services:
-        panels.append(service_name_cell(pid, svc["name"], svc.get("id"), x=0, y=y))
+        panels.append(service_card_cell(
+            pid, svc["name"], svc.get("id"), svc["logo"], x=0, y=y))
         pid += 1
-        panels.append(service_logo_cell(pid, svc["logo"], x=6, y=y))
+        panels.append(service_status_cell(pid, svc["name"], x=COL_SERVICO_W, y=y))
         pid += 1
-        panels.append(service_status_cell(pid, svc["name"], x=12, y=y))
-        pid += 1
-        panels.append(service_reports_cell(pid, svc["name"], x=18, y=y))
+        panels.append(service_reports_cell(
+            pid, svc["name"], x=COL_SERVICO_W + COL_STATUS_W, y=y))
         pid += 1
         y += ROW_H
     return panels, y, pid
@@ -374,13 +372,13 @@ panels = [
     logo_panel(),
 ]
 
-# Title row at y=6
+# Title row at y=6 (h=3, taller for readability)
 panels.append(section_title(500, y=6))
-# Header row at y=7
-panels.append(section_header(501, y=7))
+# Header row at y=9 (right after title)
+panels.append(section_header(501, y=9))
 
-# Service rows starting at y=9
-service_panels, next_y, _ = build_service_rows(services, start_y=9, start_panel_id=100)
+# Service rows starting at y=11
+service_panels, next_y, _ = build_service_rows(services, start_y=11, start_panel_id=100)
 panels.extend(service_panels)
 
 # Scraper health row after the services
@@ -390,7 +388,7 @@ dashboard = {
     "title": "DASHBOARD DOWNDETECTOR",
     "uid": "downdetector-main",
     "schemaVersion": 41,
-    "version": 12,
+    "version": 13,
     "editable": True,
     "refresh": "1h",
     "time": {"from": "now-1h", "to": "now"},
