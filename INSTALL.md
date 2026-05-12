@@ -8,6 +8,13 @@
 - Python 3.11+
 - Docker 20+ (para rodar FlareSolverr)
 - Plugin Grafana: `alexanderzobnin-zabbix-app` instalado
+- Grafana 11+: desabilitar o renderizador Scenes para o dashboard (text+stat panels misturados quebram com `dashboardScene=true`); adicionar em `/etc/grafana/grafana.ini`:
+  ```ini
+  [feature_toggles]
+  dashboardScene = false
+  dashboardSceneSolo = false
+  dashboardSceneForViewers = false
+  ```
 - `zabbix_sender` binário disponível (pacote `zabbix-sender` no apt)
 
 ## Passos
