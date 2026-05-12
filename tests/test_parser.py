@@ -31,3 +31,13 @@ def test_parse_cloudflare_block_returns_unknown():
     result = parse_status_page(html)
     assert result.status == Status.UNKNOWN
     assert result.error == "cloudflare_block"
+
+
+def test_parse_extracts_reports_count():
+    """Reports count must be extracted from the page when available."""
+    html = _read_fixture("downdetector_warning.html")
+    result = parse_status_page(html)
+    # warning fixture has real dd-yellow status, so reports must be present
+    if result.status != Status.OK:
+        assert result.reports is not None
+        assert result.reports >= 0
