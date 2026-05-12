@@ -1,0 +1,28 @@
+defaults:
+  poll_interval: 60
+  country: br
+
+services:
+  - name: Cloudflare
+    slug: cloudflare
+    id: 38621
+    logo: cloudflare.svg
+    poll_interval: 30
+    country: com
+
+  - name: Banco Itaú
+    slug: banco-itau
+    id: 33205
+    logo: itau.svg
+
+  - name: Nubank
+    slug: nubank
+    id: 33205
+    logo: nubank.svg
+
+  - name: Microsoft OneDrive
+    slug: microsoft-onedrive
+    id: 53650
+    logo: ms365.svg
+    poll_interval: 300
+    country: com

@@ -1,0 +1,58 @@
+from pathlib import Path
+
+import pytest
+
+from collector.config import ServiceConfig, load_services_from_path
+
+
+@pytest.fixture
+def example_yaml(tmp_path: Path) -> Path:
+    src = Path(__file__).parents[1] / "config" / "services.example.yaml"
+    dst = tmp_path / "services.yaml"
+    dst.write_text(src.read_text())
+    return dst
+
+
+def test_load_returns_list_of_service_configs(example_yaml):
+    services = load_services_from_path(example_yaml)
+    assert len(services) == 4
+    assert all(isinstance(s, ServiceConfig) for s in services)
+
+
+def test_load_applies_defaults_for_missing_fields(example_yaml):
+    services = load_services_from_path(example_yaml)
+    itau = next(s for s in services if s.slug == "banco-itau")
+    assert itau.poll_interval == 60
+    assert itau.country == "br"
+
+
+def test_load_keeps_per_service_overrides(example_yaml):
+    services = load_services_from_path(example_yaml)
+    cloudflare = next(s for s in services if s.slug == "cloudflare")
+    assert cloudflare.poll_interval == 30
+    assert cloudflare.country == "com"
+
+
+def test_load_rejects_duplicate_slugs(tmp_path: Path):
+    bad = tmp_path / "services.yaml"
+    bad.write_text("""
+defaults:
+  poll_interval: 60
+  country: br
+services:
+  - {name: A, slug: x, id: 1, logo: a.svg}
+  - {name: B, slug: x, id: 2, logo: b.svg}
+""")
+    with pytest.raises(ValueError, match="duplicate slug"):
+        load_services_from_path(bad)
+
+
+def test_load_rejects_missing_required_fields(tmp_path: Path):
+    bad = tmp_path / "services.yaml"
+    bad.write_text("""
+defaults: {poll_interval: 60, country: br}
+services:
+  - {name: A, slug: x}
+""")
+    with pytest.raises(ValueError, match="id"):
+        load_services_from_path(bad)
