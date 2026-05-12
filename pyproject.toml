@@ -33,6 +33,9 @@ testpaths = ["tests"]
 line-length = 100
 target-version = "py311"
 
+[tool.setuptools.packages.find]
+include = ["collector*"]
+
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
