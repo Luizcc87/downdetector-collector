@@ -18,6 +18,8 @@ class ServiceConfig:
     country: str
 
     def url(self) -> str:
+        if self.country == "com":
+            return f"https://downdetector.com/status/{self.slug}/"
         return f"https://downdetector.com.{self.country}/status/{self.slug}/"
 
 

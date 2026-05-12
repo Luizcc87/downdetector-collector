@@ -47,6 +47,16 @@ services:
         load_services_from_path(bad)
 
 
+def test_service_url_country_br():
+    s = ServiceConfig(name="Test", slug="test", id=1, logo="t.svg", poll_interval=60, country="br")
+    assert s.url() == "https://downdetector.com.br/status/test/"
+
+
+def test_service_url_country_com():
+    s = ServiceConfig(name="Test", slug="test", id=1, logo="t.svg", poll_interval=60, country="com")
+    assert s.url() == "https://downdetector.com/status/test/"
+
+
 def test_load_rejects_missing_required_fields(tmp_path: Path):
     bad = tmp_path / "services.yaml"
     bad.write_text("""
