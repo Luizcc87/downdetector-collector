@@ -1,0 +1,110 @@
+zabbix_export:
+  version: '6.0'
+  templates:
+    - uuid: a1b2c3d4e5f60002000000000000000a
+      template: Template Downdetector
+      name: Template Downdetector
+      groups:
+        - name: Templates
+      items:
+        - uuid: a1b2c3d4e5f60003000000000000000a
+          name: Scraper uptime
+          key: downdetector.scraper.uptime
+          type: TRAP
+          value_type: FLOAT
+          history: 7d
+          trends: 90d
+        - uuid: a1b2c3d4e5f60004000000000000000a
+          name: Last cycle duration
+          key: downdetector.scraper.cycle_seconds
+          type: TRAP
+          value_type: FLOAT
+          history: 7d
+          trends: 90d
+        - uuid: a1b2c3d4e5f60005000000000000000a
+          name: Cloudflare blocks (5m)
+          key: downdetector.scraper.blocks_5m
+          type: TRAP
+          value_type: UNSIGNED
+          history: 7d
+          trends: 90d
+        - uuid: a1b2c3d4e5f60006000000000000000a
+          name: Browser restarts
+          key: downdetector.scraper.restarts
+          type: TRAP
+          value_type: UNSIGNED
+          history: 7d
+          trends: 90d
+        - uuid: a1b2c3d4e5f60007000000000000000a
+          name: Scraper healthy
+          key: downdetector.scraper.healthy
+          type: TRAP
+          value_type: UNSIGNED
+          history: 7d
+          trends: 90d
+      discovery_rules:
+        - uuid: a1b2c3d4e5f60008000000000000000a
+          name: Downdetector services
+          key: downdetector.discovery
+          type: EXTERNAL
+          delay: 5m
+          item_prototypes:
+            - uuid: a1b2c3d4e5f60010000000000000000a
+              name: '{#NAME}: status'
+              key: 'downdetector.status[{#SLUG}]'
+              type: TRAP
+              value_type: UNSIGNED
+              history: 90d
+              trends: 365d
+              valuemap:
+                name: Downdetector Status
+            - uuid: a1b2c3d4e5f60011000000000000000a
+              name: '{#NAME}: reports last hour'
+              key: 'downdetector.reports[{#SLUG}]'
+              type: TRAP
+              value_type: UNSIGNED
+              history: 90d
+              trends: 365d
+            - uuid: a1b2c3d4e5f60012000000000000000a
+              name: '{#NAME}: last successful check'
+              key: 'downdetector.last_check[{#SLUG}]'
+              type: TRAP
+              value_type: UNSIGNED
+              history: 7d
+            - uuid: a1b2c3d4e5f60013000000000000000a
+              name: '{#NAME}: service name'
+              key: 'downdetector.name[{#SLUG}]'
+              type: TRAP
+              value_type: CHAR
+              history: 365d
+            - uuid: a1b2c3d4e5f60014000000000000000a
+              name: '{#NAME}: company id'
+              key: 'downdetector.company_id[{#SLUG}]'
+              type: TRAP
+              value_type: UNSIGNED
+              history: 365d
+          trigger_prototypes:
+            - uuid: a1b2c3d4e5f60020000000000000000a
+              expression: 'last(/Template Downdetector/downdetector.status[{#SLUG}])=1'
+              name: '[Atenção] {#NAME} reportando problemas leves'
+              priority: WARNING
+            - uuid: a1b2c3d4e5f60021000000000000000a
+              expression: 'last(/Template Downdetector/downdetector.status[{#SLUG}])=2'
+              name: '[Problema] {#NAME} reportando falha grave'
+              priority: HIGH
+            - uuid: a1b2c3d4e5f60022000000000000000a
+              expression: '(now()-last(/Template Downdetector/downdetector.last_check[{#SLUG}]))>600'
+              name: '[Stale] {#NAME} sem coleta há mais de 10min'
+              priority: INFO
+  value_maps:
+    - uuid: a1b2c3d4e5f60001000000000000000a
+      name: Downdetector Status
+      mappings:
+        - value: '0'
+          newvalue: Ok
+        - value: '1'
+          newvalue: Atenção
+        - value: '2'
+          newvalue: Problema
+        - value: '3'
+          newvalue: Desconhecido
