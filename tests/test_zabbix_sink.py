@@ -19,6 +19,20 @@ def test_build_input_lines_escapes_quotes():
     assert lines == '"Downdetector" "downdetector.name[x]" "Foo \\"Bar\\""\n'
 
 
+def test_build_input_lines_strips_newlines_to_prevent_injection():
+    metrics = [
+        (
+            "Downdetector",
+            "downdetector.name[x]",
+            'Foo\n"Downdetector" "downdetector.status[evil]" "2',
+        )
+    ]
+    lines = build_input_lines(metrics)
+    # Newlines collapsed to spaces and quotes escaped; result is exactly ONE line
+    assert lines.count("\n") == 1
+    assert "evil" in lines  # value preserved as text, just not as a new record
+
+
 def test_sink_invokes_zabbix_sender(monkeypatch, tmp_path):
     called = {}
 

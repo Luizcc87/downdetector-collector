@@ -14,14 +14,17 @@ Metric = tuple[str, ZabbixValue]  # (key, value)
 MetricWithHost = tuple[str, str, str]  # (host, key, str_value)
 
 
-def _escape_quotes(value: str) -> str:
-    return value.replace('"', '\\"')
+def _sanitize_value(value: str) -> str:
+    # Strip control chars that would split records or confuse zabbix_sender
+    # (\n starts a new metric line, \r and embedded NUL break parsing).
+    cleaned = value.replace("\r", "").replace("\n", " ").replace("\x00", "")
+    return cleaned.replace('"', '\\"')
 
 
 def build_input_lines(metrics: Sequence[MetricWithHost]) -> str:
     out = []
     for host, key, value in metrics:
-        out.append(f'"{_escape_quotes(host)}" "{_escape_quotes(key)}" "{_escape_quotes(str(value))}"\n')
+        out.append(f'"{_sanitize_value(host)}" "{_sanitize_value(key)}" "{_sanitize_value(str(value))}"\n')
     return "".join(out)
 
 

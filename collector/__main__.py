@@ -88,7 +88,7 @@ class Collector:
             if result.parse.company_id:
                 metrics.append((f"downdetector.company_id[{service.slug}]", result.parse.company_id))
         try:
-            self._sink.send(metrics)
+            await asyncio.to_thread(self._sink.send, metrics)
         except Exception as exc:
             log.error("sink_send_failed", slug=service.slug, error=str(exc))
 
@@ -97,7 +97,7 @@ class Collector:
             try:
                 # propaga restarts do scraper para o health
                 self._health.browser_restarts = self._scraper.browser_restarts
-                self._sink.send(self._health.as_metrics())
+                await asyncio.to_thread(self._sink.send, self._health.as_metrics())
             except Exception as exc:
                 log.error("health_push_failed", error=str(exc))
             try:
@@ -141,6 +141,7 @@ class Collector:
         finally:
             self._stop_event.set()
             health_task.cancel()
+            await asyncio.gather(health_task, return_exceptions=True)
             await self._scraper.stop()
 
 
