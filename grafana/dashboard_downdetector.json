@@ -1,0 +1,165 @@
+{
+  "title": "DASHBOARD DOWNDETECTOR",
+  "uid": "downdetector-main",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "tags": ["downdetector"],
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Total de Serviços",
+      "gridPos": { "h": 5, "w": 5, "x": 0, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [
+        {
+          "queryType": "0",
+          "group": { "filter": "" },
+          "host": { "filter": "Downdetector" },
+          "application": { "filter": "" },
+          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
+          "functions": [{ "def": { "name": "count" }, "params": [] }]
+        }
+      ],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#808080" } } }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Serviços Ok",
+      "gridPos": { "h": 5, "w": 5, "x": 5, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [
+        {
+          "queryType": "0",
+          "host": { "filter": "Downdetector" },
+          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
+          "functions": [
+            { "def": { "name": "filter" }, "params": ["==", "0"] },
+            { "def": { "name": "count" }, "params": [] }
+          ]
+        }
+      ],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#2EB85C" } } }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Serviços em Atenção",
+      "gridPos": { "h": 5, "w": 5, "x": 10, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [
+        {
+          "queryType": "0",
+          "host": { "filter": "Downdetector" },
+          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
+          "functions": [
+            { "def": { "name": "filter" }, "params": ["==", "1"] },
+            { "def": { "name": "count" }, "params": [] }
+          ]
+        }
+      ],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#F9B115" } } }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Serviços com Problema",
+      "gridPos": { "h": 5, "w": 5, "x": 15, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [
+        {
+          "queryType": "0",
+          "host": { "filter": "Downdetector" },
+          "item": { "filter": "/downdetector\\.status\\[.*\\]/" },
+          "functions": [
+            { "def": { "name": "filter" }, "params": ["==", "2"] },
+            { "def": { "name": "count" }, "params": [] }
+          ]
+        }
+      ],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#E55353" } } }
+    },
+    {
+      "id": 5,
+      "type": "table",
+      "title": "Painel Downdetector",
+      "gridPos": { "h": 18, "w": 24, "x": 0, "y": 5 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [
+        {
+          "queryType": "0",
+          "resultFormat": "table",
+          "host": { "filter": "Downdetector" },
+          "item": { "filter": "/downdetector\\.(name|status|reports|company_id)\\[.*\\]/" }
+        }
+      ],
+      "transformations": [
+        { "id": "groupBy", "options": {} },
+        { "id": "organize", "options": {} }
+      ],
+      "options": { "footer": { "enablePagination": true } }
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "Scraper uptime",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 23 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.uptime" } }]
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "Cycle seconds",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 23 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.cycle_seconds" } }],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 120 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": "stat",
+      "title": "CF blocks (5m)",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 23 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.blocks_5m" } }],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 10 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": "stat",
+      "title": "Browser restarts",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 23 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix" },
+      "targets": [{ "queryType": "0", "host": { "filter": "Downdetector" }, "item": { "filter": "downdetector.scraper.restarts" } }]
+    }
+  ]
+}
