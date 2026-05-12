@@ -1,0 +1,12 @@
+/var/log/downdetector-collector/*.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 downdetector downdetector
+    postrotate
+        systemctl reload downdetector-collector >/dev/null 2>&1 || true
+    endscript
+}

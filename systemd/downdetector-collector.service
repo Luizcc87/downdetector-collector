@@ -1,0 +1,31 @@
+[Unit]
+Description=Downdetector Collector daemon
+After=network-online.target zabbix-server.service docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=simple
+User=downdetector
+Group=downdetector
+WorkingDirectory=/opt/downdetector-collector
+Environment=ZABBIX_SERVER=127.0.0.1
+Environment=ZABBIX_PORT=10051
+Environment=FLARESOLVERR_URL=http://localhost:8191/v1
+ExecStart=/opt/downdetector-collector/.venv/bin/python -m collector \
+    --config /etc/downdetector-collector/services.yaml \
+    --flaresolverr-url ${FLARESOLVERR_URL}
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=30
+StandardOutput=append:/var/log/downdetector-collector/collector.log
+StandardError=append:/var/log/downdetector-collector/collector.log
+
+# Hardening
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/log/downdetector-collector /var/lib/downdetector-collector
+NoNewPrivileges=true
+MemoryMax=2G
+
+[Install]
+WantedBy=multi-user.target
