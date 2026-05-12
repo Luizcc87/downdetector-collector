@@ -80,6 +80,13 @@ zabbix_export:
               key: 'downdetector.company_id[{#SLUG}]'
               type: TRAP
               history: 365d
+            - uuid: 8e03e04a04a54e1889380f7954507151
+              name: '{#NAME}: logo'
+              key: 'downdetector.logo[{#SLUG}]'
+              type: TRAP
+              value_type: CHAR
+              history: 365d
+              trends: '0'
           trigger_prototypes:
             - uuid: 68486048e524493fb76620498e192416
               expression: 'last(/Template Downdetector/downdetector.status[{#SLUG}])=1'

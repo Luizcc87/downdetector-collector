@@ -87,6 +87,8 @@ class Collector:
                 metrics.append((f"downdetector.name[{service.slug}]", result.parse.name))
             if result.parse.company_id:
                 metrics.append((f"downdetector.company_id[{service.slug}]", result.parse.company_id))
+            if service.logo:
+                metrics.append((f"downdetector.logo[{service.slug}]", service.logo))
         try:
             await asyncio.to_thread(self._sink.send, metrics)
         except Exception as exc:

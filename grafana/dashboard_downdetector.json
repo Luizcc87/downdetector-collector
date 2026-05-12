@@ -2,11 +2,11 @@
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
   "schemaVersion": 41,
-  "version": 5,
+  "version": 9,
   "editable": true,
-  "refresh": "30s",
+  "refresh": "1h",
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timezone": "browser",
@@ -25,8 +25,8 @@
       "type": "stat",
       "title": "Total de Serviços",
       "gridPos": {
-        "h": 5,
-        "w": 4,
+        "h": 6,
+        "w": 5,
         "x": 0,
         "y": 0
       },
@@ -87,8 +87,19 @@
         "defaults": {
           "color": {
             "mode": "fixed",
-            "fixedColor": "blue"
-          }
+            "fixedColor": "#808080"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#808080",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       }
@@ -98,9 +109,9 @@
       "type": "stat",
       "title": "Serviços Ok",
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 4,
+        "h": 6,
+        "w": 5,
+        "x": 5,
         "y": 0
       },
       "datasource": {
@@ -179,18 +190,20 @@
         "defaults": {
           "color": {
             "mode": "fixed",
-            "fixedColor": "green"
+            "fixedColor": "#2EB85C"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#2EB85C",
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       }
@@ -200,9 +213,9 @@
       "type": "stat",
       "title": "Serviços em Atenção",
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 8,
+        "h": 6,
+        "w": 5,
+        "x": 10,
         "y": 0
       },
       "datasource": {
@@ -281,18 +294,20 @@
         "defaults": {
           "color": {
             "mode": "fixed",
-            "fixedColor": "yellow"
+            "fixedColor": "#F9B115"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow",
+                "color": "#F9B115",
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       }
@@ -302,9 +317,9 @@
       "type": "stat",
       "title": "Serviços com Problema",
       "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 12,
+        "h": 6,
+        "w": 5,
+        "x": 15,
         "y": 0
       },
       "datasource": {
@@ -383,212 +398,49 @@
         "defaults": {
           "color": {
             "mode": "fixed",
-            "fixedColor": "red"
+            "fixedColor": "#E55353"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "#E55353",
                 "value": null
               }
             ]
-          }
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 5,
-      "type": "stat",
-      "title": "Desconhecido",
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 16,
-        "y": 0
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
           },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "/.*: status$/"
-          },
-          "functions": []
-        }
-      ],
-      "transformations": [
-        {
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "lastNotNull"
-            ],
-            "mode": "seriesToRows",
-            "includeTimeField": false
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "fieldName": "Last *",
-                "config": {
-                  "id": "equal",
-                  "options": {
-                    "value": 3.0
-                  }
-                }
-              }
-            ],
-            "type": "include",
-            "match": "any"
-          }
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "count"
-          ],
-          "fields": "/^Last \\*$/",
-          "values": false
-        },
-        "colorMode": "background",
-        "graphMode": "none",
-        "textMode": "value",
-        "orientation": "auto",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "purple"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              }
-            ]
-          }
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       }
     },
     {
       "id": 6,
-      "type": "stat",
-      "title": "Bloqueios CF (5m)",
+      "type": "text",
+      "title": "",
       "gridPos": {
-        "h": 5,
-        "w": 6,
+        "h": 6,
+        "w": 4,
         "x": 20,
         "y": 0
       },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Cloudflare blocks (5m)"
-          },
-          "functions": []
-        }
-      ],
       "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "value",
-        "graphMode": "none",
-        "textMode": "auto",
-        "justifyMode": "auto"
+        "mode": "html",
+        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;text-align:center;\"><div style=\"font-size:26px;font-weight:700;letter-spacing:-1px;\"><span style=\"color:#E74C3C;\">Down</span><span style=\"color:#8a8a8a;\">detector</span><span style=\"color:#E74C3C;font-size:18px;vertical-align:top;\">●</span></div><div style=\"font-size:11px;color:#888;letter-spacing:2px;margin-top:4px;\">by Ookla®</div></div>"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds",
-            "fixedColor": "green"
-          },
-          "unit": "short",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 5
-              },
-              {
-                "color": "red",
-                "value": 10
-              }
-            ]
-          }
-        },
-        "overrides": []
-      }
+      "transparent": true
     },
     {
       "id": 30,
       "type": "table",
-      "title": "Status por Serviço",
+      "title": "Painel Downdetector",
       "gridPos": {
-        "h": 10,
+        "h": 14,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 6
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -613,51 +465,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/.*: status$/"
-          },
-          "functions": []
-        },
-        {
-          "refId": "B",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "/.*: reports last hour$/"
-          },
-          "functions": []
-        },
-        {
-          "refId": "C",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "/.*: last successful check$/"
+            "filter": "/.*: (status|reports last hour|company id)$/"
           },
           "functions": []
         }
@@ -677,37 +485,55 @@
           "id": "extractFields",
           "options": {
             "source": "Field",
-            "format": "auto",
+            "format": "regex",
+            "regExp": "^(?<Servico>[^:]+):\\s*(?<Metric>.+)$",
             "keepTime": false,
-            "replace": false,
-            "delimiter": ":"
+            "replace": false
+          }
+        },
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "Metric",
+            "rowField": "Servico",
+            "valueField": "Last *",
+            "emptyValue": "null"
           }
         },
         {
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Field": false
+              "company id": true
+            },
+            "indexByName": {
+              "Servico\\Metric": 0,
+              "status": 1,
+              "reports last hour": 2
             },
             "renameByName": {
-              "Field": "Item",
-              "Last *": "Valor"
-            },
-            "indexByName": {}
+              "Servico\\Metric": "Serviço",
+              "status": "Status",
+              "reports last hour": "Relatos"
+            }
           }
         }
       ],
       "options": {
         "showHeader": true,
-        "cellHeight": "sm",
+        "cellHeight": "md",
         "footer": {
-          "show": false,
-          "reducer": [
-            "sum"
-          ]
+          "show": false
         },
-        "frameIndex": 0
+        "frameIndex": 0,
+        "sortBy": [
+          {
+            "displayName": "Status",
+            "desc": true
+          }
+        ]
       },
+      "pluginVersion": "11.6.0",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -730,8 +556,8 @@
         "overrides": [
           {
             "matcher": {
-              "id": "byRegexp",
-              "options": ".*: status$"
+              "id": "byName",
+              "options": "Status"
             },
             "properties": [
               {
@@ -741,40 +567,111 @@
                     "type": "value",
                     "options": {
                       "0": {
-                        "text": "Ok",
-                        "color": "green",
+                        "text": "Ok 🟢",
+                        "color": "#2EB85C",
                         "index": 0
                       },
                       "1": {
-                        "text": "Atenção",
-                        "color": "yellow",
+                        "text": "Atenção 🟠",
+                        "color": "#F9B115",
                         "index": 1
                       },
                       "2": {
-                        "text": "Problema",
-                        "color": "red",
+                        "text": "Problema 🔴",
+                        "color": "#E55353",
                         "index": 2
                       },
                       "3": {
-                        "text": "Desconhecido",
-                        "color": "purple",
+                        "text": "Desconhecido ⚪",
+                        "color": "#9B59B6",
                         "index": 3
                       }
                     }
                   }
                 ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 220
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
               }
             ]
           },
           {
             "matcher": {
-              "id": "byRegexp",
-              "options": ".*: last successful check$"
+              "id": "byName",
+              "options": "Relatos"
             },
             "properties": [
               {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "gauge",
+                  "mode": "gradient",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 200
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#2EB85C",
+                      "value": null
+                    },
+                    {
+                      "color": "#F9B115",
+                      "value": 50
+                    },
+                    {
+                      "color": "#E55353",
+                      "value": 100
+                    }
+                  ]
+                }
+              },
+              {
                 "id": "unit",
-                "value": "dateTimeFromNow"
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Serviço"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 260
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
               }
             ]
           }
@@ -784,12 +681,12 @@
     {
       "id": 7,
       "type": "stat",
-      "title": "Uptime do scraper",
+      "title": "Uptime",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 15
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -860,7 +757,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 15
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -918,12 +815,12 @@
                 "value": null
               },
               {
-                "color": "yellow",
+                "color": "#F9B115",
                 "value": 30
               },
               {
-                "color": "red",
-                "value": 60
+                "color": "#E55353",
+                "value": 120
               }
             ]
           }
@@ -934,12 +831,91 @@
     {
       "id": 9,
       "type": "stat",
-      "title": "Reinícios do browser",
+      "title": "Bloqueios CF (5m)",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 15
+        "y": 20
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Cloudflare blocks (5m)"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "area",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "fixedColor": "green"
+          },
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 10
+              }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 10,
+      "type": "stat",
+      "title": "Reinícios do browser",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 20
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -994,166 +970,6 @@
             "steps": [
               {
                 "color": "blue",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 11,
-      "type": "stat",
-      "title": "Scraper saudável",
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 15
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Scraper healthy"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "auto",
-        "justifyMode": "auto"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds",
-            "fixedColor": "green"
-          },
-          "unit": "short",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 40,
-      "type": "timeseries",
-      "title": "Relatos por serviço (última hora)",
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 20
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "/.*: reports last hour$/"
-          },
-          "functions": [
-            {
-              "def": {
-                "name": "setAliasByRegex",
-                "category": "Alias",
-                "params": []
-              },
-              "params": [
-                "^(.*): reports last hour$",
-                "$1"
-              ]
-            }
-          ]
-        }
-      ],
-      "options": {
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "drawStyle": "line",
-            "lineWidth": 2,
-            "fillOpacity": 10,
-            "showPoints": "auto",
-            "spanNulls": true,
-            "pointSize": 5
-          },
-          "unit": "short",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
                 "value": null
               }
             ]
