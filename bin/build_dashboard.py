@@ -172,12 +172,12 @@ COL_RELATOS_W = 8
 
 
 def service_card_cell(panel_id, service_name, company_id, logo_url, x, y):
-    """Single text panel combining logo (top) + name + (id) below."""
-    id_html = (
-        f'<div style="color:#888;font-size:12px;margin-top:2px;">'
-        f'({company_id})</div>'
-        if company_id else ""
-    )
+    """Single text panel: 'Service (id)' on TOP, logo image BELOW.
+
+    Per user feedback (2026-05-12): top = combined "Cloudflare (32542)",
+    bottom = the logo as an image.
+    """
+    id_part = f" <span style=\"color:#888;font-weight:400;\">({company_id})</span>" if company_id else ""
     return {
         "id": panel_id, "type": "text", "title": "",
         "gridPos": {"h": ROW_H, "w": COL_SERVICO_W, "x": x, "y": y},
@@ -186,11 +186,10 @@ def service_card_cell(panel_id, service_name, company_id, logo_url, x, y):
             "content": (
                 '<div style="display:flex;flex-direction:column;'
                 'align-items:center;justify-content:center;height:100%;'
-                'gap:8px;padding:6px;">'
-                f'<img src="{logo_url}" style="max-height:48px;max-width:140px;'
+                'gap:10px;padding:6px;">'
+                f'<div style="font-size:16px;font-weight:700;">{service_name}{id_part}</div>'
+                f'<img src="{logo_url}" style="max-height:54px;max-width:160px;'
                 'object-fit:contain;" alt="" onerror="this.style.visibility=\'hidden\'" />'
-                f'<div style="font-size:15px;font-weight:600;">{service_name}</div>'
-                f'{id_html}'
                 '</div>'
             ),
         },
@@ -388,7 +387,7 @@ dashboard = {
     "title": "DASHBOARD DOWNDETECTOR",
     "uid": "downdetector-main",
     "schemaVersion": 41,
-    "version": 13,
+    "version": 14,
     "editable": True,
     "refresh": "1h",
     "time": {"from": "now-1h", "to": "now"},
