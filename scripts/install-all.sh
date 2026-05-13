@@ -14,7 +14,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-ZABBIX_URL=""
+ZABBIX_URL="http://localhost/zabbix"
 ZABBIX_USER="Admin"
 ZABBIX_PASSWORD=""
 SKIP_ZABBIX=0
@@ -31,9 +31,13 @@ Uso: sudo $0 [opções]
 Faz o setup completo: pacotes + FlareSolverr + daemon + Zabbix + Grafana.
 
 Opções Zabbix (necessárias se NÃO usar --skip-zabbix):
-  --zabbix-url URL            URL base do Zabbix (ex: http://zabbix/zabbix)
+  --zabbix-password PASS      Senha do admin do Zabbix (OBRIGATÓRIO)
+  --zabbix-url URL            URL base (default: http://localhost/zabbix)
   --zabbix-user USER          Usuário (default: Admin)
-  --zabbix-password PASS      Senha
+
+Grafana é provisionado via arquivos em /etc/grafana/provisioning/ — não
+precisa de senha. As credenciais do Zabbix são reaproveitadas pelo
+datasource Grafana → Zabbix.
 
 Skips:
   --skip-zabbix               Não configurar Zabbix automaticamente
