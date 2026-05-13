@@ -74,6 +74,23 @@ def _is_cloudflare_block(html: str) -> bool:
     return any(m in html for m in title_markers) or any(m in html for m in body_markers)
 
 
+# Página de bloqueio anti-scraping do Downdetector: vem com HTTP 200 mas
+# conteúdo é "(╯°□°)╯︵ ┻━┻" + "429 Rate Limited" + texto sobre scraping.
+# Página inteira tem ~248KB e título genérico "Downdetector".
+_RATE_LIMIT_MARKERS = (
+    "(╯°□°)╯︵ ┻━┻",
+    "429 Rate Limited",
+    "blocked from accessing",
+)
+
+
+def _is_rate_limited(html: str) -> bool:
+    if not html:
+        return False
+    hits = sum(1 for m in _RATE_LIMIT_MARKERS if m in html)
+    return hits >= 2  # dois marcadores reduzem falso-positivo
+
+
 def _extract_status(html: str) -> Optional[Status]:
     # Primary: JSON SSR
     m = _STATUS_JSON_RE.search(html)
@@ -144,6 +161,8 @@ def _extract_company_id(html: str) -> Optional[int]:
 def parse_status_page(html: str) -> ParseResult:
     if _is_cloudflare_block(html):
         return ParseResult(status=Status.UNKNOWN, error="cloudflare_block")
+    if _is_rate_limited(html):
+        return ParseResult(status=Status.UNKNOWN, error="rate_limited")
     status = _extract_status(html)
     if status is None:
         return ParseResult(status=Status.UNKNOWN, error="status_not_found")

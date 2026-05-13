@@ -13,3 +13,7 @@ config/services.yaml
 *.log
 .idea/
 .vscode/
+
+# Claude Code work artifacts
+.claude/
+skills-lock.json

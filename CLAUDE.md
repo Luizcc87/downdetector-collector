@@ -1,8 +1,9 @@
 # downdetector-collector — Project Context for Claude
 
 > This file is loaded automatically at session start. It captures the state
-> at session pause on **2026-05-12** so the next session can continue without
-> re-discovering everything.
+> at session pause on **2026-05-12 ~18:00** so the next session can continue
+> without re-discovering everything. Última atualização: **2026-05-12 ~19:42**
+> após retomada pós-crash: expansão de 3 → 58 serviços via SIGHUP reload.
 
 ## What this project does
 
@@ -25,37 +26,61 @@ todos os serviços monitorados.
 | **FlareSolverr container** | `flaresolverr` (Docker), porta `127.0.0.1:8191` |
 | **Zabbix Server** | 7.0.19 local, host "Downdetector" (hostid=10676), 24 items |
 | **Scrape interval** | `3600s` (1h) em `/etc/downdetector-collector/services.yaml` |
-| **Serviços monitorados** | 3 (Google, Cloudflare, WhatsApp) — placeholder pra expandir até 48 |
+| **Serviços monitorados** | **58** — 3 confirmados (Google id=10200, Cloudflare 32542, WhatsApp 10136) + 55 novos da lista AlanMartines com `id: 0` (placeholder) |
 | **Dashboard JSON** | v14 em DB do Grafana; commit `c9852b8` no repo |
 | **Testes Python** | 23 passing (em `/home/cristiano/downdetector-collector/.venv`) |
-| **Disco** | ~622 M livres em `/` (15G total, ~96% usado) — apertado |
+| **Disco** | 15G livres / 30G (48% usado) — usuário aumentou a VM ✓ |
 | **Backup pré-upgrade** | `/var/backups/grafana/pre-13-upgrade-20260512-174834/` |
+| **grafana.ini toggles** | Limpos — `dashboardScene*=false` removidos (Grafana 13 ignora) |
 
-## Por onde paramos
+## Por onde paramos (após segunda retomada 2026-05-12 ~19:42)
 
-Pausamos no meio de:
+Sessão anterior crashou no meio da edição do `services.yaml` — o arquivo ficou
+zerado (`services: []`) enquanto o daemon ainda rodava com 3 serviços em memória
+do reload anterior (18:38:58). Recuperação feita:
 
-1. **Upgrade Grafana 11.6 → 13.0.1 concluído** (apesar de dpkg ter erradoo durante install por falta de disco — o upgrade finalizou em outro momento; `/api/health` confirma versão 13.0.1).
-2. **Usuário vai aumentar o disco da VM** (`/dev/mapper/ubuntu--vg-ubuntu--lv`) — está 96% cheio, precisa de mais espaço pra instalar plugins, cache, etc.
-3. **Layout do dashboard precisa ser revalidado em Grafana 13** porque o problema anterior era:
-   - Grafana 11 com `dashboardScene=true` (renderizador Scenes) **empilhava** verticalmente painéis `text` e `stat` no mesmo `y` em vez de respeitar `gridPos.x/w`.
-   - Workaround aplicado: `[feature_toggles] dashboardScene = false` em `/etc/grafana/grafana.ini`.
-   - **Em Grafana 13** esse toggle pode não existir mais (Scenes virou padrão único). Precisa testar se o workaround ainda funciona OU redesenhar o layout sem mistura `text`+`stat` no mesmo y.
+1. **Recuperei os 3 serviços** confirmando IDs via Zabbix items (`downdetector.company_id[*]`).
+2. **Expandi pra 58 serviços** copiando a lista de 56 do AlanMartines (`/tmp/alanmartines/downdetectorlist.list`, 57 únicos), removendo overlap com cloudflare/whatsapp, corrigindo typo `receite-federal` → `receita-federal`.
+3. **IDs dos 55 novos como `0`** (placeholder) — o `{#ID}` macro só aparece como cosmético no LLD (não é usado em key/trigger; verifiquei em `zabbix/tmpl_downdetector.yaml`). `company_id` real é coletado a cada scrape e enviado em `downdetector.company_id[<slug>]`. Pra popular IDs reais, rodar `python3 bin/discover.py --slugs-file <lista>`.
+4. **SIGHUP** via `systemctl reload downdetector-collector` → log confirmou `count: 58, event: config_loaded`.
+5. **LLD do Zabbix rodou sozinho** (delay 5min) e criou ~360 items (58 svcs × 6 metrics + 5 health + extras). Primeiros scrapes saíram count=6 (status+last_check+reports+name+company_id+logo) por causa do META_PUSH_EVERY_N_SCRAPES=20 (count==1 dispara meta).
+6. Pace observado: ~15s/scrape via FlareSolverr (serial). Primeira passada completa: ~14min após reload.
+
+Pendente (continuação do TODO da primeira retomada — não foi tocado):
+
+### Por onde paramos (snapshot 2026-05-12 ~18:05)
+
+Concluído nesta sessão:
+
+1. **Upgrade Grafana 11.6 → 13.0.1 confirmado** — `/api/health` responde version 13.0.1+security-01.
+2. **Disco aumentado** — `/` agora tem 30G total / 15G livres.
+3. **grafana.ini limpo** — os 3 toggles `dashboardScene*=false` em `[feature_toggles]` foram removidos (substituídos por comentário). Logs do startup confirmam que em Grafana 13 esses toggles são **ignorados** (`FeatureToggles ... dashboardScene=true dashboardSceneSolo=true dashboardSceneForViewers=true`). Scenes virou padrão único.
+4. **Backup do grafana.ini** em `/etc/grafana/grafana.ini.bak-20260512-175853` (caso queira reverter).
+5. **Permissão regravada** — `Edit` tool zerou o group do `grafana.ini` pra `root:root`, restaurado pra `root:grafana 640`. **Cuidado**: editar `grafana.ini` por ferramentas que reescrevem o arquivo (Edit/Write/sed) podem repetir o bug. Sempre re-aplicar `chown root:grafana /etc/grafana/grafana.ini` e `systemctl restart grafana-server` depois.
+
+Pendente:
+
+- **Validação visual do layout v14 em Grafana 13.** Sem `grafana-image-renderer` plugin instalado, não foi possível screenshot programático. **Você precisa abrir `http://srv-zabbix:3000/d/downdetector-main/` e olhar**:
+  - Se cada serviço aparece como **uma linha de 3 cards lado-a-lado** (logo+nome / status / relatos) → Grafana 13 corrigiu o bug do Scenes 1.0; está pronto.
+  - Se os painéis text+stat aparecem **empilhados verticalmente** no mesmo y → bug persistiu em Scenes 13. Nesse caso, redesenhar substituindo `text` panels por `stat` com `mappings` HTML inline, ou usar `volkovlabs-table-panel`.
 
 ## Próximos passos quando voltar
 
-1. **Confirmar disco aumentou.** Rodar `df -h /` — deve ter pelo menos 2-3GB livres.
-2. **Reiniciar Grafana** (`systemctl restart grafana-server`) e checar:
-   - `curl -s http://localhost:3000/api/health` → version 13.0.1
-   - Login com a senha do usuário (que NÃO foi alterada nos upgrades)
-   - Abrir o dashboard `http://srv-zabbix:3000/d/downdetector-main/`
-3. **Verificar se o layout funciona em Grafana 13** sem o workaround `dashboardScene=false`:
-   - Remover as 3 linhas `dashboardScene*=false` do `grafana.ini` se Grafana 13 ignorá-las
-   - Se layout quebrar (empilhar), **redesenhar** sem text panels — substituir o card de serviço por um stat panel com value mapping HTML, ou usar plugin React moderno (`volkovlabs-table-panel`)
-4. **Limpar partial-install artifacts** se houver:
+1. **Olhar o dashboard** e me dizer qual dos dois cenários acima ocorreu (layout OK ou quebrado em Grafana 13 Scenes).
+2. **Regenerar dashboard JSON** pra refletir os 58 serviços: `python3 bin/build_dashboard.py` → escreve em `/var/lib/grafana/dashboards/downdetector/dashboard_downdetector.json`. **Atenção**: dashboard atual ainda foi gerado pra 3 serviços; vai mostrar muito espaço vazio até regenerar.
+3. **Gerar/baixar SVGs faltantes** dos 52 serviços novos em `/usr/share/grafana/public/img/downdetector/<slug>.svg`. Só temos 6 hoje (cloudflare/google/whatsapp + 3 placeholders itau/ms365/nubank). Sem SVG, dashboard mostra alt text/quadradinho quebrado mas coleta não é afetada.
+4. **Popular IDs reais** dos 55 novos serviços rodando discover (opcional, só cosmético no `{#ID}`):
+   ```
+   cd /home/cristiano/downdetector-collector
+   .venv/bin/python -c "from pathlib import Path; from collector.config import load_services_from_path; print('\n'.join(s.slug for s in load_services_from_path(Path('/etc/downdetector-collector/services.yaml')) if s.id == 0))" > /tmp/new_slugs.txt
+   .venv/bin/python bin/discover.py --slugs-file /tmp/new_slugs.txt > /tmp/discovered.yaml
+   ```
+   Depois mesclar IDs descobertos manualmente no services.yaml.
+5. **Trimming**: se 58 ficou demais, podar serviços irrelevantes pra ti (FIFA, Free Fire, Tinder, Snapchat etc) — basta deletar do yaml e dar SIGHUP novamente.
+6. Se layout quebrado em Grafana 13 → redesign do dashboard (sem mistura text+stat no mesmo y).
+7. **Limpar partial-install artifacts** se houver:
    - `dpkg --audit` — deve estar limpo
    - `ls /usr/share/grafana/public/build/*.dpkg-new` — não deve haver
-5. **Atualizar memórias** com lições do Grafana 13 (Scenes ainda existe? Toggle removido? text+stat mix funciona?).
 
 ## Decisões arquiteturais críticas
 

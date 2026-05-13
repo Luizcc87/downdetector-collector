@@ -1,25 +1,23 @@
-"""DASHBOARD DOWNDETECTOR v12 — AlanMartines-inspired layout (NO Angular, NO plugins).
+"""DASHBOARD DOWNDETECTOR v19 — Layout do Cristiano.
 
-Reference: https://github.com/AlanMartines/monitoramento-downdetector-zabbix-grafana
-That dashboard uses ONLY native `stat` and `text` panels arranged in a grid —
-no table panel, no boomtable, no transformations. Works on any Grafana version
-including Grafana 12/13 (no Angular deprecation issues).
+Topo (h=3, linha única, 24 cols):
+  Total(2) Ok(2) Atn(2) Prob(3) | Uptime(3) Cycle(4) CF(4) Restarts(4)
 
-Layout per service (1 row = 1 service):
-  ┌─────────┬───────────┬──────────────┬────────────┐
-  │ Serviço │  Logo     │   Status     │  Relatos   │
-  │ Name(id)│ <img/>    │ ESTÁVEL/etc  │ <number>   │
-  └─────────┴───────────┴──────────────┴────────────┘
-   text       text(html)  stat (mapped)  stat
+Título (h=2)
 
-Top row: 4 count cards (Total/OK/Atenção/Problema) + Downdetector wordmark
-Bottom row: 4 scraper-health stats
-
-Panels are generated from /etc/downdetector-collector/services.yaml so adding
-a service to the config rebuilds the dashboard automatically.
+Cada card de serviço (w=3, h=8, 8 por linha):
+  ┌────────────┐
+  │   <logo>   │  ← text panel (h=4): logo + nome
+  │   Nome     │
+  ├────────────┤
+  │  🟢 Ok     │  ← stat panel (h=2): status mapeado/colorido
+  ├────────────┤
+  │  35 R      │  ← stat panel (h=2): número de relatos
+  └────────────┘
 """
 import json
 from pathlib import Path
+
 import yaml
 
 ZBX_DS = {"type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix"}
@@ -32,19 +30,15 @@ COLOR_ATTN = "#F9B115"
 COLOR_PROB = "#E55353"
 COLOR_UNK = "#9B59B6"
 
-# Map status code -> mapping config (mimicking AlanMartines's range style)
-STATUS_MAPPINGS = [
-    {
-        "type": "value",
-        "options": {
-            "0": {"text": "🟢 Ok", "color": COLOR_OK, "index": 0},
-            "1": {"text": "🟠 Atenção", "color": COLOR_ATTN, "index": 1},
-            "2": {"text": "🔴 Problema", "color": COLOR_PROB, "index": 2},
-            "3": {"text": "⚪ Desconhecido", "color": COLOR_UNK, "index": 3},
-        },
-    }
-]
-
+STATUS_MAPPINGS = [{
+    "type": "value",
+    "options": {
+        "0": {"text": "Ok", "color": COLOR_OK, "index": 0},
+        "1": {"text": "Atenção", "color": COLOR_ATTN, "index": 1},
+        "2": {"text": "Problema", "color": COLOR_PROB, "index": 2},
+        "3": {"text": "N/D", "color": COLOR_UNK, "index": 3},
+    },
+}]
 STATUS_THRESHOLDS = {
     "mode": "absolute",
     "steps": [
@@ -55,73 +49,45 @@ STATUS_THRESHOLDS = {
     ],
 }
 
+# Grid: 24 cols. 8 cards per row, each w=3.
+CARDS_PER_ROW = 8
+CARD_W = 24 // CARDS_PER_ROW  # = 3
+LOGO_H = 4
+STATUS_H = 2
+REPORTS_H = 2
+CARD_H = LOGO_H + STATUS_H + REPORTS_H  # = 8
+
+# Topo: linha única de h=3 com contadores (esq) + saúde do scraper (dir)
+TOP_H = 3
+TITLE_Y = 3
+TITLE_H = 2
+SERVICES_Y = TITLE_Y + TITLE_H  # = 5
+
 
 def zbx_target(name_filter, ref="A"):
     return {
-        "refId": ref,
-        "queryType": "0",
-        "resultFormat": "time_series",
+        "refId": ref, "queryType": "0", "resultFormat": "time_series",
         "datasource": ZBX_DS,
-        "group": {"filter": HOST_GROUP},
-        "host": {"filter": HOST},
-        "application": {"filter": ""},
-        "item": {"filter": name_filter},
+        "group": {"filter": HOST_GROUP}, "host": {"filter": HOST},
+        "application": {"filter": ""}, "item": {"filter": name_filter},
         "functions": [],
     }
 
 
 # ── TOP ROW ─────────────────────────────────────────────────────────────────
 
-def status_count_panel(panel_id, title, status_value, color, grid_x):
-    return {
-        "id": panel_id, "type": "stat", "title": title,
-        "gridPos": {"h": 6, "w": 5, "x": grid_x, "y": 0},
-        "datasource": ZBX_DS,
-        "targets": [zbx_target("/.*: status$/")],
-        "transformations": [
-            {"id": "reduce", "options": {
-                "reducers": ["lastNotNull"], "mode": "seriesToRows",
-                "includeTimeField": False,
-            }},
-            {"id": "filterByValue", "options": {
-                "filters": [{"fieldName": "Last *", "config": {
-                    "id": "equal", "options": {"value": float(status_value)},
-                }}],
-                "type": "include", "match": "any",
-            }},
-        ],
-        "options": {
-            "reduceOptions": {"calcs": ["count"], "fields": "/^Last \\*$/", "values": False},
-            "colorMode": "background", "graphMode": "none", "textMode": "value",
-            "justifyMode": "center",
-        },
-        "fieldConfig": {
-            "defaults": {
-                "color": {"mode": "fixed", "fixedColor": color},
-                "thresholds": {"mode": "absolute", "steps": [{"color": color, "value": None}]},
-                "unit": "none", "min": 0,
-            },
-            "overrides": [],
-        },
-    }
-
-
 def total_panel():
     return {
-        "id": 1, "type": "stat", "title": "Total de Serviços",
-        "gridPos": {"h": 6, "w": 5, "x": 0, "y": 0},
+        "id": 1, "type": "stat", "title": "Total",
+        "gridPos": {"h": TOP_H, "w": 2, "x": 0, "y": 0},
         "datasource": ZBX_DS,
         "targets": [zbx_target("/.*: status$/")],
         "transformations": [
-            {"id": "reduce", "options": {
-                "reducers": ["lastNotNull"], "mode": "seriesToRows",
-                "includeTimeField": False,
-            }},
+            {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
         ],
         "options": {
-            "reduceOptions": {"calcs": ["count"], "fields": "/^Last \\*$/", "values": False},
-            "colorMode": "background", "graphMode": "none", "textMode": "value",
-            "justifyMode": "center",
+            "reduceOptions": {"calcs": ["count"], "fields": "/^Last/", "values": False},
+            "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center",
         },
         "fieldConfig": {
             "defaults": {
@@ -134,22 +100,70 @@ def total_panel():
     }
 
 
-def logo_panel():
+def status_count_panel(pid, title, status_value, color, gx, gw):
     return {
-        "id": 6, "type": "text", "title": "",
-        "gridPos": {"h": 6, "w": 4, "x": 20, "y": 0},
+        "id": pid, "type": "stat", "title": title,
+        "gridPos": {"h": TOP_H, "w": gw, "x": gx, "y": 0},
+        "datasource": ZBX_DS,
+        "targets": [zbx_target("/.*: status$/")],
+        "transformations": [
+            {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
+            {"id": "filterByValue", "options": {
+                "filters": [{"fieldName": "Last", "config": {"id": "equal", "options": {"value": float(status_value)}}}],
+                "type": "include", "match": "any",
+            }},
+        ],
+        "options": {
+            "reduceOptions": {"calcs": ["count"], "fields": "/^Last/", "values": False},
+            "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center",
+        },
+        "fieldConfig": {
+            "defaults": {
+                "color": {"mode": "fixed", "fixedColor": color},
+                "thresholds": {"mode": "absolute", "steps": [{"color": color, "value": None}]},
+                "unit": "none", "min": 0,
+            },
+            "overrides": [],
+        },
+    }
+
+
+def section_title(pid, y):
+    return {
+        "id": pid, "type": "text", "title": "",
+        "gridPos": {"h": TITLE_H, "w": 24, "x": 0, "y": y},
         "options": {
             "mode": "html",
             "content": (
-                '<div style="display:flex;align-items:center;justify-content:center;'
-                'height:100%;flex-direction:column;text-align:center;">'
-                '<div style="font-size:26px;font-weight:700;letter-spacing:-1px;">'
-                '<span style="color:#E74C3C;">Down</span>'
-                '<span style="color:#8a8a8a;">detector</span>'
-                '<span style="color:#E74C3C;font-size:18px;vertical-align:top;">●</span>'
-                '</div>'
-                '<div style="font-size:11px;color:#888;letter-spacing:2px;margin-top:4px;">'
-                'by Ookla®</div>'
+                '<div style="display:flex;align-items:center;justify-content:flex-start;'
+                'height:100%;padding-left:8px;">'
+                '<h2 style="margin:0;font-size:20px;font-weight:700;">'
+                'Painel Downdetector</h2></div>'
+            ),
+        },
+        "transparent": True,
+    }
+
+
+# ── SERVICE CARDS ───────────────────────────────────────────────────────────
+
+def card_logo(pid, name, logo_url, x, y):
+    """Topo do card: logo + nome do serviço."""
+    return {
+        "id": pid, "type": "text", "title": "",
+        "gridPos": {"h": LOGO_H, "w": CARD_W, "x": x, "y": y},
+        "options": {
+            "mode": "html",
+            "content": (
+                '<div style="display:flex;flex-direction:column;align-items:center;'
+                'justify-content:center;height:100%;padding:2px;gap:2px;'
+                'background:#1f1f1f;border-radius:4px 4px 0 0;">'
+                f'<img src="{logo_url}" style="max-height:32px;max-width:80%;'
+                'object-fit:contain;" onerror="this.style.display=\'none\'" />'
+                '<div style="font-size:10px;font-weight:600;text-align:center;'
+                'line-height:1.1;color:#ddd;max-width:100%;overflow:hidden;'
+                'text-overflow:ellipsis;white-space:nowrap;padding:0 4px;">'
+                f'{name}</div>'
                 '</div>'
             ),
         },
@@ -157,57 +171,16 @@ def logo_panel():
     }
 
 
-# ── PER-SERVICE PANELS (the "table" rows) ────────────────────────────────────
-
-# Each service row is 24 cols wide x 5 high, split as:
-#   Serviço (name+id):  w=6   x=0
-#   Logo (img):         w=6   x=6
-#   Status (stat):      w=6   x=12
-#   Relatos (stat):     w=6   x=18
-ROW_H = 6
-# 3-column layout (24 grid cols / 3 = 8 cols each)
-COL_SERVICO_W = 8
-COL_STATUS_W = 8
-COL_RELATOS_W = 8
-
-
-def service_card_cell(panel_id, service_name, company_id, logo_url, x, y):
-    """Single text panel: 'Service (id)' on TOP, logo image BELOW.
-
-    Per user feedback (2026-05-12): top = combined "Cloudflare (32542)",
-    bottom = the logo as an image.
-    """
-    id_part = f" <span style=\"color:#888;font-weight:400;\">({company_id})</span>" if company_id else ""
+def card_status(pid, name, x, y):
+    """Meio do card: stat com background colorido mostrando o status mapeado."""
     return {
-        "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": ROW_H, "w": COL_SERVICO_W, "x": x, "y": y},
-        "options": {
-            "mode": "html",
-            "content": (
-                '<div style="display:flex;flex-direction:column;'
-                'align-items:center;justify-content:center;height:100%;'
-                'gap:10px;padding:6px;">'
-                f'<div style="font-size:16px;font-weight:700;">{service_name}{id_part}</div>'
-                f'<img src="{logo_url}" style="max-height:54px;max-width:160px;'
-                'object-fit:contain;" alt="" onerror="this.style.visibility=\'hidden\'" />'
-                '</div>'
-            ),
-        },
-        "transparent": False,
-    }
-
-
-def service_status_cell(panel_id, service_name, x, y):
-    """Stat panel querying '<service>: status' item with text+color mappings."""
-    return {
-        "id": panel_id, "type": "stat", "title": "",
-        "gridPos": {"h": ROW_H, "w": COL_STATUS_W, "x": x, "y": y},
+        "id": pid, "type": "stat", "title": "",
+        "gridPos": {"h": STATUS_H, "w": CARD_W, "x": x, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target(f"{service_name}: status")],
+        "targets": [zbx_target(f"{name}: status")],
         "options": {
-            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": False},
-            "colorMode": "background", "graphMode": "none", "textMode": "value",
-            "justifyMode": "center",
+            "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
+            "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center",
         },
         "fieldConfig": {
             "defaults": {
@@ -221,16 +194,16 @@ def service_status_cell(panel_id, service_name, x, y):
     }
 
 
-def service_reports_cell(panel_id, service_name, x, y):
-    """Stat panel for reports count of one service."""
+def card_reports(pid, name, x, y):
+    """Fim do card: stat com o número de relatos da última hora."""
     return {
-        "id": panel_id, "type": "stat", "title": "",
-        "gridPos": {"h": ROW_H, "w": COL_RELATOS_W, "x": x, "y": y},
+        "id": pid, "type": "stat", "title": "",
+        "gridPos": {"h": REPORTS_H, "w": CARD_W, "x": x, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target(f"{service_name}: reports last hour")],
+        "targets": [zbx_target(f"{name}: reports last hour")],
         "options": {
-            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": False},
-            "colorMode": "value", "graphMode": "area", "textMode": "value",
+            "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
+            "colorMode": "value", "graphMode": "none", "textMode": "value_and_name",
             "justifyMode": "center",
         },
         "fieldConfig": {
@@ -239,165 +212,107 @@ def service_reports_cell(panel_id, service_name, x, y):
                 "thresholds": {
                     "mode": "absolute",
                     "steps": [
-                        {"color": COLOR_OK, "value": None},
-                        {"color": COLOR_ATTN, "value": 50},
+                        {"color": "#3498DB", "value": None},
+                        {"color": COLOR_ATTN, "value": 30},
                         {"color": COLOR_PROB, "value": 100},
                     ],
                 },
-                "unit": "short", "decimals": 0,
+                "displayName": "R",
+                "unit": "short",
+                "decimals": 0,
+                "min": 0,
             },
             "overrides": [],
         },
     }
 
 
-def section_header(panel_id, y):
-    """Header row aligned with the 3-column service grid below (8+8+8 = 24)."""
-    return {
-        "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": 2, "w": 24, "x": 0, "y": y},
-        "options": {
-            "mode": "html",
-            "content": (
-                '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;'
-                'font-weight:700;font-size:14px;color:#aaa;text-align:center;'
-                'border-bottom:2px solid #444;padding:10px 0;">'
-                '<div>Serviço</div><div>Status</div><div>Relatos</div>'
-                '</div>'
-            ),
-        },
-        "transparent": True,
-    }
-
-
-def section_title(panel_id, y):
-    return {
-        "id": panel_id, "type": "text", "title": "",
-        "gridPos": {"h": 3, "w": 24, "x": 0, "y": y},
-        "options": {
-            "mode": "html",
-            "content": (
-                '<div style="display:flex;align-items:center;justify-content:flex-start;'
-                'height:100%;padding-left:8px;">'
-                '<h2 style="margin:0;font-size:22px;font-weight:700;letter-spacing:0.5px;">'
-                'Painel Downdetector</h2></div>'
-            ),
-        },
-        "transparent": True,
-    }
-
-
-def build_service_rows(services, start_y, start_panel_id):
-    """Return a list of panels (3 per service)."""
+def build_service_grid(services, start_y, start_pid):
     panels = []
-    pid = start_panel_id
+    pid = start_pid
     y = start_y
+    col = 0
     for svc in services:
-        panels.append(service_card_cell(
-            pid, svc["name"], svc.get("id"), svc["logo"], x=0, y=y))
+        x = col * CARD_W
+        panels.append(card_logo(pid, svc["name"], svc["logo"], x=x, y=y))
         pid += 1
-        panels.append(service_status_cell(pid, svc["name"], x=COL_SERVICO_W, y=y))
+        panels.append(card_status(pid, svc["name"], x=x, y=y + LOGO_H))
         pid += 1
-        panels.append(service_reports_cell(
-            pid, svc["name"], x=COL_SERVICO_W + COL_STATUS_W, y=y))
+        panels.append(card_reports(pid, svc["name"], x=x, y=y + LOGO_H + STATUS_H))
         pid += 1
-        y += ROW_H
+        col += 1
+        if col >= CARDS_PER_ROW:
+            col = 0
+            y += CARD_H
+    if col > 0:
+        y += CARD_H
     return panels, y, pid
 
 
-# ── BOTTOM ROW: scraper health ───────────────────────────────────────────────
+# ── HEALTH ROW ──────────────────────────────────────────────────────────────
 
-def health_stat(panel_id, title, item_name, unit, color, grid_x, grid_y, thresholds=None):
+def health_stat(pid, title, item, unit, color, gx, gw, thresholds=None):
     return {
-        "id": panel_id, "type": "stat", "title": title,
-        "gridPos": {"h": 5, "w": 6, "x": grid_x, "y": grid_y},
+        "id": pid, "type": "stat", "title": title,
+        "gridPos": {"h": TOP_H, "w": gw, "x": gx, "y": 0},
         "datasource": ZBX_DS,
-        "targets": [zbx_target(item_name, ref="A")],
+        "targets": [zbx_target(item, ref="A")],
         "options": {
             "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": False},
-            "colorMode": "value", "graphMode": "area", "textMode": "auto",
-            "justifyMode": "auto",
+            "colorMode": "value", "graphMode": "area", "textMode": "auto", "justifyMode": "auto",
         },
         "fieldConfig": {
             "defaults": {
                 "color": {"mode": "thresholds" if thresholds else "fixed", "fixedColor": color},
                 "unit": unit,
-                "thresholds": {
-                    "mode": "absolute",
-                    "steps": thresholds or [{"color": color, "value": None}],
-                },
+                "thresholds": {"mode": "absolute", "steps": thresholds or [{"color": color, "value": None}]},
             },
             "overrides": [],
         },
     }
 
 
-def scraper_health_row(y):
-    return [
-        health_stat(900, "Uptime", "Scraper uptime", "s", "blue", 0, y),
-        health_stat(901, "Duração do ciclo", "Last cycle duration", "s", "blue", 6, y,
-                    thresholds=[
-                        {"color": "green", "value": None},
-                        {"color": COLOR_ATTN, "value": 30},
-                        {"color": COLOR_PROB, "value": 120},
-                    ]),
-        health_stat(902, "Bloqueios CF (5m)", "Cloudflare blocks (5m)", "short", "green", 12, y,
-                    thresholds=[
-                        {"color": "green", "value": None},
-                        {"color": COLOR_ATTN, "value": 1},
-                        {"color": COLOR_PROB, "value": 10},
-                    ]),
-        health_stat(903, "Reinícios do browser", "Browser restarts", "short", "blue", 18, y),
-    ]
+# ── BUILD ───────────────────────────────────────────────────────────────────
 
-
-# ── BUILD ────────────────────────────────────────────────────────────────────
-
-# Read services from production yaml
-services_path = Path("/etc/downdetector-collector/services.yaml")
-raw = yaml.safe_load(services_path.read_text())
-defaults = raw.get("defaults", {}) or {}
-services = []
-for s in raw.get("services", []):
-    merged = {**defaults, **s}
-    services.append(merged)
-print(f"Read {len(services)} services from {services_path}")
+cfg = yaml.safe_load(Path("/etc/downdetector-collector/services.yaml").read_text())
+defaults = cfg.get("defaults", {}) or {}
+services = [{**defaults, **s} for s in cfg.get("services", [])]
+print(f"Read {len(services)} services from production yaml")
 
 panels = [
-    total_panel(),
-    status_count_panel(2, "Serviços Ok", 0, COLOR_OK, 5),
-    status_count_panel(3, "Serviços em Atenção", 1, COLOR_ATTN, 10),
-    status_count_panel(4, "Serviços com Problema", 2, COLOR_PROB, 15),
-    logo_panel(),
+    # Linha do topo (h=3), contadores à esquerda + saúde do scraper à direita
+    total_panel(),                                              # x=0  w=2
+    status_count_panel(2, "Ok", 0, COLOR_OK, gx=2, gw=2),         # x=2  w=2
+    status_count_panel(3, "Atenção", 1, COLOR_ATTN, gx=4, gw=2),  # x=4  w=2
+    status_count_panel(4, "Problema", 2, COLOR_PROB, gx=6, gw=3), # x=6  w=3
+    health_stat(900, "Uptime", "Scraper uptime", "s", "blue", gx=9, gw=3),         # x=9  w=3
+    health_stat(901, "Duração do ciclo", "Last cycle duration", "s", "blue", gx=12, gw=4,
+                thresholds=[{"color": "green", "value": None},
+                            {"color": COLOR_ATTN, "value": 30},
+                            {"color": COLOR_PROB, "value": 120}]),                  # x=12 w=4
+    health_stat(902, "Bloqueios CF (5m)", "Cloudflare blocks (5m)", "short", "green", gx=16, gw=4,
+                thresholds=[{"color": "green", "value": None},
+                            {"color": COLOR_ATTN, "value": 1},
+                            {"color": COLOR_PROB, "value": 10}]),                   # x=16 w=4
+    health_stat(903, "Restarts browser", "Browser restarts", "short", "blue", gx=20, gw=4), # x=20 w=4
+    # Título
+    section_title(500, y=TITLE_Y),
 ]
 
-# Title row at y=6 (h=3, taller for readability)
-panels.append(section_title(500, y=6))
-# Header row at y=9 (right after title)
-panels.append(section_header(501, y=9))
-
-# Service rows starting at y=11
-service_panels, next_y, _ = build_service_rows(services, start_y=11, start_panel_id=100)
+service_panels, next_y, _ = build_service_grid(services, start_y=SERVICES_Y, start_pid=100)
 panels.extend(service_panels)
-
-# Scraper health row after the services
-panels.extend(scraper_health_row(y=next_y + 1))
 
 dashboard = {
     "title": "DASHBOARD DOWNDETECTOR",
     "uid": "downdetector-main",
-    "schemaVersion": 41,
-    "version": 14,
-    "editable": True,
-    "refresh": "1h",
+    "schemaVersion": 41, "version": 19,
+    "editable": True, "refresh": "1h",
     "time": {"from": "now-1h", "to": "now"},
-    "timezone": "browser",
-    "tags": ["downdetector"],
-    "annotations": {"list": []},
-    "templating": {"list": []},
+    "timezone": "America/Sao_Paulo", "tags": ["downdetector"],
+    "annotations": {"list": []}, "templating": {"list": []},
     "panels": panels,
 }
 
 out = Path("/var/lib/grafana/dashboards/downdetector/dashboard_downdetector.json")
 out.write_text(json.dumps(dashboard, indent=2, ensure_ascii=False))
-print(f"wrote dashboard v{dashboard['version']} with {len(dashboard['panels'])} panels")
+print(f"wrote v{dashboard['version']} with {len(panels)} panels (last_y={next_y})")

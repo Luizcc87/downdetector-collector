@@ -73,6 +73,11 @@ class Collector:
         if result.cloudflare_blocked:
             self._health.record_block()
             raise RuntimeError("cloudflare_blocked")  # triggers scheduler backoff
+        if result.rate_limited:
+            # Não envia métrica nessa iteração (não sobrescrever último valor bom
+            # com UNKNOWN). Backoff exponencial do scheduler assume.
+            self._health.record_block()
+            raise RuntimeError("rate_limited")
         metrics: list[Metric] = [
             (f"downdetector.status[{service.slug}]", int(result.parse.status)),
             (f"downdetector.last_check[{service.slug}]", int(time.time())),
@@ -136,7 +141,10 @@ class Collector:
         health_task = asyncio.create_task(self._health_pusher())
         try:
             while not self._stop_event.is_set():
-                self._scheduler = Scheduler(self._services, self._on_scrape)
+                self._scheduler = Scheduler(
+                    self._services, self._on_scrape,
+                    backoff_initial=300.0, backoff_max=7200.0,
+                )
                 await self._scheduler.run()
                 # Scheduler.run() só retorna em SIGHUP (recarrega config) ou stop;
                 # se stop_event setado, sai do loop; senão, recria scheduler com nova lista.
