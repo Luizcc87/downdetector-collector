@@ -1,6 +1,7 @@
 """Wrapper sobre o binário `zabbix_sender` para envio batch de métricas."""
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 from typing import Iterable, Sequence, Union
@@ -12,6 +13,22 @@ log = structlog.get_logger(__name__)
 ZabbixValue = Union[int, float, str]
 Metric = tuple[str, ZabbixValue]  # (key, value)
 MetricWithHost = tuple[str, str, str]  # (host, key, str_value)
+
+_SLUG_RE = re.compile(r"\[([^\]]+)\]$")
+
+
+def _scope_of(keys: Iterable[str]) -> str:
+    """Deriva o escopo do batch a partir dos nomes de métrica.
+
+    Todas as métricas de um scrape compartilham o mesmo slug (ex.: instagram).
+    O health push não tem [slug] e retorna 'health'.
+    """
+    slugs = {m.group(1) for k in keys if (m := _SLUG_RE.search(k))}
+    if len(slugs) == 1:
+        return next(iter(slugs))
+    if not slugs:
+        return "health"
+    return "multi"
 
 
 def _sanitize_value(value: str) -> str:
@@ -46,11 +63,18 @@ class ZabbixSink:
         result = subprocess.run(
             cmd, input=payload, capture_output=True, text=True, timeout=30, check=False,
         )
+        scope = _scope_of(key for _, key, _ in with_host)
         if result.returncode != 0:
             log.error(
                 "zabbix_sender_failed",
+                slug=scope,
                 returncode=result.returncode,
                 stderr=result.stderr.strip(),
             )
         else:
-            log.debug("zabbix_sender_ok", count=len(with_host), stdout=result.stdout.strip())
+            log.debug(
+                "zabbix_sender_ok",
+                slug=scope,
+                count=len(with_host),
+                stdout=result.stdout.strip(),
+            )

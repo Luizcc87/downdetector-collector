@@ -1,4 +1,4 @@
-from collector.zabbix_sink import ZabbixSink, build_input_lines
+from collector.zabbix_sink import ZabbixSink, _scope_of, build_input_lines
 
 
 def test_build_input_lines_format():
@@ -51,3 +51,29 @@ def test_sink_invokes_zabbix_sender(monkeypatch, tmp_path):
     assert "zabbix_sender" in called["cmd"][0]
     assert "Downdetector" in called["input"]
     assert "downdetector.status[cloudflare]" in called["input"]
+
+
+def test_scope_of_extracts_slug_from_service_keys():
+    keys = [
+        "downdetector.status[instagram]",
+        "downdetector.last_check[instagram]",
+        "downdetector.reports[instagram]",
+    ]
+    assert _scope_of(keys) == "instagram"
+
+
+def test_scope_of_returns_health_for_internal_metrics():
+    keys = [
+        "downdetector.scraper.uptime",
+        "downdetector.scraper.cycle_seconds",
+        "downdetector.scraper.blocks_5m",
+    ]
+    assert _scope_of(keys) == "health"
+
+
+def test_scope_of_returns_multi_when_batch_mixes_services():
+    keys = [
+        "downdetector.status[instagram]",
+        "downdetector.status[nubank]",
+    ]
+    assert _scope_of(keys) == "multi"
