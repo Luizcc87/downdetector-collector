@@ -32,7 +32,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -41,7 +41,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -116,7 +116,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -125,7 +125,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -218,7 +218,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -227,7 +227,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -320,7 +320,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -329,7 +329,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -470,7 +470,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -479,7 +479,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -579,7 +579,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -588,7 +588,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -674,7 +674,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -683,7 +683,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -783,7 +783,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -792,7 +792,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -878,7 +878,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -887,7 +887,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -987,7 +987,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -996,7 +996,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -1066,7 +1066,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -1075,7 +1075,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -1137,7 +1137,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -1146,7 +1146,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -1216,7 +1216,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -1225,7 +1225,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"
@@ -1295,7 +1295,7 @@
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "zabbix"
+        "uid": "downdetector-zabbix"
       },
       "targets": [
         {
@@ -1304,7 +1304,7 @@
           "resultFormat": "time_series",
           "datasource": {
             "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "zabbix"
+            "uid": "downdetector-zabbix"
           },
           "group": {
             "filter": "Downdetector"

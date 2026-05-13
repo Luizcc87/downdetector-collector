@@ -184,7 +184,7 @@ UI: `http://srv-zabbix:3000` → Connections → Add data source → Zabbix:
 - Trends: enabled
 - Save & test
 
-UID da datasource: `zabbix` (referenciada no `bin/build_dashboard.py`).
+Name/UID da datasource: `Downdetector-Zabbix` / `downdetector-zabbix` (referenciada no `bin/build_dashboard.py`).
 
 ### 3.7 Provisionamento Grafana
 

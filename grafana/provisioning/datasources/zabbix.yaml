@@ -1,7 +1,7 @@
 apiVersion: 1
 datasources:
-  - name: Zabbix
-    uid: zabbix
+  - name: Downdetector-Zabbix
+    uid: downdetector-zabbix
     type: alexanderzobnin-zabbix-datasource
     access: proxy
     url: http://localhost/zabbix/api_jsonrpc.php

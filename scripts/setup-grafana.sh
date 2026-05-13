@@ -66,7 +66,7 @@ command -v grafana-cli >/dev/null || die "grafana-cli não encontrado. Instale o
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-# ── 1. Plugin Zabbix ────────────────────────────────────────────────────────
+# ── 1. Plugin Zabbix (binário + habilitação no org) ─────────────────────────
 if [[ $SKIP_PLUGIN -eq 0 ]]; then
     if grafana-cli plugins ls 2>/dev/null | grep -q alexanderzobnin-zabbix-app; then
         ok "Plugin alexanderzobnin-zabbix-app já instalado"
@@ -75,8 +75,25 @@ if [[ $SKIP_PLUGIN -eq 0 ]]; then
         grafana-cli plugins install alexanderzobnin-zabbix-app >/dev/null
         ok "Plugin instalado"
     fi
+
+    # Habilita o app no org 1. Sem isso, o datasource type
+    # "alexanderzobnin-zabbix-datasource" não fica registrado
+    # e o provisioner do datasource falha com "data source not found".
+    APP_FILE="$GRAFANA_CONFIG_DIR/provisioning/plugins/downdetector-zabbix-app.yaml"
+    log "Habilitando app Zabbix em $APP_FILE..."
+    mkdir -p "$(dirname "$APP_FILE")"
+    cat > "$APP_FILE" <<EOF
+apiVersion: 1
+apps:
+  - type: alexanderzobnin-zabbix-app
+    org_id: 1
+    disabled: false
+EOF
+    chmod 640 "$APP_FILE"
+    chown root:grafana "$APP_FILE" 2>/dev/null || true
+    ok "App Zabbix habilitado no org 1"
 else
-    log "Pulando instalação do plugin (--skip-plugin)"
+    log "Pulando plugin + app provisioning (--skip-plugin)"
 fi
 
 # ── 2. Datasource provisioning ──────────────────────────────────────────────
@@ -87,16 +104,16 @@ if [[ -z "$ZABBIX_API_PASSWORD" ]]; then
     warn "Crie manualmente pela UI: Configuration → Data sources → Add → Zabbix"
     warn "  URL: $ZABBIX_API_URL"
     warn "  User/Pass: credenciais admin do Zabbix"
-    warn "  Salve com UID 'zabbix'"
+    warn "  Salve com Name 'Downdetector-Zabbix' e UID 'downdetector-zabbix'"
 else
     log "Provisionando datasource em $DS_FILE..."
     mkdir -p "$(dirname "$DS_FILE")"
     cat > "$DS_FILE" <<EOF
 apiVersion: 1
 datasources:
-  - name: Zabbix
+  - name: Downdetector-Zabbix
     type: alexanderzobnin-zabbix-datasource
-    uid: zabbix
+    uid: downdetector-zabbix
     access: proxy
     url: $ZABBIX_API_URL
     isDefault: false
@@ -113,7 +130,7 @@ datasources:
 EOF
     chmod 640 "$DS_FILE"
     chown root:grafana "$DS_FILE" 2>/dev/null || true
-    ok "Datasource provisionado (UID: zabbix)"
+    ok "Datasource provisionado (Name: Downdetector-Zabbix, UID: downdetector-zabbix)"
 fi
 
 # ── 3. Dashboard provisioning ───────────────────────────────────────────────
@@ -197,7 +214,7 @@ cat <<EOF
  GRAFANA CONFIGURADO
 ═══════════════════════════════════════════════════════════════════════════
  Plugin:    alexanderzobnin-zabbix-app
- Datasource: UID 'zabbix' provisionado em
+ Datasource: Name 'Downdetector-Zabbix' (UID downdetector-zabbix)
              $DS_FILE
  Dashboard:  $GRAFANA_DASH_DIR/dashboard_downdetector.json
  Logos:      $GRAFANA_LOGOS_DIR

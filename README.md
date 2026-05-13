@@ -221,7 +221,8 @@ sudo systemctl restart grafana-server
 Datasource (Configuration → Data sources → Add → Zabbix):
 - URL: `http://localhost/zabbix/api_jsonrpc.php`
 - Auth: usuário + senha do Zabbix
-- **UID** do datasource: salvar com nome `zabbix` (referenciado no gerador do dashboard)
+- **Name** do datasource: `Downdetector-Zabbix`
+- **UID** do datasource: `downdetector-zabbix` (referenciado no gerador do dashboard)
 
 Provisionamento do dashboard:
 

@@ -1,28 +1,102 @@
 defaults:
-  poll_interval: 60
+  poll_interval: 300
   country: br
 
 services:
-  - name: Cloudflare
-    slug: cloudflare
-    id: 32542
-    logo: /public/img/downdetector/cloudflare.svg
-    poll_interval: 30
-    country: com
+  # === Redes Sociais ===
+  - name: Instagram
+    slug: instagram
+    id: 33204
+    logo: /public/img/downdetector/instagram.svg
+
+  - name: WhatsApp
+    slug: whatsapp
+    id: 10136
+    logo: /public/img/downdetector/whatsapp.svg
+
+  - name: Facebook
+    slug: facebook
+    id: 0
+    logo: /public/img/downdetector/facebook.svg
+
+  - name: X (Twitter)
+    slug: twitter
+    id: 0
+    logo: /public/img/downdetector/twitter.svg
+
+  - name: Telegram
+    slug: telegram
+    id: 0
+    logo: /public/img/downdetector/telegram.svg
+
+  - name: Discord
+    slug: discord
+    id: 0
+    logo: /public/img/downdetector/discord.svg
+
+  - name: Facebook Messenger
+    slug: facebook-messenger
+    id: 0
+    logo: /public/img/downdetector/facebook-messenger.svg
+
+  - name: LinkedIn
+    slug: linkedin
+    id: 0
+    logo: /public/img/downdetector/linkedin.svg
+
+  - name: Snapchat
+    slug: snapchat
+    id: 0
+    logo: /public/img/downdetector/snapchat.svg
+
+  # === YouTube ===
+  - name: YouTube
+    slug: youtube
+    id: 0
+    logo: /public/img/downdetector/youtube.svg
+
+  # === Bancos ===
+  - name: Banco do Brasil
+    slug: banco-do-brasil
+    id: 0
+    logo: /public/img/downdetector/banco-do-brasil.svg
+
+  - name: Banco Inter
+    slug: banco-inter
+    id: 0
+    logo: /public/img/downdetector/banco-inter.svg
 
   - name: Banco Itaú
     slug: banco-itau
-    id: 33205
-    logo: /public/img/downdetector/itau.svg
+    id: 0
+    logo: /public/img/downdetector/banco-itau.svg
+
+  - name: Bradesco
+    slug: bradesco
+    id: 0
+    logo: /public/img/downdetector/bradesco.svg
 
   - name: Nubank
     slug: nubank
-    id: 33205
+    id: 0
     logo: /public/img/downdetector/nubank.svg
 
-  - name: Microsoft OneDrive
-    slug: microsoft-onedrive
-    id: 53650
-    logo: /public/img/downdetector/ms365.svg
-    poll_interval: 300
-    country: com
+  - name: Banco Central do Brasil
+    slug: bcb
+    id: 0
+    logo: /public/img/downdetector/bcb.svg
+
+  - name: Sicoob
+    slug: sicoob
+    id: 0
+    logo: /public/img/downdetector/sicoob.svg
+
+  - name: Caixa Econômica Federal
+    slug: caixa
+    id: 0
+    logo: /public/img/downdetector/caixa.svg
+
+  - name: Mercado Pago
+    slug: mercadopago
+    id: 0
+    logo: /public/img/downdetector/mercadopago.svg

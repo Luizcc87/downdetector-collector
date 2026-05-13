@@ -20,7 +20,7 @@ from pathlib import Path
 
 import yaml
 
-ZBX_DS = {"type": "alexanderzobnin-zabbix-datasource", "uid": "zabbix"}
+ZBX_DS = {"type": "alexanderzobnin-zabbix-datasource", "uid": "downdetector-zabbix"}
 HOST_GROUP = "Downdetector"
 HOST = "Downdetector"
 

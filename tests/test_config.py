@@ -7,9 +7,31 @@ from collector.config import ServiceConfig, load_services_from_path
 
 @pytest.fixture
 def example_yaml(tmp_path: Path) -> Path:
-    src = Path(__file__).parents[1] / "config" / "services.example.yaml"
     dst = tmp_path / "services.yaml"
-    dst.write_text(src.read_text())
+    dst.write_text("""
+defaults:
+  poll_interval: 60
+  country: br
+services:
+  - name: Cloudflare
+    slug: cloudflare
+    id: 32542
+    logo: /public/img/downdetector/cloudflare.svg
+    poll_interval: 30
+    country: com
+  - name: Banco Itaú
+    slug: banco-itau
+    id: 33205
+    logo: /public/img/downdetector/banco-itau.svg
+  - name: Nubank
+    slug: nubank
+    id: 33205
+    logo: /public/img/downdetector/nubank.svg
+  - name: WhatsApp
+    slug: whatsapp
+    id: 10136
+    logo: /public/img/downdetector/whatsapp.svg
+""")
     return dst
 
 
@@ -31,6 +53,14 @@ def test_load_keeps_per_service_overrides(example_yaml):
     cloudflare = next(s for s in services if s.slug == "cloudflare")
     assert cloudflare.poll_interval == 30
     assert cloudflare.country == "com"
+
+
+def test_example_yaml_is_valid():
+    """Smoke test: o exemplo embalado no repo carrega sem erro."""
+    example = Path(__file__).parents[1] / "config" / "services.example.yaml"
+    services = load_services_from_path(example)
+    assert len(services) > 0
+    assert all(isinstance(s, ServiceConfig) for s in services)
 
 
 def test_load_rejects_duplicate_slugs(tmp_path: Path):
