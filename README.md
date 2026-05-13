@@ -96,7 +96,7 @@ Topo do dashboard:
 ```bash
 git clone https://github.com/<user>/downdetector-collector.git
 cd downdetector-collector
-sudo ./scripts/install.sh
+sudo ./scripts/install-all.sh --zabbix-url http://zabbix/zabbix --zabbix-password <senha>
 ```
 
 O script executa:
