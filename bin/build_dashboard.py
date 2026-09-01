@@ -48,7 +48,7 @@ CARD_W = 24 // CARDS_PER_ROW  # = 3
 LOGO_H = 3
 STATUS_H = 2
 SPARKLINE_H = 2
-LATENCY_H = 2
+LATENCY_H = 3
 CARD_H = LOGO_H + STATUS_H + SPARKLINE_H + LATENCY_H  # = 9
 
 TOP_H = 3
@@ -267,7 +267,7 @@ def card_sparkline_reports(pid, svc, x, y):
                     "axisPlacement": "none",
                     "showPoints": "never",
                 },
-                "color": {"mode": "fixed", "fixedColor": "#3498DB"},
+                "color": {"mode": "fixed", "fixedColor": "#2a78d6"},
                 "unit": "short",
                 "min": 0,
             },
@@ -278,27 +278,29 @@ def card_sparkline_reports(pid, svc, x, y):
 
 def card_sparkline_latency(pid, svc, x, y):
     return {
-        "id": pid, "type": "timeseries", "title": "Latencia ate o servico oficial",
+        "id": pid, "type": "stat", "title": "Latencia ate o servico oficial",
         "gridPos": {"h": LATENCY_H, "w": CARD_W, "x": x, "y": y},
         "links": panel_links(svc),
         "datasource": ZBX_DS,
         "targets": [zbx_target(f"/^{re.escape(svc['name'])}{LATENCY_NAME_SUFFIX}$/")],
         "options": {
-            "legend": {"displayMode": "hidden"},
-            "tooltip": {"mode": "single"},
+            "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
+            "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center",
         },
         "fieldConfig": {
             "defaults": {
-                "custom": {
-                    "drawStyle": "line",
-                    "lineInterpolation": "smooth",
-                    "fillOpacity": 15,
-                    "axisPlacement": "none",
-                    "showPoints": "never",
-                },
-                "color": {"mode": "fixed", "fixedColor": "#F39C12"},
+                "custom": {"fillOpacity": 25},
+                "color": {"mode": "fixed", "fixedColor": "#eb6834"},
                 "unit": "ms",
                 "min": 0,
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {"color": "#eb6834", "value": None},
+                        {"color": COLOR_ATTN, "value": 500},
+                        {"color": COLOR_PROB, "value": 2000},
+                    ],
+                },
             },
             "overrides": [],
         },
