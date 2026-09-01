@@ -10,6 +10,7 @@ Recursos:
 - Painel de Desempenho: Latência Direta de Resposta aos Serviços (ms).
 """
 import json
+import re
 from pathlib import Path
 import yaml
 
@@ -53,6 +54,11 @@ CARD_H = LOGO_H + STATUS_H + SPARKLINE_H + LATENCY_H  # = 9
 TOP_H = 3
 
 
+STATUS_NAME_SUFFIX = ": status"
+REPORTS_NAME_SUFFIX = ": reports last hour"
+LATENCY_NAME_SUFFIX = ": latency to official service"
+
+
 def zbx_target(name_filter, ref="A"):
     return {
         "refId": ref, "queryType": "0", "resultFormat": "time_series",
@@ -84,7 +90,7 @@ def total_panel():
         "id": 1, "type": "stat", "title": "Total",
         "gridPos": {"h": TOP_H, "w": 2, "x": 0, "y": 0},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
+        "targets": [zbx_target(f"/{STATUS_NAME_SUFFIX}/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
         ],
@@ -108,7 +114,7 @@ def status_count_panel(pid, title, status_value, color, gx, gw):
         "id": pid, "type": "stat", "title": title,
         "gridPos": {"h": TOP_H, "w": gw, "x": gx, "y": 0},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
+        "targets": [zbx_target(f"/{STATUS_NAME_SUFFIX}/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
             {"id": "filterByValue", "options": {
@@ -157,7 +163,7 @@ def active_incidents_panel(pid, y):
         "id": pid, "type": "stat", "title": "🚨 Serviços em Estado de Alerta / Falha",
         "gridPos": {"h": 4, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
+        "targets": [zbx_target(f"/{STATUS_NAME_SUFFIX}/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
             {"id": "filterByValue", "options": {
@@ -224,7 +230,7 @@ def card_status(pid, svc, x, y):
         "gridPos": {"h": STATUS_H, "w": CARD_W, "x": x, "y": y},
         "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "targets": [zbx_target(f"/downdetector\\.status\\[{svc['slug']}\\]/")],
+        "targets": [zbx_target(f"/^{re.escape(svc['name'])}{STATUS_NAME_SUFFIX}$/")],
         "options": {
             "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
             "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center",
@@ -247,7 +253,7 @@ def card_sparkline_reports(pid, svc, x, y):
         "gridPos": {"h": SPARKLINE_H, "w": CARD_W, "x": x, "y": y},
         "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "targets": [zbx_target(f"/downdetector\\.reports\\[{svc['slug']}\\]/")],
+        "targets": [zbx_target(f"/^{re.escape(svc['name'])}{REPORTS_NAME_SUFFIX}$/")],
         "options": {
             "legend": {"displayMode": "hidden"},
             "tooltip": {"mode": "single"},
@@ -276,7 +282,7 @@ def card_sparkline_latency(pid, svc, x, y):
         "gridPos": {"h": LATENCY_H, "w": CARD_W, "x": x, "y": y},
         "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "targets": [zbx_target(f"/downdetector\\.latency_ms\\[{svc['slug']}\\]/")],
+        "targets": [zbx_target(f"/^{re.escape(svc['name'])}{LATENCY_NAME_SUFFIX}$/")],
         "options": {
             "legend": {"displayMode": "hidden"},
             "tooltip": {"mode": "single"},
@@ -328,7 +334,7 @@ def status_history_panel(pid, y):
         "id": pid, "type": "state-timeline", "title": "⏱️ Histórico de Status dos Serviços (Últimas 24h)",
         "gridPos": {"h": 10, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
+        "targets": [zbx_target(f"/{STATUS_NAME_SUFFIX}/")],
         "options": {
             "showValue": "never",
             "mergeValues": True,
@@ -352,7 +358,7 @@ def reports_timeline_panel(pid, y):
         "id": pid, "type": "timeseries", "title": "📊 Histórico de Relatos de Problemas (Últimas 24h)",
         "gridPos": {"h": 8, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.reports\\[.*\\]/")],
+        "targets": [zbx_target(f"/{REPORTS_NAME_SUFFIX}/")],
         "options": {
             "tooltip": {"mode": "multi", "sort": "desc"},
             "legend": {"displayMode": "table", "placement": "right", "calcs": ["max", "last"]},
@@ -377,7 +383,7 @@ def latency_timeline_panel(pid, y):
         "id": pid, "type": "timeseries", "title": "⚡ Latência de Resposta Direta aos Serviços (ms)",
         "gridPos": {"h": 8, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/downdetector\\.latency_ms\\[.*\\]/")],
+        "targets": [zbx_target(f"/{LATENCY_NAME_SUFFIX}/")],
         "options": {
             "tooltip": {"mode": "multi", "sort": "desc"},
             "legend": {"displayMode": "table", "placement": "right", "calcs": ["mean", "max", "last"]},

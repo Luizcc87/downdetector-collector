@@ -53,7 +53,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -137,7 +137,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -239,7 +239,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -341,7 +341,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -743,7 +743,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -925,7 +925,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[instagram\\]/"
+            "filter": "/^Instagram: status$/"
           },
           "functions": []
         }
@@ -1041,7 +1041,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[instagram\\]/"
+            "filter": "/^Instagram: reports last hour$/"
           },
           "functions": []
         }
@@ -1113,7 +1113,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[instagram\\]/"
+            "filter": "/^Instagram: latency to official service$/"
           },
           "functions": []
         }
@@ -1208,7 +1208,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[whatsapp\\]/"
+            "filter": "/^WhatsApp: status$/"
           },
           "functions": []
         }
@@ -1324,7 +1324,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[whatsapp\\]/"
+            "filter": "/^WhatsApp: reports last hour$/"
           },
           "functions": []
         }
@@ -1396,7 +1396,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[whatsapp\\]/"
+            "filter": "/^WhatsApp: latency to official service$/"
           },
           "functions": []
         }
@@ -1491,7 +1491,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[facebook\\]/"
+            "filter": "/^Facebook: status$/"
           },
           "functions": []
         }
@@ -1607,7 +1607,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[facebook\\]/"
+            "filter": "/^Facebook: reports last hour$/"
           },
           "functions": []
         }
@@ -1679,7 +1679,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[facebook\\]/"
+            "filter": "/^Facebook: latency to official service$/"
           },
           "functions": []
         }
@@ -1774,7 +1774,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[twitter\\]/"
+            "filter": "/^X\\ \\(Twitter\\): status$/"
           },
           "functions": []
         }
@@ -1890,7 +1890,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[twitter\\]/"
+            "filter": "/^X\\ \\(Twitter\\): reports last hour$/"
           },
           "functions": []
         }
@@ -1962,7 +1962,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[twitter\\]/"
+            "filter": "/^X\\ \\(Twitter\\): latency to official service$/"
           },
           "functions": []
         }
@@ -2057,7 +2057,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[telegram\\]/"
+            "filter": "/^Telegram: status$/"
           },
           "functions": []
         }
@@ -2173,7 +2173,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[telegram\\]/"
+            "filter": "/^Telegram: reports last hour$/"
           },
           "functions": []
         }
@@ -2245,7 +2245,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[telegram\\]/"
+            "filter": "/^Telegram: latency to official service$/"
           },
           "functions": []
         }
@@ -2340,7 +2340,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[discord\\]/"
+            "filter": "/^Discord: status$/"
           },
           "functions": []
         }
@@ -2456,7 +2456,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[discord\\]/"
+            "filter": "/^Discord: reports last hour$/"
           },
           "functions": []
         }
@@ -2528,7 +2528,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[discord\\]/"
+            "filter": "/^Discord: latency to official service$/"
           },
           "functions": []
         }
@@ -2623,7 +2623,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[facebook-messenger\\]/"
+            "filter": "/^Facebook\\ Messenger: status$/"
           },
           "functions": []
         }
@@ -2739,7 +2739,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[facebook-messenger\\]/"
+            "filter": "/^Facebook\\ Messenger: reports last hour$/"
           },
           "functions": []
         }
@@ -2811,7 +2811,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[facebook-messenger\\]/"
+            "filter": "/^Facebook\\ Messenger: latency to official service$/"
           },
           "functions": []
         }
@@ -2906,7 +2906,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[linkedin\\]/"
+            "filter": "/^LinkedIn: status$/"
           },
           "functions": []
         }
@@ -3022,7 +3022,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[linkedin\\]/"
+            "filter": "/^LinkedIn: reports last hour$/"
           },
           "functions": []
         }
@@ -3094,7 +3094,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[linkedin\\]/"
+            "filter": "/^LinkedIn: latency to official service$/"
           },
           "functions": []
         }
@@ -3189,7 +3189,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[snapchat\\]/"
+            "filter": "/^Snapchat: status$/"
           },
           "functions": []
         }
@@ -3305,7 +3305,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[snapchat\\]/"
+            "filter": "/^Snapchat: reports last hour$/"
           },
           "functions": []
         }
@@ -3377,7 +3377,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[snapchat\\]/"
+            "filter": "/^Snapchat: latency to official service$/"
           },
           "functions": []
         }
@@ -3485,7 +3485,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[youtube\\]/"
+            "filter": "/^YouTube: status$/"
           },
           "functions": []
         }
@@ -3601,7 +3601,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[youtube\\]/"
+            "filter": "/^YouTube: reports last hour$/"
           },
           "functions": []
         }
@@ -3673,7 +3673,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[youtube\\]/"
+            "filter": "/^YouTube: latency to official service$/"
           },
           "functions": []
         }
@@ -3781,7 +3781,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[pix\\]/"
+            "filter": "/^Pix: status$/"
           },
           "functions": []
         }
@@ -3897,7 +3897,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[pix\\]/"
+            "filter": "/^Pix: reports last hour$/"
           },
           "functions": []
         }
@@ -3969,7 +3969,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[pix\\]/"
+            "filter": "/^Pix: latency to official service$/"
           },
           "functions": []
         }
@@ -4064,7 +4064,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[banco-do-brasil\\]/"
+            "filter": "/^Banco\\ do\\ Brasil: status$/"
           },
           "functions": []
         }
@@ -4180,7 +4180,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[banco-do-brasil\\]/"
+            "filter": "/^Banco\\ do\\ Brasil: reports last hour$/"
           },
           "functions": []
         }
@@ -4252,7 +4252,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[banco-do-brasil\\]/"
+            "filter": "/^Banco\\ do\\ Brasil: latency to official service$/"
           },
           "functions": []
         }
@@ -4347,7 +4347,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[banco-inter\\]/"
+            "filter": "/^Banco\\ Inter: status$/"
           },
           "functions": []
         }
@@ -4463,7 +4463,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[banco-inter\\]/"
+            "filter": "/^Banco\\ Inter: reports last hour$/"
           },
           "functions": []
         }
@@ -4535,7 +4535,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[banco-inter\\]/"
+            "filter": "/^Banco\\ Inter: latency to official service$/"
           },
           "functions": []
         }
@@ -4630,7 +4630,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[banco-itau\\]/"
+            "filter": "/^Banco\\ Itaú: status$/"
           },
           "functions": []
         }
@@ -4746,7 +4746,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[banco-itau\\]/"
+            "filter": "/^Banco\\ Itaú: reports last hour$/"
           },
           "functions": []
         }
@@ -4818,7 +4818,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[banco-itau\\]/"
+            "filter": "/^Banco\\ Itaú: latency to official service$/"
           },
           "functions": []
         }
@@ -4913,7 +4913,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[bradesco\\]/"
+            "filter": "/^Bradesco: status$/"
           },
           "functions": []
         }
@@ -5029,7 +5029,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[bradesco\\]/"
+            "filter": "/^Bradesco: reports last hour$/"
           },
           "functions": []
         }
@@ -5101,7 +5101,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[bradesco\\]/"
+            "filter": "/^Bradesco: latency to official service$/"
           },
           "functions": []
         }
@@ -5196,7 +5196,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[nubank\\]/"
+            "filter": "/^Nubank: status$/"
           },
           "functions": []
         }
@@ -5312,7 +5312,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[nubank\\]/"
+            "filter": "/^Nubank: reports last hour$/"
           },
           "functions": []
         }
@@ -5384,7 +5384,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[nubank\\]/"
+            "filter": "/^Nubank: latency to official service$/"
           },
           "functions": []
         }
@@ -5479,7 +5479,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[bcb\\]/"
+            "filter": "/^Banco\\ Central\\ do\\ Brasil: status$/"
           },
           "functions": []
         }
@@ -5595,7 +5595,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[bcb\\]/"
+            "filter": "/^Banco\\ Central\\ do\\ Brasil: reports last hour$/"
           },
           "functions": []
         }
@@ -5667,7 +5667,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[bcb\\]/"
+            "filter": "/^Banco\\ Central\\ do\\ Brasil: latency to official service$/"
           },
           "functions": []
         }
@@ -5762,7 +5762,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[sicoob\\]/"
+            "filter": "/^Sicoob: status$/"
           },
           "functions": []
         }
@@ -5878,7 +5878,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[sicoob\\]/"
+            "filter": "/^Sicoob: reports last hour$/"
           },
           "functions": []
         }
@@ -5950,7 +5950,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[sicoob\\]/"
+            "filter": "/^Sicoob: latency to official service$/"
           },
           "functions": []
         }
@@ -6045,7 +6045,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[sicredi\\]/"
+            "filter": "/^Sicredi: status$/"
           },
           "functions": []
         }
@@ -6161,7 +6161,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[sicredi\\]/"
+            "filter": "/^Sicredi: reports last hour$/"
           },
           "functions": []
         }
@@ -6233,7 +6233,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[sicredi\\]/"
+            "filter": "/^Sicredi: latency to official service$/"
           },
           "functions": []
         }
@@ -6328,7 +6328,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[banrisul\\]/"
+            "filter": "/^Banrisul: status$/"
           },
           "functions": []
         }
@@ -6444,7 +6444,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[banrisul\\]/"
+            "filter": "/^Banrisul: reports last hour$/"
           },
           "functions": []
         }
@@ -6516,7 +6516,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[banrisul\\]/"
+            "filter": "/^Banrisul: latency to official service$/"
           },
           "functions": []
         }
@@ -6611,7 +6611,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[caixa\\]/"
+            "filter": "/^Caixa\\ Econômica\\ Federal: status$/"
           },
           "functions": []
         }
@@ -6727,7 +6727,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[caixa\\]/"
+            "filter": "/^Caixa\\ Econômica\\ Federal: reports last hour$/"
           },
           "functions": []
         }
@@ -6799,7 +6799,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[caixa\\]/"
+            "filter": "/^Caixa\\ Econômica\\ Federal: latency to official service$/"
           },
           "functions": []
         }
@@ -6894,7 +6894,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[mercadopago\\]/"
+            "filter": "/^Mercado\\ Pago: status$/"
           },
           "functions": []
         }
@@ -7010,7 +7010,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[mercadopago\\]/"
+            "filter": "/^Mercado\\ Pago: reports last hour$/"
           },
           "functions": []
         }
@@ -7082,7 +7082,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[mercadopago\\]/"
+            "filter": "/^Mercado\\ Pago: latency to official service$/"
           },
           "functions": []
         }
@@ -7190,7 +7190,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[google\\]/"
+            "filter": "/^Google: status$/"
           },
           "functions": []
         }
@@ -7306,7 +7306,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[google\\]/"
+            "filter": "/^Google: reports last hour$/"
           },
           "functions": []
         }
@@ -7378,7 +7378,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[google\\]/"
+            "filter": "/^Google: latency to official service$/"
           },
           "functions": []
         }
@@ -7473,7 +7473,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[google-cloud\\]/"
+            "filter": "/^Google\\ Cloud: status$/"
           },
           "functions": []
         }
@@ -7589,7 +7589,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[google-cloud\\]/"
+            "filter": "/^Google\\ Cloud: reports last hour$/"
           },
           "functions": []
         }
@@ -7661,7 +7661,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[google-cloud\\]/"
+            "filter": "/^Google\\ Cloud: latency to official service$/"
           },
           "functions": []
         }
@@ -7756,7 +7756,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[google-drive\\]/"
+            "filter": "/^Google\\ Drive: status$/"
           },
           "functions": []
         }
@@ -7872,7 +7872,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[google-drive\\]/"
+            "filter": "/^Google\\ Drive: reports last hour$/"
           },
           "functions": []
         }
@@ -7944,7 +7944,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[google-drive\\]/"
+            "filter": "/^Google\\ Drive: latency to official service$/"
           },
           "functions": []
         }
@@ -8039,7 +8039,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[aws-amazon-web-services\\]/"
+            "filter": "/^AWS\\ Amazon\\ Web\\ Services: status$/"
           },
           "functions": []
         }
@@ -8155,7 +8155,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[aws-amazon-web-services\\]/"
+            "filter": "/^AWS\\ Amazon\\ Web\\ Services: reports last hour$/"
           },
           "functions": []
         }
@@ -8227,7 +8227,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[aws-amazon-web-services\\]/"
+            "filter": "/^AWS\\ Amazon\\ Web\\ Services: latency to official service$/"
           },
           "functions": []
         }
@@ -8322,7 +8322,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[microsoft-365\\]/"
+            "filter": "/^Microsoft\\ 365: status$/"
           },
           "functions": []
         }
@@ -8438,7 +8438,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[microsoft-365\\]/"
+            "filter": "/^Microsoft\\ 365: reports last hour$/"
           },
           "functions": []
         }
@@ -8510,7 +8510,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[microsoft-365\\]/"
+            "filter": "/^Microsoft\\ 365: latency to official service$/"
           },
           "functions": []
         }
@@ -8605,7 +8605,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[microsoft-account\\]/"
+            "filter": "/^Microsoft\\ Account: status$/"
           },
           "functions": []
         }
@@ -8721,7 +8721,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[microsoft-account\\]/"
+            "filter": "/^Microsoft\\ Account: reports last hour$/"
           },
           "functions": []
         }
@@ -8793,7 +8793,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[microsoft-account\\]/"
+            "filter": "/^Microsoft\\ Account: latency to official service$/"
           },
           "functions": []
         }
@@ -8888,7 +8888,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[outlook\\]/"
+            "filter": "/^Outlook: status$/"
           },
           "functions": []
         }
@@ -9004,7 +9004,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[outlook\\]/"
+            "filter": "/^Outlook: reports last hour$/"
           },
           "functions": []
         }
@@ -9076,7 +9076,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[outlook\\]/"
+            "filter": "/^Outlook: latency to official service$/"
           },
           "functions": []
         }
@@ -9171,7 +9171,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[hostgator\\]/"
+            "filter": "/^Hostgator: status$/"
           },
           "functions": []
         }
@@ -9287,7 +9287,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[hostgator\\]/"
+            "filter": "/^Hostgator: reports last hour$/"
           },
           "functions": []
         }
@@ -9359,7 +9359,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[hostgator\\]/"
+            "filter": "/^Hostgator: latency to official service$/"
           },
           "functions": []
         }
@@ -9467,7 +9467,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[claude-ai\\]/"
+            "filter": "/^Claude\\ AI: status$/"
           },
           "functions": []
         }
@@ -9583,7 +9583,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[claude-ai\\]/"
+            "filter": "/^Claude\\ AI: reports last hour$/"
           },
           "functions": []
         }
@@ -9655,7 +9655,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[claude-ai\\]/"
+            "filter": "/^Claude\\ AI: latency to official service$/"
           },
           "functions": []
         }
@@ -9750,7 +9750,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[openai\\]/"
+            "filter": "/^OpenAI: status$/"
           },
           "functions": []
         }
@@ -9866,7 +9866,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[openai\\]/"
+            "filter": "/^OpenAI: reports last hour$/"
           },
           "functions": []
         }
@@ -9938,7 +9938,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[openai\\]/"
+            "filter": "/^OpenAI: latency to official service$/"
           },
           "functions": []
         }
@@ -10033,7 +10033,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[googlegemini\\]/"
+            "filter": "/^Google\\ Gemini: status$/"
           },
           "functions": []
         }
@@ -10149,7 +10149,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[googlegemini\\]/"
+            "filter": "/^Google\\ Gemini: reports last hour$/"
           },
           "functions": []
         }
@@ -10221,7 +10221,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[googlegemini\\]/"
+            "filter": "/^Google\\ Gemini: latency to official service$/"
           },
           "functions": []
         }
@@ -10329,7 +10329,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[sefaz\\]/"
+            "filter": "/^Sefaz\\ \\(Nacional\\): status$/"
           },
           "functions": []
         }
@@ -10445,7 +10445,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[sefaz\\]/"
+            "filter": "/^Sefaz\\ \\(Nacional\\): reports last hour$/"
           },
           "functions": []
         }
@@ -10517,7 +10517,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[sefaz\\]/"
+            "filter": "/^Sefaz\\ \\(Nacional\\): latency to official service$/"
           },
           "functions": []
         }
@@ -10612,7 +10612,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[nota-fiscal-eletronica\\]/"
+            "filter": "/^Nota\\ Fiscal\\ Eletrônica\\ \\(NF\\-e\\): status$/"
           },
           "functions": []
         }
@@ -10728,7 +10728,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[nota-fiscal-eletronica\\]/"
+            "filter": "/^Nota\\ Fiscal\\ Eletrônica\\ \\(NF\\-e\\): reports last hour$/"
           },
           "functions": []
         }
@@ -10800,7 +10800,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[nota-fiscal-eletronica\\]/"
+            "filter": "/^Nota\\ Fiscal\\ Eletrônica\\ \\(NF\\-e\\): latency to official service$/"
           },
           "functions": []
         }
@@ -10878,7 +10878,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.latency_ms\\[.*\\]/"
+            "filter": "/: latency to official service/"
           },
           "functions": []
         }
@@ -10974,7 +10974,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.status\\[.*\\]/"
+            "filter": "/: status/"
           },
           "functions": []
         }
@@ -11078,7 +11078,7 @@
             "filter": ""
           },
           "item": {
-            "filter": "/downdetector\\.reports\\[.*\\]/"
+            "filter": "/: reports last hour/"
           },
           "functions": []
         }
