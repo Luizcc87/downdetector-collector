@@ -2,6 +2,13 @@
 
 Documento para IAs (Claude Code, Cursor, Aider, Copilot, etc.) que vão editar este repositório. Resume arquitetura, convenções e armadilhas críticas que não dá pra inferir só do código.
 
+> **Nota de ambiente**: os caminhos `/opt`, `/etc`, `systemd` abaixo descrevem o
+> deploy **bare-metal de produção** (ver [INSTALL.md](INSTALL.md) / [DOCS.md](DOCS.md)).
+> Rodando localmente via `docker compose up -d`, o equivalente é
+> `docker exec dd-collector`, bind mounts do `docker-compose.yml`, e
+> `docker restart <container>` no lugar de `systemctl`. Detalhes e armadilhas
+> específicas do modo Docker: **[CLAUDE.md](CLAUDE.md)**.
+
 ## O que o projeto faz
 
 Daemon Python (em `collector/`) que raspa páginas de status do `downdetector.com.br` via FlareSolverr (Chromium em Docker), parseia o HTML do Next.js do site, e envia métricas para Zabbix Server via `zabbix_sender`. Um dashboard Grafana auto-gerado a partir de `services.yaml` consome as métricas via plugin Zabbix.

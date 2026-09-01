@@ -1,5 +1,10 @@
 # Instalação — downdetector-collector
 
+> **Quer só rodar local pra testar?** Use `docker compose up -d` — sobe todo o
+> stack (FlareSolverr, Zabbix, Grafana, daemon) em containers isolados, sem
+> tocar no sistema. Veja a seção "Modo Docker Compose" no [README.md](README.md).
+> O passo-a-passo abaixo é para deploy bare-metal de produção (systemd).
+
 ## Pré-requisitos no servidor
 
 - Debian/Ubuntu com systemd

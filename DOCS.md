@@ -3,6 +3,11 @@
 Sistema de monitoramento dos serviços do Downdetector com coleta automatizada,
 armazenamento no Zabbix e visualização no Grafana. Atualizado em **2026-05-13**.
 
+> Este documento descreve o deploy **bare-metal de produção** (topologia de
+> rede real, systemd). Para rodar local via Docker Compose, veja a seção
+> "Modo Docker Compose" no [README.md](README.md) e detalhes de operação em
+> [CLAUDE.md](CLAUDE.md).
+
 ---
 
 ## 1. Arquitetura

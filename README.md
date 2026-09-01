@@ -12,6 +12,42 @@ Downdetector → FlareSolverr → daemon Python → zabbix_sender → Zabbix →
 
 ## Instalação
 
+Dois modos: **Docker Compose** (dev/teste local, todo o stack em containers) ou
+**bare-metal** (produção, systemd + Zabbix/Grafana instalados diretamente no host).
+
+### Modo Docker Compose (dev/teste local)
+
+Requer só Docker Desktop (ou Docker Engine + Compose v2):
+
+```bash
+docker compose up -d
+```
+
+Sobe FlareSolverr, Postgres, Zabbix Server + Web, Grafana e o daemon collector
+(buildado a partir do `Dockerfile` local), tudo em containers isolados:
+
+| Serviço | URL/porta | Login |
+|---|---|---|
+| Grafana | http://localhost:3030 | `admin` / `admin` |
+| Zabbix Web | http://localhost:8888 | `Admin` / `zabbix` |
+| FlareSolverr | http://localhost:8191 | — |
+
+**Importante**: `dd-collector` não tem bind mount de código — mudar algo em
+`collector/*.py` exige rebuild:
+
+```bash
+docker compose build collector && docker compose up -d collector
+```
+
+`config/services.example.yaml` é montado direto no container; editar e
+rodar `docker compose restart collector` já aplica (o daemon também recarrega
+via `SIGHUP`, mas isso exige `docker exec` — restart é mais simples no Compose).
+
+Detalhes de operação nesse modo (troubleshooting, regeneração de dashboard,
+armadilhas específicas): **[CLAUDE.md](CLAUDE.md)**.
+
+### Modo bare-metal (produção, Ubuntu/Debian + systemd)
+
 Ubuntu 22.04+ ou Debian 12+, com Zabbix Server 7.0+ e Grafana 13+ já instalados:
 
 ```bash
