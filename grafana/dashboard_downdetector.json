@@ -1004,7 +1004,7 @@
     {
       "id": 14,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
@@ -1103,6 +1103,106 @@
     },
     {
       "id": 15,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 17
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/instagram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Instagram: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 16,
       "type": "text",
       "title": "",
       "gridPos": {
@@ -1125,7 +1225,7 @@
       "transparent": true
     },
     {
-      "id": 16,
+      "id": 17,
       "type": "stat",
       "title": "",
       "gridPos": {
@@ -1241,9 +1341,9 @@
       }
     },
     {
-      "id": 17,
+      "id": 18,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
@@ -1341,7 +1441,107 @@
       "transparent": true
     },
     {
-      "id": 18,
+      "id": 19,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 17
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/whatsapp/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "WhatsApp: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 20,
       "type": "text",
       "title": "",
       "gridPos": {
@@ -1364,7 +1564,7 @@
       "transparent": true
     },
     {
-      "id": 19,
+      "id": 21,
       "type": "stat",
       "title": "",
       "gridPos": {
@@ -1480,9 +1680,9 @@
       }
     },
     {
-      "id": 20,
+      "id": 22,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
@@ -1580,7 +1780,107 @@
       "transparent": true
     },
     {
-      "id": 21,
+      "id": 23,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 24,
       "type": "text",
       "title": "",
       "gridPos": {
@@ -1603,7 +1903,7 @@
       "transparent": true
     },
     {
-      "id": 22,
+      "id": 25,
       "type": "stat",
       "title": "",
       "gridPos": {
@@ -1719,9 +2019,9 @@
       }
     },
     {
-      "id": 23,
+      "id": 26,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
@@ -1819,14 +2119,114 @@
       "transparent": true
     },
     {
-      "id": 24,
+      "id": 27,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/twitter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "X (Twitter): latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 28,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 17
+        "y": 20
       },
       "links": [
         {
@@ -1842,14 +2242,14 @@
       "transparent": true
     },
     {
-      "id": 25,
+      "id": 29,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 22
+        "y": 25
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1958,14 +2358,14 @@
       }
     },
     {
-      "id": 26,
+      "id": 30,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 23
+        "y": 26
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2058,14 +2458,114 @@
       "transparent": true
     },
     {
-      "id": 27,
+      "id": 31,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 29
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/telegram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Telegram: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 32,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 17
+        "y": 20
       },
       "links": [
         {
@@ -2081,14 +2581,14 @@
       "transparent": true
     },
     {
-      "id": 28,
+      "id": 33,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 6,
-        "y": 22
+        "y": 25
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2197,14 +2697,14 @@
       }
     },
     {
-      "id": 29,
+      "id": 34,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 23
+        "y": 26
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2297,14 +2797,114 @@
       "transparent": true
     },
     {
-      "id": 30,
+      "id": 35,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 29
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/discord/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Discord: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 36,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 17
+        "y": 20
       },
       "links": [
         {
@@ -2320,14 +2920,14 @@
       "transparent": true
     },
     {
-      "id": 31,
+      "id": 37,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 12,
-        "y": 22
+        "y": 25
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2436,14 +3036,14 @@
       }
     },
     {
-      "id": 32,
+      "id": 38,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 23
+        "y": 26
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2536,14 +3136,114 @@
       "transparent": true
     },
     {
-      "id": 33,
+      "id": 39,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 29
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook-messenger/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook Messenger: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 40,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 17
+        "y": 20
       },
       "links": [
         {
@@ -2559,14 +3259,14 @@
       "transparent": true
     },
     {
-      "id": 34,
+      "id": 41,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 18,
-        "y": 22
+        "y": 25
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2675,14 +3375,14 @@
       }
     },
     {
-      "id": 35,
+      "id": 42,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 18,
-        "y": 23
+        "y": 26
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2775,14 +3475,114 @@
       "transparent": true
     },
     {
-      "id": 36,
+      "id": 43,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 29
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/linkedin/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "LinkedIn: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 44,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 26
+        "y": 32
       },
       "links": [
         {
@@ -2798,14 +3598,14 @@
       "transparent": true
     },
     {
-      "id": 37,
+      "id": 45,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 31
+        "y": 37
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -2914,14 +3714,14 @@
       }
     },
     {
-      "id": 38,
+      "id": 46,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 32
+        "y": 38
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3014,7 +3814,107 @@
       "transparent": true
     },
     {
-      "id": 39,
+      "id": 47,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 41
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/snapchat/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Snapchat: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 48,
       "type": "row",
       "title": "📺 Streaming & Vídeo",
       "collapsed": false,
@@ -3022,19 +3922,19 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 44
       },
       "panels": []
     },
     {
-      "id": 40,
+      "id": 49,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 36
+        "y": 45
       },
       "links": [
         {
@@ -3050,14 +3950,14 @@
       "transparent": true
     },
     {
-      "id": 41,
+      "id": 50,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 41
+        "y": 50
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3166,14 +4066,14 @@
       }
     },
     {
-      "id": 42,
+      "id": 51,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 42
+        "y": 51
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3266,7 +4166,107 @@
       "transparent": true
     },
     {
-      "id": 43,
+      "id": 52,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 54
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/youtube/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "YouTube: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 53,
       "type": "row",
       "title": "🏦 Bancos & Fintechs",
       "collapsed": false,
@@ -3274,19 +4274,19 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 57
       },
       "panels": []
     },
     {
-      "id": 44,
+      "id": 54,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 46
+        "y": 58
       },
       "links": [
         {
@@ -3302,14 +4302,14 @@
       "transparent": true
     },
     {
-      "id": 45,
+      "id": 55,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 51
+        "y": 63
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3418,14 +4418,14 @@
       }
     },
     {
-      "id": 46,
+      "id": 56,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 52
+        "y": 64
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3518,14 +4518,114 @@
       "transparent": true
     },
     {
-      "id": 47,
+      "id": 57,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 67
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-do-brasil/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco do Brasil: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 58,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 46
+        "y": 58
       },
       "links": [
         {
@@ -3541,14 +4641,14 @@
       "transparent": true
     },
     {
-      "id": 48,
+      "id": 59,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 6,
-        "y": 51
+        "y": 63
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3657,14 +4757,14 @@
       }
     },
     {
-      "id": 49,
+      "id": 60,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 52
+        "y": 64
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3757,14 +4857,114 @@
       "transparent": true
     },
     {
-      "id": 50,
+      "id": 61,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 67
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-inter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Inter: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 62,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 46
+        "y": 58
       },
       "links": [
         {
@@ -3780,14 +4980,14 @@
       "transparent": true
     },
     {
-      "id": 51,
+      "id": 63,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 12,
-        "y": 51
+        "y": 63
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3896,14 +5096,14 @@
       }
     },
     {
-      "id": 52,
+      "id": 64,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 52
+        "y": 64
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -3996,14 +5196,114 @@
       "transparent": true
     },
     {
-      "id": 53,
+      "id": 65,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 67
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-itau/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Itaú: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 66,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 46
+        "y": 58
       },
       "links": [
         {
@@ -4019,14 +5319,14 @@
       "transparent": true
     },
     {
-      "id": 54,
+      "id": 67,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 18,
-        "y": 51
+        "y": 63
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4135,14 +5435,14 @@
       }
     },
     {
-      "id": 55,
+      "id": 68,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 18,
-        "y": 52
+        "y": 64
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4235,14 +5535,114 @@
       "transparent": true
     },
     {
-      "id": 56,
+      "id": 69,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 67
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bradesco/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Bradesco: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 70,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 55
+        "y": 70
       },
       "links": [
         {
@@ -4258,14 +5658,14 @@
       "transparent": true
     },
     {
-      "id": 57,
+      "id": 71,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 60
+        "y": 75
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4374,14 +5774,14 @@
       }
     },
     {
-      "id": 58,
+      "id": 72,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 61
+        "y": 76
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4474,14 +5874,114 @@
       "transparent": true
     },
     {
-      "id": 59,
+      "id": 73,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nubank/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nubank: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 74,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 55
+        "y": 70
       },
       "links": [
         {
@@ -4497,14 +5997,14 @@
       "transparent": true
     },
     {
-      "id": 60,
+      "id": 75,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 6,
-        "y": 60
+        "y": 75
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4613,14 +6113,14 @@
       }
     },
     {
-      "id": 61,
+      "id": 76,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 61
+        "y": 76
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4713,14 +6213,114 @@
       "transparent": true
     },
     {
-      "id": 62,
+      "id": 77,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bcb/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Central do Brasil: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 78,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 55
+        "y": 70
       },
       "links": [
         {
@@ -4736,14 +6336,14 @@
       "transparent": true
     },
     {
-      "id": 63,
+      "id": 79,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 12,
-        "y": 60
+        "y": 75
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4852,14 +6452,14 @@
       }
     },
     {
-      "id": 64,
+      "id": 80,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 61
+        "y": 76
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -4952,14 +6552,114 @@
       "transparent": true
     },
     {
-      "id": 65,
+      "id": 81,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicoob/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicoob: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 82,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 55
+        "y": 70
       },
       "links": [
         {
@@ -4975,14 +6675,14 @@
       "transparent": true
     },
     {
-      "id": 66,
+      "id": 83,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 18,
-        "y": 60
+        "y": 75
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5091,14 +6791,14 @@
       }
     },
     {
-      "id": 67,
+      "id": 84,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 18,
-        "y": 61
+        "y": 76
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5191,14 +6891,114 @@
       "transparent": true
     },
     {
-      "id": 68,
+      "id": 85,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicredi/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicredi: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 86,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 64
+        "y": 82
       },
       "links": [
         {
@@ -5214,14 +7014,14 @@
       "transparent": true
     },
     {
-      "id": 69,
+      "id": 87,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 69
+        "y": 87
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5330,14 +7130,14 @@
       }
     },
     {
-      "id": 70,
+      "id": 88,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 70
+        "y": 88
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5430,14 +7230,114 @@
       "transparent": true
     },
     {
-      "id": 71,
+      "id": 89,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 91
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banrisul/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banrisul: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 90,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 64
+        "y": 82
       },
       "links": [
         {
@@ -5453,14 +7353,14 @@
       "transparent": true
     },
     {
-      "id": 72,
+      "id": 91,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 6,
-        "y": 69
+        "y": 87
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5569,14 +7469,14 @@
       }
     },
     {
-      "id": 73,
+      "id": 92,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 70
+        "y": 88
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5669,14 +7569,114 @@
       "transparent": true
     },
     {
-      "id": 74,
+      "id": 93,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 91
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/caixa/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Caixa Econômica Federal: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 94,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 12,
-        "y": 64
+        "y": 82
       },
       "links": [
         {
@@ -5692,14 +7692,14 @@
       "transparent": true
     },
     {
-      "id": 75,
+      "id": 95,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 12,
-        "y": 69
+        "y": 87
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5808,14 +7808,14 @@
       }
     },
     {
-      "id": 76,
+      "id": 96,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 70
+        "y": 88
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -5908,7 +7908,107 @@
       "transparent": true
     },
     {
-      "id": 77,
+      "id": 97,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 91
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/mercadopago/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Mercado Pago: latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 98,
       "type": "row",
       "title": "🏛️ Governo & Serviços Fiscais",
       "collapsed": false,
@@ -5916,19 +8016,19 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 73
+        "y": 94
       },
       "panels": []
     },
     {
-      "id": 78,
+      "id": 99,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 74
+        "y": 95
       },
       "links": [
         {
@@ -5944,14 +8044,14 @@
       "transparent": true
     },
     {
-      "id": 79,
+      "id": 100,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 0,
-        "y": 79
+        "y": 100
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -6060,14 +8160,14 @@
       }
     },
     {
-      "id": 80,
+      "id": 101,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 80
+        "y": 101
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -6160,14 +8260,114 @@
       "transparent": true
     },
     {
-      "id": 81,
+      "id": 102,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 104
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sefaz/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sefaz (Nacional): latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 103,
       "type": "text",
       "title": "",
       "gridPos": {
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 74
+        "y": 95
       },
       "links": [
         {
@@ -6183,14 +8383,14 @@
       "transparent": true
     },
     {
-      "id": 82,
+      "id": 104,
       "type": "stat",
       "title": "",
       "gridPos": {
         "h": 1,
         "w": 6,
         "x": 6,
-        "y": 79
+        "y": 100
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -6299,14 +8499,14 @@
       }
     },
     {
-      "id": 83,
+      "id": 105,
       "type": "timeseries",
-      "title": "",
+      "title": "Historico Downdetector",
       "gridPos": {
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 80
+        "y": 101
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -6399,7 +8599,107 @@
       "transparent": true
     },
     {
-      "id": 84,
+      "id": 106,
+      "type": "timeseries",
+      "title": "Latencia ate o servico oficial",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 104
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nota-fiscal-eletronica/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nota Fiscal Eletrônica (NF-e): latency to official service"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#7C3AED"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 500
+              },
+              {
+                "color": "#E55353",
+                "value": 1500
+              }
+            ]
+          },
+          "unit": "ms",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 107,
       "type": "row",
       "title": "📈 Tendências & Histórico",
       "collapsed": false,
@@ -6407,19 +8707,19 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 107
       },
       "panels": []
     },
     {
-      "id": 85,
+      "id": 108,
       "type": "timeseries",
       "title": "📊 Histórico de Relatos de Problemas (Últimas 24h)",
       "gridPos": {
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 84
+        "y": 108
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",

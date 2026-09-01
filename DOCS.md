@@ -273,6 +273,7 @@ services:
     slug: instagram                                    # parte da URL Downdetector
     id: 33204                                          # company_id (opcional, só LLD cosmético)
     logo: /public/img/downdetector/instagram.svg       # path pro Grafana servir
+    target_url: https://www.instagram.com/             # URL oficial para latência HTTP
     poll_interval: 60                                  # override (opcional)
     country: com                                       # override (opcional)
 ```
@@ -283,6 +284,7 @@ services:
 - `slug` *(obrigatório)*: identificador no Downdetector. URL fica `https://downdetector.com.br/status/<slug>/`. Deve existir no Downdetector (alguns BR não existem, ex: skype, receita-federal).
 - `id` *(obrigatório, pode ser 0)*: company_id. Cosmético no LLD do Zabbix; o real é coletado a cada scrape e enviado em `downdetector.company_id[<slug>]`.
 - `logo` *(obrigatório)*: path absoluto servido pelo Grafana. Convenção: `/public/img/downdetector/<slug>.svg`.
+- `target_url` *(opcional, recomendado)*: endereço oficial do serviço usado para medir latência HTTP direta. Não é página do Downdetector.
 - `poll_interval` *(opcional)*: intervalo em segundos. Default 300 (5min). Mínimo prático 60s.
 - `country` *(opcional)*: country code. Default `br`. Usar `com` pra forçar `.com` (sem `.br`).
 
@@ -405,8 +407,8 @@ tail -F /var/log/grafana/grafana.log
 | `sighup_received_reloading_config` | SIGHUP recebido | — |
 | `term_received_stopping` | SIGTERM/SIGINT recebido | — |
 | `zabbix_sender_ok count=5` | Push de health metrics (a cada 60s) | — |
-| `zabbix_sender_ok count=3` | Scrape OK (status+last_check+reports) | — |
-| `zabbix_sender_ok count=6` | Scrape OK + meta push (name/company_id/logo, cada N scrapes) | — |
+| `zabbix_sender_ok count=4` | Scrape OK (status+last_check+reports+latency_ms, quando `target_url` existe) | — |
+| `zabbix_sender_ok count=7` | Scrape OK + meta push (name/company_id/logo, cada N scrapes) | — |
 | `scrape_blocked` | Cloudflare 403 ou challenge "Just a moment..." | Backoff exponencial automático |
 | `scrape_rate_limited` | Página 429 `(╯°□°)╯︵ ┻━┻` do Downdetector | Backoff exponencial automático |
 | `flaresolverr_http_error status=500` | Chromium do FS travou | Retry no próximo ciclo; se persistente, `docker restart flaresolverr` |
@@ -421,6 +423,7 @@ Por serviço (LLD descobre via `services.yaml`):
 |---|---|---|
 | `downdetector.status[<slug>]` | UNSIGNED | 0=Ok, 1=Atenção, 2=Problema, 3=N/D |
 | `downdetector.reports[<slug>]` | UNSIGNED | Relatos na última hora (mais recente do chartData) |
+| `downdetector.latency_ms[<slug>]` | FLOAT | Latência HTTP direta até `target_url`, em ms |
 | `downdetector.last_check[<slug>]` | UNSIGNED | Unix timestamp do último scrape OK |
 | `downdetector.name[<slug>]` | CHAR | Nome do serviço (cosmético, raramente muda) |
 | `downdetector.company_id[<slug>]` | UNSIGNED | company_id descoberto (idem) |

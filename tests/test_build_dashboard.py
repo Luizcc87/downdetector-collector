@@ -30,6 +30,7 @@ def test_service_panels_link_to_downdetector_page():
         "slug": "instagram",
         "country": "br",
         "logo": "/public/img/downdetector/instagram.svg",
+        "target_url": "https://www.instagram.com/",
     }
 
     panels, _, _ = dashboard.build_service_grid([service], start_y=1, start_pid=10)
@@ -48,15 +49,20 @@ def test_service_grid_renders_logo_status_and_sparkline():
         "slug": "instagram",
         "country": "br",
         "logo": "/public/img/downdetector/instagram.svg",
+        "target_url": "https://www.instagram.com/",
     }
 
     panels, next_y, next_pid = dashboard.build_service_grid([service], start_y=1, start_pid=10)
 
-    assert [panel["type"] for panel in panels] == ["text", "stat", "timeseries"]
+    assert [panel["type"] for panel in panels] == ["text", "stat", "timeseries", "timeseries"]
     sparkline = panels[2]
-    assert sparkline["title"] == ""
+    assert sparkline["title"] == "Historico Downdetector"
     assert sparkline["targets"][0]["item"]["filter"] == "Instagram: reports last hour"
     assert sparkline["options"]["legend"]["displayMode"] == "hidden"
     assert sparkline["fieldConfig"]["defaults"]["custom"]["drawStyle"] == "line"
+    latency = panels[3]
+    assert latency["title"] == "Latencia ate o servico oficial"
+    assert latency["targets"][0]["item"]["filter"] == "Instagram: latency to official service"
+    assert latency["fieldConfig"]["defaults"]["unit"] == "ms"
     assert next_y == 1 + dashboard.CARD_H
-    assert next_pid == 13
+    assert next_pid == 14

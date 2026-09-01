@@ -50,7 +50,8 @@ CARD_W = 24 // CARDS_PER_ROW  # = 6
 LOGO_H = 5
 STATUS_H = 1
 REPORTS_H = 3
-CARD_H = LOGO_H + STATUS_H + REPORTS_H  # = 9
+LATENCY_H = 3
+CARD_H = LOGO_H + STATUS_H + REPORTS_H + LATENCY_H  # = 12
 
 TOP_H = 3
 
@@ -248,7 +249,7 @@ def card_status(pid, name, service_url, x, y):
 
 def card_reports(pid, name, service_url, x, y):
     return {
-        "id": pid, "type": "timeseries", "title": "",
+        "id": pid, "type": "timeseries", "title": "Historico Downdetector",
         "gridPos": {"h": REPORTS_H, "w": CARD_W, "x": x, "y": y},
         "datasource": ZBX_DS,
         "links": panel_link(service_url),
@@ -287,6 +288,47 @@ def card_reports(pid, name, service_url, x, y):
     }
 
 
+def card_latency(pid, name, service_url, x, y):
+    return {
+        "id": pid, "type": "timeseries", "title": "Latencia ate o servico oficial",
+        "gridPos": {"h": LATENCY_H, "w": CARD_W, "x": x, "y": y},
+        "datasource": ZBX_DS,
+        "links": panel_link(service_url),
+        "targets": [zbx_target(f"{name}: latency to official service")],
+        "options": {
+            "tooltip": {"mode": "single", "sort": "none"},
+            "legend": {"displayMode": "hidden", "placement": "bottom", "calcs": []},
+        },
+        "fieldConfig": {
+            "defaults": {
+                "color": {"mode": "fixed", "fixedColor": "#7C3AED"},
+                "custom": {
+                    "drawStyle": "line",
+                    "lineInterpolation": "smooth",
+                    "lineWidth": 2,
+                    "fillOpacity": 0,
+                    "showPoints": "never",
+                    "axisPlacement": "hidden",
+                    "hideFrom": {"tooltip": False, "viz": False, "legend": False},
+                },
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {"color": "#2EB85C", "value": None},
+                        {"color": COLOR_ATTN, "value": 500},
+                        {"color": COLOR_PROB, "value": 1500},
+                    ],
+                },
+                "unit": "ms",
+                "decimals": 0,
+                "min": 0,
+            },
+            "overrides": [],
+        },
+        "transparent": True,
+    }
+
+
 def build_service_grid(services, start_y, start_pid):
     panels = []
     pid = start_pid
@@ -300,6 +342,14 @@ def build_service_grid(services, start_y, start_pid):
         panels.append(card_status(pid, svc["name"], service_url, x=x, y=y + LOGO_H))
         pid += 1
         panels.append(card_reports(pid, svc["name"], service_url, x=x, y=y + LOGO_H + STATUS_H))
+        pid += 1
+        panels.append(card_latency(
+            pid,
+            svc["name"],
+            service_url,
+            x=x,
+            y=y + LOGO_H + STATUS_H + REPORTS_H,
+        ))
         pid += 1
         col += 1
         if col >= CARDS_PER_ROW:

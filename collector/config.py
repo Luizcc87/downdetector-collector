@@ -1,9 +1,9 @@
 """Parsing de services.yaml. Fonte única de verdade para a lista de serviços."""
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 import yaml
 
@@ -16,6 +16,7 @@ class ServiceConfig:
     logo: str
     poll_interval: int
     country: str
+    target_url: str | None = None
 
     def url(self) -> str:
         if self.country == "com":
@@ -66,6 +67,7 @@ def load_services_from_path(path: Path) -> list[ServiceConfig]:
                 logo=merged["logo"],
                 poll_interval=int(merged.get("poll_interval", 60)),
                 country=merged.get("country", "br"),
+                target_url=merged.get("target_url"),
             )
         )
     return result

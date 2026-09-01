@@ -12,13 +12,12 @@ import signal
 import sys
 import time
 from pathlib import Path
-from typing import Optional
 
 import structlog
 
 from collector.config import ServiceConfig, load_services_from_path
 from collector.health import HealthState
-from collector.parser import Status
+from collector.latency import LatencyChecker
 from collector.scheduler import Scheduler
 from collector.scraper import ScrapeResult, Scraper
 from collector.zabbix_sink import Metric, ZabbixSink
@@ -57,9 +56,10 @@ class Collector:
         self._args = args
         self._services: list[ServiceConfig] = []
         self._scraper = Scraper(args.flaresolverr_url)
+        self._latency = LatencyChecker()
         self._sink = ZabbixSink(args.zabbix_server, args.zabbix_port, args.zabbix_host_name)
         self._health = HealthState()
-        self._scheduler: Optional[Scheduler] = None
+        self._scheduler: Scheduler | None = None
         self._scrape_counts: dict[str, int] = {}
         self._stop_event = asyncio.Event()
 
@@ -84,6 +84,9 @@ class Collector:
         ]
         if result.parse.reports is not None:
             metrics.append((f"downdetector.reports[{service.slug}]", result.parse.reports))
+        latency = await self._latency.check(service)
+        if latency.latency_ms is not None:
+            metrics.append((f"downdetector.latency_ms[{service.slug}]", latency.latency_ms))
         # name e company_id raramente mudam — envia a cada N
         count = self._scrape_counts.get(service.slug, 0) + 1
         self._scrape_counts[service.slug] = count
@@ -136,6 +139,7 @@ class Collector:
     async def run(self) -> None:
         self._load_config()
         await self._scraper.start()
+        await self._latency.start()
         loop = asyncio.get_running_loop()
         self._install_signal_handlers(loop)
         health_task = asyncio.create_task(self._health_pusher())
@@ -153,6 +157,7 @@ class Collector:
             health_task.cancel()
             await asyncio.gather(health_task, return_exceptions=True)
             await self._scraper.stop()
+            await self._latency.stop()
 
 
 def main() -> int:

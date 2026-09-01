@@ -8,95 +8,139 @@ services:
     slug: instagram
     id: 33204
     logo: /public/img/downdetector/instagram.svg
+    target_url: https://www.instagram.com/
 
   - name: WhatsApp
     slug: whatsapp
     id: 10136
     logo: /public/img/downdetector/whatsapp.svg
+    target_url: https://www.whatsapp.com/
 
   - name: Facebook
     slug: facebook
     id: 0
     logo: /public/img/downdetector/facebook.svg
+    target_url: https://www.facebook.com/
 
   - name: X (Twitter)
     slug: twitter
     id: 0
     logo: /public/img/downdetector/twitter.svg
+    target_url: https://x.com/
 
   - name: Telegram
     slug: telegram
     id: 0
     logo: /public/img/downdetector/telegram.svg
+    target_url: https://telegram.org/
 
   - name: Discord
     slug: discord
     id: 0
     logo: /public/img/downdetector/discord.svg
+    target_url: https://discord.com/
 
   - name: Facebook Messenger
     slug: facebook-messenger
     id: 0
     logo: /public/img/downdetector/facebook-messenger.svg
+    target_url: https://www.messenger.com/
 
   - name: LinkedIn
     slug: linkedin
     id: 0
     logo: /public/img/downdetector/linkedin.svg
+    target_url: https://www.linkedin.com/
 
   - name: Snapchat
     slug: snapchat
     id: 0
     logo: /public/img/downdetector/snapchat.svg
+    target_url: https://www.snapchat.com/
 
   # === YouTube ===
   - name: YouTube
     slug: youtube
     id: 0
     logo: /public/img/downdetector/youtube.svg
+    target_url: https://www.youtube.com/
 
   # === Bancos ===
   - name: Banco do Brasil
     slug: banco-do-brasil
     id: 0
     logo: /public/img/downdetector/banco-do-brasil.svg
+    target_url: https://www.bb.com.br/
 
   - name: Banco Inter
     slug: banco-inter
     id: 0
     logo: /public/img/downdetector/banco-inter.svg
+    target_url: https://www.inter.co/
 
   - name: Banco Itaú
     slug: banco-itau
     id: 0
     logo: /public/img/downdetector/banco-itau.svg
+    target_url: https://www.itau.com.br/
 
   - name: Bradesco
     slug: bradesco
     id: 0
     logo: /public/img/downdetector/bradesco.svg
+    target_url: https://banco.bradesco/
 
   - name: Nubank
     slug: nubank
     id: 0
     logo: /public/img/downdetector/nubank.svg
+    target_url: https://nubank.com.br/
 
   - name: Banco Central do Brasil
     slug: bcb
     id: 0
     logo: /public/img/downdetector/bcb.svg
+    target_url: https://www.bcb.gov.br/
 
   - name: Sicoob
     slug: sicoob
     id: 0
     logo: /public/img/downdetector/sicoob.svg
+    target_url: https://www.sicoob.com.br/
+
+  - name: Sicredi
+    slug: sicredi
+    id: 37505
+    logo: /public/img/downdetector/sicredi.svg
+    target_url: https://www.sicredi.com.br/
+
+  - name: Banrisul
+    slug: banrisul
+    id: 35425
+    logo: /public/img/downdetector/banrisul.svg
+    target_url: https://www.banrisul.com.br/
 
   - name: Caixa Econômica Federal
     slug: caixa
     id: 0
     logo: /public/img/downdetector/caixa.svg
+    target_url: https://www.caixa.gov.br/
 
   - name: Mercado Pago
     slug: mercadopago
     id: 0
     logo: /public/img/downdetector/mercadopago.svg
+    target_url: https://www.mercadopago.com.br/
+
+  # === Serviços Públicos / Sefaz ===
+  - name: Sefaz (Nacional)
+    slug: sefaz
+    id: 37626
+    logo: /public/img/downdetector/sefaz.svg
+    target_url: https://www.nfe.fazenda.gov.br/
+
+  - name: Nota Fiscal Eletrônica (NF-e)
+    slug: nota-fiscal-eletronica
+    id: 34718
+    logo: /public/img/downdetector/nota-fiscal-eletronica.svg
+    target_url: https://www.nfe.fazenda.gov.br/

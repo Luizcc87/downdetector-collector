@@ -41,11 +41,13 @@ services:
     slug: instagram                              # parte da URL: .../status/<slug>/
     id: 33204                                    # company_id (cosmético, pode ser 0)
     logo: /public/img/downdetector/instagram.svg # path do logo no Grafana
+    target_url: https://www.instagram.com/       # URL oficial usada para medir latência HTTP
 
   - name: Banco Itaú
     slug: banco-itau
     id: 0
     logo: /public/img/downdetector/banco-itau.svg
+    target_url: https://www.itau.com.br/
     poll_interval: 600                           # override por serviço (opcional)
 
   - name: Cloudflare
@@ -53,6 +55,7 @@ services:
     id: 32542
     logo: /public/img/downdetector/cloudflare.svg
     country: com                                 # força .com em vez do default .br
+    target_url: https://www.cloudflare.com/
 ```
 
 ### Campos
@@ -65,6 +68,9 @@ services:
 | `logo` | sim | — | Path absoluto do SVG servido pelo Grafana |
 | `poll_interval` | não | `defaults.poll_interval` | Segundos entre scrapes |
 | `country` | não | `defaults.country` | Código de país do Downdetector |
+| `target_url` | não | — | URL oficial medida diretamente para latência HTTP |
+
+No dashboard, o gráfico **Histórico Downdetector** mostra relatos extraídos do Downdetector. O gráfico **Latência até o serviço oficial** mede HTTP direto contra `target_url` e é enviado como métrica separada ao Zabbix.
 
 ### poll_interval — recomendação
 
@@ -146,8 +152,8 @@ sudo /opt/downdetector-collector/.venv/bin/python /opt/downdetector-collector/sr
 | Evento | Significado |
 |---|---|
 | `config_loaded count=N` | Reload OK, N serviços ativos |
-| `zabbix_sender_ok count=3` | Scrape OK (status + last_check + reports) |
-| `zabbix_sender_ok count=6` | Scrape OK + meta-push (name + id + logo, periódico) |
+| `zabbix_sender_ok count=4` | Scrape OK (status + last_check + reports + latency_ms, quando `target_url` existe) |
+| `zabbix_sender_ok count=7` | Scrape OK + meta-push (name + id + logo, periódico) |
 | `scrape_blocked` | Cloudflare 403 — backoff automático |
 | `scrape_rate_limited` | Página `(╯°□°)╯︵ ┻━┻` — backoff longo |
 | `flaresolverr_http_error` | Chromium do FS travou — geralmente recupera sozinho |

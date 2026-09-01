@@ -19,6 +19,7 @@ services:
     logo: /public/img/downdetector/cloudflare.svg
     poll_interval: 30
     country: com
+    target_url: https://www.cloudflare.com/
   - name: Banco Itaú
     slug: banco-itau
     id: 33205
@@ -31,7 +32,7 @@ services:
     slug: whatsapp
     id: 10136
     logo: /public/img/downdetector/whatsapp.svg
-""")
+""", encoding="utf-8")
     return dst
 
 
@@ -53,6 +54,14 @@ def test_load_keeps_per_service_overrides(example_yaml):
     cloudflare = next(s for s in services if s.slug == "cloudflare")
     assert cloudflare.poll_interval == 30
     assert cloudflare.country == "com"
+
+
+def test_load_keeps_official_target_url(example_yaml):
+    services = load_services_from_path(example_yaml)
+    cloudflare = next(s for s in services if s.slug == "cloudflare")
+    itau = next(s for s in services if s.slug == "banco-itau")
+    assert cloudflare.target_url == "https://www.cloudflare.com/"
+    assert itau.target_url is None
 
 
 def test_example_yaml_is_valid():
@@ -78,12 +87,28 @@ services:
 
 
 def test_service_url_country_br():
-    s = ServiceConfig(name="Test", slug="test", id=1, logo="t.svg", poll_interval=60, country="br")
+    s = ServiceConfig(
+        name="Test",
+        slug="test",
+        id=1,
+        logo="t.svg",
+        poll_interval=60,
+        country="br",
+        target_url=None,
+    )
     assert s.url() == "https://downdetector.com.br/status/test/"
 
 
 def test_service_url_country_com():
-    s = ServiceConfig(name="Test", slug="test", id=1, logo="t.svg", poll_interval=60, country="com")
+    s = ServiceConfig(
+        name="Test",
+        slug="test",
+        id=1,
+        logo="t.svg",
+        poll_interval=60,
+        country="com",
+        target_url=None,
+    )
     assert s.url() == "https://downdetector.com/status/test/"
 
 
