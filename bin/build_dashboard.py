@@ -43,13 +43,13 @@ STATUS_THRESHOLDS = {
     ],
 }
 
-CARDS_PER_ROW = 8
-CARD_W = 24 // CARDS_PER_ROW  # = 3
-LOGO_H = 3
+CARDS_PER_ROW = 6
+CARD_W = 24 // CARDS_PER_ROW  # = 4
+LOGO_H = 4
 STATUS_H = 2
-SPARKLINE_H = 2
+SPARKLINE_H = 3
 LATENCY_H = 3
-CARD_H = LOGO_H + STATUS_H + SPARKLINE_H + LATENCY_H  # = 9
+CARD_H = LOGO_H + STATUS_H + SPARKLINE_H + LATENCY_H  # = 12
 
 TOP_H = 3
 
@@ -205,12 +205,12 @@ def card_logo(pid, svc, logo_url, x, y):
             "mode": "html",
             "content": (
                 '<div style="display:flex;flex-direction:column;align-items:center;'
-                'justify-content:center;height:100%;padding:4px;gap:2px;'
+                'justify-content:center;height:100%;padding:6px;gap:3px;'
                 'background:#181b1f;border-radius:6px 6px 0 0;">'
                 '<div style="background:#ffffff;padding:2px;border-radius:6px;'
                 'display:flex;align-items:center;justify-content:center;'
-                'width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);">'
-                f'<img src="{logo_url}" style="max-height:30px;max-width:30px;'
+                'width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);">'
+                f'<img src="{logo_url}" style="max-height:40px;max-width:40px;'
                 'object-fit:contain;" />'
                 '</div>'
                 '<div style="font-size:11px;font-weight:600;text-align:center;'
@@ -263,9 +263,11 @@ def card_sparkline_reports(pid, svc, x, y):
                 "custom": {
                     "drawStyle": "line",
                     "lineInterpolation": "smooth",
-                    "fillOpacity": 20,
+                    "lineWidth": 2,
+                    "fillOpacity": 35,
                     "axisPlacement": "none",
-                    "showPoints": "never",
+                    "showPoints": "auto",
+                    "pointSize": 3,
                 },
                 "color": {"mode": "fixed", "fixedColor": "#2a78d6"},
                 "unit": "short",
@@ -284,7 +286,7 @@ def card_sparkline_latency(pid, svc, x, y):
         "datasource": ZBX_DS,
         "targets": [zbx_target(f"/^{re.escape(svc['name'])}{LATENCY_NAME_SUFFIX}$/")],
         "options": {
-            "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
+            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": False},
             "colorMode": "value", "graphMode": "area", "textMode": "value", "justifyMode": "center",
         },
         "fieldConfig": {

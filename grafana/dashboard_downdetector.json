@@ -867,8 +867,8 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
         "y": 8
       },
@@ -881,7 +881,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/instagram.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Instagram</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/instagram.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Instagram</div></div>"
       },
       "transparent": true
     },
@@ -891,9 +891,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 11
+        "y": 12
       },
       "links": [
         {
@@ -1006,10 +1006,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 13
+        "y": 14
       },
       "links": [
         {
@@ -1059,9 +1059,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -1079,9 +1081,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 15
+        "y": 17
       },
       "links": [
         {
@@ -1121,7 +1123,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1168,9 +1170,9 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
+        "h": 4,
+        "w": 4,
+        "x": 4,
         "y": 8
       },
       "links": [
@@ -1182,7 +1184,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">WhatsApp</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">WhatsApp</div></div>"
       },
       "transparent": true
     },
@@ -1192,9 +1194,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 11
+        "w": 4,
+        "x": 4,
+        "y": 12
       },
       "links": [
         {
@@ -1307,10 +1309,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 14
       },
       "links": [
         {
@@ -1360,9 +1362,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -1380,9 +1384,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 15
+        "w": 4,
+        "x": 4,
+        "y": 17
       },
       "links": [
         {
@@ -1422,7 +1426,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1469,9 +1473,9 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
+        "h": 4,
+        "w": 4,
+        "x": 8,
         "y": 8
       },
       "links": [
@@ -1483,7 +1487,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/facebook.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Facebook</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/facebook.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Facebook</div></div>"
       },
       "transparent": true
     },
@@ -1493,9 +1497,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 11
+        "w": 4,
+        "x": 8,
+        "y": 12
       },
       "links": [
         {
@@ -1608,10 +1612,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 14
       },
       "links": [
         {
@@ -1661,9 +1665,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -1681,9 +1687,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 15
+        "w": 4,
+        "x": 8,
+        "y": 17
       },
       "links": [
         {
@@ -1723,7 +1729,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1770,9 +1776,9 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
+        "h": 4,
+        "w": 4,
+        "x": 12,
         "y": 8
       },
       "links": [
@@ -1784,7 +1790,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/twitter.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">X (Twitter)</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/twitter.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">X (Twitter)</div></div>"
       },
       "transparent": true
     },
@@ -1794,9 +1800,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 11
+        "w": 4,
+        "x": 12,
+        "y": 12
       },
       "links": [
         {
@@ -1909,10 +1915,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 14
       },
       "links": [
         {
@@ -1962,9 +1968,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -1982,9 +1990,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 15
+        "w": 4,
+        "x": 12,
+        "y": 17
       },
       "links": [
         {
@@ -2024,7 +2032,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -2071,9 +2079,9 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 12,
+        "h": 4,
+        "w": 4,
+        "x": 16,
         "y": 8
       },
       "links": [
@@ -2085,7 +2093,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/telegram.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Telegram</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/telegram.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Telegram</div></div>"
       },
       "transparent": true
     },
@@ -2095,9 +2103,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 11
+        "w": 4,
+        "x": 16,
+        "y": 12
       },
       "links": [
         {
@@ -2210,10 +2218,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 14
       },
       "links": [
         {
@@ -2263,9 +2271,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -2283,9 +2293,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 15
+        "w": 4,
+        "x": 16,
+        "y": 17
       },
       "links": [
         {
@@ -2325,7 +2335,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -2372,9 +2382,9 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 15,
+        "h": 4,
+        "w": 4,
+        "x": 20,
         "y": 8
       },
       "links": [
@@ -2386,7 +2396,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/discord.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Discord</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/discord.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Discord</div></div>"
       },
       "transparent": true
     },
@@ -2396,9 +2406,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 11
+        "w": 4,
+        "x": 20,
+        "y": 12
       },
       "links": [
         {
@@ -2511,10 +2521,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 14
       },
       "links": [
         {
@@ -2564,9 +2574,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -2584,9 +2596,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 15
+        "w": 4,
+        "x": 20,
+        "y": 17
       },
       "links": [
         {
@@ -2626,7 +2638,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -2673,10 +2685,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 8
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 20
       },
       "links": [
         {
@@ -2687,7 +2699,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/facebook-messenger.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Facebook Messenger</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/facebook-messenger.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Facebook Messenger</div></div>"
       },
       "transparent": true
     },
@@ -2697,9 +2709,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 11
+        "w": 4,
+        "x": 0,
+        "y": 24
       },
       "links": [
         {
@@ -2812,10 +2824,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 26
       },
       "links": [
         {
@@ -2865,9 +2877,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -2885,9 +2899,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 15
+        "w": 4,
+        "x": 0,
+        "y": 29
       },
       "links": [
         {
@@ -2927,7 +2941,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -2974,10 +2988,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 8
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 20
       },
       "links": [
         {
@@ -2988,7 +3002,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/linkedin.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">LinkedIn</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/linkedin.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">LinkedIn</div></div>"
       },
       "transparent": true
     },
@@ -2998,9 +3012,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 11
+        "w": 4,
+        "x": 4,
+        "y": 24
       },
       "links": [
         {
@@ -3113,10 +3127,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 13
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 26
       },
       "links": [
         {
@@ -3166,9 +3180,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -3186,9 +3202,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 15
+        "w": 4,
+        "x": 4,
+        "y": 29
       },
       "links": [
         {
@@ -3228,7 +3244,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -3275,10 +3291,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 18
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 20
       },
       "links": [
         {
@@ -3289,7 +3305,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/snapchat.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Snapchat</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/snapchat.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Snapchat</div></div>"
       },
       "transparent": true
     },
@@ -3299,9 +3315,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 21
+        "w": 4,
+        "x": 8,
+        "y": 24
       },
       "links": [
         {
@@ -3414,10 +3430,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 23
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 26
       },
       "links": [
         {
@@ -3467,9 +3483,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -3487,9 +3505,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 25
+        "w": 4,
+        "x": 8,
+        "y": 29
       },
       "links": [
         {
@@ -3529,7 +3547,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -3580,7 +3598,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 32
       },
       "panels": []
     },
@@ -3589,10 +3607,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 29
+        "y": 33
       },
       "links": [
         {
@@ -3603,7 +3621,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/youtube.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">YouTube</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/youtube.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">YouTube</div></div>"
       },
       "transparent": true
     },
@@ -3613,9 +3631,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 32
+        "y": 37
       },
       "links": [
         {
@@ -3728,10 +3746,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 34
+        "y": 39
       },
       "links": [
         {
@@ -3781,9 +3799,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -3801,9 +3821,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 36
+        "y": 42
       },
       "links": [
         {
@@ -3843,7 +3863,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -3894,7 +3914,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 45
       },
       "panels": []
     },
@@ -3903,10 +3923,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 40
+        "y": 46
       },
       "links": [
         {
@@ -3917,7 +3937,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pix.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Pix</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pix.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Pix</div></div>"
       },
       "transparent": true
     },
@@ -3927,9 +3947,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 43
+        "y": 50
       },
       "links": [
         {
@@ -4042,10 +4062,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 45
+        "y": 52
       },
       "links": [
         {
@@ -4095,9 +4115,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -4115,9 +4137,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 47
+        "y": 55
       },
       "links": [
         {
@@ -4157,7 +4179,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -4204,10 +4226,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 46
       },
       "links": [
         {
@@ -4218,7 +4240,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-do-brasil.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco do Brasil</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-do-brasil.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco do Brasil</div></div>"
       },
       "transparent": true
     },
@@ -4228,9 +4250,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 43
+        "w": 4,
+        "x": 4,
+        "y": 50
       },
       "links": [
         {
@@ -4343,10 +4365,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 52
       },
       "links": [
         {
@@ -4396,9 +4418,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -4416,9 +4440,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 47
+        "w": 4,
+        "x": 4,
+        "y": 55
       },
       "links": [
         {
@@ -4458,7 +4482,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -4505,10 +4529,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 46
       },
       "links": [
         {
@@ -4519,7 +4543,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-inter.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Inter</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-inter.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Inter</div></div>"
       },
       "transparent": true
     },
@@ -4529,9 +4553,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 43
+        "w": 4,
+        "x": 8,
+        "y": 50
       },
       "links": [
         {
@@ -4644,10 +4668,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 52
       },
       "links": [
         {
@@ -4697,9 +4721,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -4717,9 +4743,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 47
+        "w": 4,
+        "x": 8,
+        "y": 55
       },
       "links": [
         {
@@ -4759,7 +4785,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -4806,10 +4832,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 46
       },
       "links": [
         {
@@ -4820,7 +4846,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-itau.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Itaú</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-itau.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Itaú</div></div>"
       },
       "transparent": true
     },
@@ -4830,9 +4856,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 43
+        "w": 4,
+        "x": 12,
+        "y": 50
       },
       "links": [
         {
@@ -4945,10 +4971,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 52
       },
       "links": [
         {
@@ -4998,9 +5024,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -5018,9 +5046,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 47
+        "w": 4,
+        "x": 12,
+        "y": 55
       },
       "links": [
         {
@@ -5060,7 +5088,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -5107,10 +5135,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 46
       },
       "links": [
         {
@@ -5121,7 +5149,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bradesco.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Bradesco</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bradesco.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Bradesco</div></div>"
       },
       "transparent": true
     },
@@ -5131,9 +5159,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 43
+        "w": 4,
+        "x": 16,
+        "y": 50
       },
       "links": [
         {
@@ -5246,10 +5274,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 52
       },
       "links": [
         {
@@ -5299,9 +5327,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -5319,9 +5349,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 47
+        "w": 4,
+        "x": 16,
+        "y": 55
       },
       "links": [
         {
@@ -5361,7 +5391,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -5408,10 +5438,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 46
       },
       "links": [
         {
@@ -5422,7 +5452,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nubank.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Nubank</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nubank.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Nubank</div></div>"
       },
       "transparent": true
     },
@@ -5432,9 +5462,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 43
+        "w": 4,
+        "x": 20,
+        "y": 50
       },
       "links": [
         {
@@ -5547,10 +5577,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 52
       },
       "links": [
         {
@@ -5600,9 +5630,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -5620,9 +5652,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 47
+        "w": 4,
+        "x": 20,
+        "y": 55
       },
       "links": [
         {
@@ -5662,7 +5694,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -5709,10 +5741,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 58
       },
       "links": [
         {
@@ -5723,7 +5755,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bcb.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Central do Brasil</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bcb.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banco Central do Brasil</div></div>"
       },
       "transparent": true
     },
@@ -5733,9 +5765,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 43
+        "w": 4,
+        "x": 0,
+        "y": 62
       },
       "links": [
         {
@@ -5848,10 +5880,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 64
       },
       "links": [
         {
@@ -5901,9 +5933,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -5921,9 +5955,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 47
+        "w": 4,
+        "x": 0,
+        "y": 67
       },
       "links": [
         {
@@ -5963,7 +5997,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -6010,10 +6044,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 40
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 58
       },
       "links": [
         {
@@ -6024,7 +6058,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicoob.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sicoob</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicoob.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sicoob</div></div>"
       },
       "transparent": true
     },
@@ -6034,9 +6068,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 43
+        "w": 4,
+        "x": 4,
+        "y": 62
       },
       "links": [
         {
@@ -6149,10 +6183,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 45
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 64
       },
       "links": [
         {
@@ -6202,9 +6236,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -6222,9 +6258,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 47
+        "w": 4,
+        "x": 4,
+        "y": 67
       },
       "links": [
         {
@@ -6264,7 +6300,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -6311,10 +6347,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 50
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 58
       },
       "links": [
         {
@@ -6325,7 +6361,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicredi.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sicredi</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicredi.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sicredi</div></div>"
       },
       "transparent": true
     },
@@ -6335,9 +6371,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 53
+        "w": 4,
+        "x": 8,
+        "y": 62
       },
       "links": [
         {
@@ -6450,10 +6486,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 55
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 64
       },
       "links": [
         {
@@ -6503,9 +6539,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -6523,9 +6561,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 57
+        "w": 4,
+        "x": 8,
+        "y": 67
       },
       "links": [
         {
@@ -6565,7 +6603,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -6612,10 +6650,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 50
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 58
       },
       "links": [
         {
@@ -6626,7 +6664,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banrisul.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banrisul</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banrisul.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Banrisul</div></div>"
       },
       "transparent": true
     },
@@ -6636,9 +6674,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 53
+        "w": 4,
+        "x": 12,
+        "y": 62
       },
       "links": [
         {
@@ -6751,10 +6789,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 55
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 64
       },
       "links": [
         {
@@ -6804,9 +6842,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -6824,9 +6864,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 57
+        "w": 4,
+        "x": 12,
+        "y": 67
       },
       "links": [
         {
@@ -6866,7 +6906,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -6913,10 +6953,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 50
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 58
       },
       "links": [
         {
@@ -6927,7 +6967,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/caixa.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Caixa Econômica Federal</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/caixa.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Caixa Econômica Federal</div></div>"
       },
       "transparent": true
     },
@@ -6937,9 +6977,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 53
+        "w": 4,
+        "x": 16,
+        "y": 62
       },
       "links": [
         {
@@ -7052,10 +7092,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 55
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 64
       },
       "links": [
         {
@@ -7105,9 +7145,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -7125,9 +7167,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 57
+        "w": 4,
+        "x": 16,
+        "y": 67
       },
       "links": [
         {
@@ -7167,7 +7209,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -7214,10 +7256,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 50
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 58
       },
       "links": [
         {
@@ -7228,7 +7270,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/mercadopago.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Mercado Pago</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/mercadopago.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Mercado Pago</div></div>"
       },
       "transparent": true
     },
@@ -7238,9 +7280,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 53
+        "w": 4,
+        "x": 20,
+        "y": 62
       },
       "links": [
         {
@@ -7353,10 +7395,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 55
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 64
       },
       "links": [
         {
@@ -7406,9 +7448,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -7426,9 +7470,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 57
+        "w": 4,
+        "x": 20,
+        "y": 67
       },
       "links": [
         {
@@ -7468,7 +7512,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -7519,7 +7563,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 70
       },
       "panels": []
     },
@@ -7528,10 +7572,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 61
+        "y": 71
       },
       "links": [
         {
@@ -7542,7 +7586,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google</div></div>"
       },
       "transparent": true
     },
@@ -7552,9 +7596,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 64
+        "y": 75
       },
       "links": [
         {
@@ -7667,10 +7711,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 66
+        "y": 77
       },
       "links": [
         {
@@ -7720,9 +7764,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -7740,9 +7786,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 68
+        "y": 80
       },
       "links": [
         {
@@ -7782,7 +7828,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -7829,10 +7875,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 71
       },
       "links": [
         {
@@ -7843,7 +7889,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google-cloud.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Cloud</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google-cloud.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Cloud</div></div>"
       },
       "transparent": true
     },
@@ -7853,9 +7899,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 64
+        "w": 4,
+        "x": 4,
+        "y": 75
       },
       "links": [
         {
@@ -7968,10 +8014,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 77
       },
       "links": [
         {
@@ -8021,9 +8067,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -8041,9 +8089,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 68
+        "w": 4,
+        "x": 4,
+        "y": 80
       },
       "links": [
         {
@@ -8083,7 +8131,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -8130,10 +8178,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 71
       },
       "links": [
         {
@@ -8144,7 +8192,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google-drive.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Drive</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google-drive.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Drive</div></div>"
       },
       "transparent": true
     },
@@ -8154,9 +8202,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 64
+        "w": 4,
+        "x": 8,
+        "y": 75
       },
       "links": [
         {
@@ -8269,10 +8317,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 77
       },
       "links": [
         {
@@ -8322,9 +8370,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -8342,9 +8392,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 68
+        "w": 4,
+        "x": 8,
+        "y": 80
       },
       "links": [
         {
@@ -8384,7 +8434,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -8431,10 +8481,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 71
       },
       "links": [
         {
@@ -8445,7 +8495,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/aws-amazon-web-services.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">AWS Amazon Web Services</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/aws-amazon-web-services.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">AWS Amazon Web Services</div></div>"
       },
       "transparent": true
     },
@@ -8455,9 +8505,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 64
+        "w": 4,
+        "x": 12,
+        "y": 75
       },
       "links": [
         {
@@ -8570,10 +8620,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 77
       },
       "links": [
         {
@@ -8623,9 +8673,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -8643,9 +8695,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 68
+        "w": 4,
+        "x": 12,
+        "y": 80
       },
       "links": [
         {
@@ -8685,7 +8737,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -8732,10 +8784,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 71
       },
       "links": [
         {
@@ -8746,7 +8798,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-365.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Microsoft 365</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-365.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Microsoft 365</div></div>"
       },
       "transparent": true
     },
@@ -8756,9 +8808,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 64
+        "w": 4,
+        "x": 16,
+        "y": 75
       },
       "links": [
         {
@@ -8871,10 +8923,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 77
       },
       "links": [
         {
@@ -8924,9 +8976,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -8944,9 +8998,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 68
+        "w": 4,
+        "x": 16,
+        "y": 80
       },
       "links": [
         {
@@ -8986,7 +9040,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -9033,10 +9087,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 71
       },
       "links": [
         {
@@ -9047,7 +9101,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-account.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Microsoft Account</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-account.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Microsoft Account</div></div>"
       },
       "transparent": true
     },
@@ -9057,9 +9111,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 64
+        "w": 4,
+        "x": 20,
+        "y": 75
       },
       "links": [
         {
@@ -9172,10 +9226,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 77
       },
       "links": [
         {
@@ -9225,9 +9279,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -9245,9 +9301,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 68
+        "w": 4,
+        "x": 20,
+        "y": 80
       },
       "links": [
         {
@@ -9287,7 +9343,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -9334,10 +9390,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 83
       },
       "links": [
         {
@@ -9348,7 +9404,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/outlook.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Outlook</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/outlook.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Outlook</div></div>"
       },
       "transparent": true
     },
@@ -9358,9 +9414,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 64
+        "w": 4,
+        "x": 0,
+        "y": 87
       },
       "links": [
         {
@@ -9473,10 +9529,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 89
       },
       "links": [
         {
@@ -9526,9 +9582,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -9546,9 +9604,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 68
+        "w": 4,
+        "x": 0,
+        "y": 92
       },
       "links": [
         {
@@ -9588,7 +9646,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -9635,10 +9693,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 61
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 83
       },
       "links": [
         {
@@ -9649,7 +9707,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/hostgator.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Hostgator</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/hostgator.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Hostgator</div></div>"
       },
       "transparent": true
     },
@@ -9659,9 +9717,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 64
+        "w": 4,
+        "x": 4,
+        "y": 87
       },
       "links": [
         {
@@ -9774,10 +9832,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 66
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 89
       },
       "links": [
         {
@@ -9827,9 +9885,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -9847,9 +9907,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 68
+        "w": 4,
+        "x": 4,
+        "y": 92
       },
       "links": [
         {
@@ -9889,7 +9949,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -9940,7 +10000,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 71
+        "y": 95
       },
       "panels": []
     },
@@ -9949,10 +10009,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 72
+        "y": 96
       },
       "links": [
         {
@@ -9963,7 +10023,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/claude-ai.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Claude AI</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/claude-ai.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Claude AI</div></div>"
       },
       "transparent": true
     },
@@ -9973,9 +10033,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 75
+        "y": 100
       },
       "links": [
         {
@@ -10088,10 +10148,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 77
+        "y": 102
       },
       "links": [
         {
@@ -10141,9 +10201,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -10161,9 +10223,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 79
+        "y": 105
       },
       "links": [
         {
@@ -10203,7 +10265,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -10250,10 +10312,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 72
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 96
       },
       "links": [
         {
@@ -10264,7 +10326,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/openai.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">OpenAI</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/openai.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">OpenAI</div></div>"
       },
       "transparent": true
     },
@@ -10274,9 +10336,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 75
+        "w": 4,
+        "x": 4,
+        "y": 100
       },
       "links": [
         {
@@ -10389,10 +10451,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 77
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 102
       },
       "links": [
         {
@@ -10442,9 +10504,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -10462,9 +10526,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 79
+        "w": 4,
+        "x": 4,
+        "y": 105
       },
       "links": [
         {
@@ -10504,7 +10568,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -10551,10 +10615,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 72
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 96
       },
       "links": [
         {
@@ -10565,7 +10629,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/googlegemini.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Gemini</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/googlegemini.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Google Gemini</div></div>"
       },
       "transparent": true
     },
@@ -10575,9 +10639,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 75
+        "w": 4,
+        "x": 8,
+        "y": 100
       },
       "links": [
         {
@@ -10690,10 +10754,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 77
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 102
       },
       "links": [
         {
@@ -10743,9 +10807,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -10763,9 +10829,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 79
+        "w": 4,
+        "x": 8,
+        "y": 105
       },
       "links": [
         {
@@ -10805,7 +10871,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -10856,7 +10922,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 108
       },
       "panels": []
     },
@@ -10865,10 +10931,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 83
+        "y": 109
       },
       "links": [
         {
@@ -10879,7 +10945,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sefaz.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sefaz (Nacional)</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sefaz.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Sefaz (Nacional)</div></div>"
       },
       "transparent": true
     },
@@ -10889,9 +10955,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 86
+        "y": 113
       },
       "links": [
         {
@@ -11004,10 +11070,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 3,
+        "w": 4,
         "x": 0,
-        "y": 88
+        "y": 115
       },
       "links": [
         {
@@ -11057,9 +11123,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -11077,9 +11145,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 90
+        "y": 118
       },
       "links": [
         {
@@ -11119,7 +11187,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -11166,10 +11234,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 83
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 109
       },
       "links": [
         {
@@ -11180,7 +11248,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px;gap:2px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nota-fiscal-eletronica.svg\" style=\"max-height:30px;max-width:30px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Nota Fiscal Eletrônica (NF-e)</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:6px;gap:3px;background:#181b1f;border-radius:6px 6px 0 0;\"><div style=\"background:#ffffff;padding:2px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:46px;height:46px;box-shadow:0 2px 4px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nota-fiscal-eletronica.svg\" style=\"max-height:40px;max-width:40px;object-fit:contain;\" /></div><div style=\"font-size:11px;font-weight:600;text-align:center;line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;\">Nota Fiscal Eletrônica (NF-e)</div></div>"
       },
       "transparent": true
     },
@@ -11190,9 +11258,9 @@
       "title": "",
       "gridPos": {
         "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 86
+        "w": 4,
+        "x": 4,
+        "y": 113
       },
       "links": [
         {
@@ -11305,10 +11373,10 @@
       "type": "timeseries",
       "title": "Historico Downdetector",
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 88
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 115
       },
       "links": [
         {
@@ -11358,9 +11426,11 @@
           "custom": {
             "drawStyle": "line",
             "lineInterpolation": "smooth",
-            "fillOpacity": 20,
+            "lineWidth": 2,
+            "fillOpacity": 35,
             "axisPlacement": "none",
-            "showPoints": "never"
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
             "mode": "fixed",
@@ -11378,9 +11448,9 @@
       "title": "Latencia ate o servico oficial",
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 90
+        "w": 4,
+        "x": 4,
+        "y": 118
       },
       "links": [
         {
@@ -11420,7 +11490,7 @@
       "options": {
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -11471,7 +11541,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 93
+        "y": 121
       },
       "panels": []
     },
@@ -11483,7 +11553,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 94
+        "y": 122
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -11567,7 +11637,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 102
+        "y": 130
       },
       "panels": []
     },
@@ -11579,7 +11649,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 131
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -11683,7 +11753,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 113
+        "y": 141
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
