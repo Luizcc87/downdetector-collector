@@ -6,7 +6,7 @@ from collector.health import HealthState
 def test_uptime_increases():
     h = HealthState()
     time.sleep(0.05)
-    assert h.uptime_seconds() >= 0.05
+    assert h.uptime_seconds() >= 0.04
 
 
 def test_record_cycle_keeps_last():

@@ -1,19 +1,16 @@
-"""DASHBOARD DOWNDETECTOR v20 — Layout NOC Profissional com Categorias e Incidentes.
+"""DASHBOARD DOWNDETECTOR v24 — Layout NOC Completo com Filtros por Chaves de Item Zabbix.
 
 Recursos:
 - Banner de Métricas Globais (Total, OK, Atenção, Problema) + Métricas do Scraper.
 - Painel em Destaque: Incidentes e Instabilidades Ativas no Momento.
-- Linhas Retráteis por Categoria:
-    * 📱 Redes Sociais & Comunicação
-    * 📺 Streaming & Vídeo
-    * 🏦 Bancos & Fintechs
-    * 🏛️ Governo & Serviços Fiscais
-- Gráfico de Tendência: Histórico de Reclamações (últimas 24h).
+- Cards Individuais por Serviço com Logo, Status, Histórico Sparkline e Latência.
+- Linhas Retráteis por Categoria.
+- Painel Histórico: State Timeline do Status dos Serviços (Últimas 24h).
+- Painel Histórico: Histórico de Relatos de Problemas (Últimas 24h).
+- Painel de Desempenho: Latência Direta de Resposta aos Serviços (ms).
 """
 import json
-from html import escape
 from pathlib import Path
-
 import yaml
 
 ZBX_DS = {"type": "alexanderzobnin-zabbix-datasource", "uid": "downdetector-zabbix"}
@@ -45,13 +42,13 @@ STATUS_THRESHOLDS = {
     ],
 }
 
-CARDS_PER_ROW = 4
-CARD_W = 24 // CARDS_PER_ROW  # = 6
-LOGO_H = 5
-STATUS_H = 1
-REPORTS_H = 3
-LATENCY_H = 3
-CARD_H = LOGO_H + STATUS_H + REPORTS_H + LATENCY_H  # = 12
+CARDS_PER_ROW = 8
+CARD_W = 24 // CARDS_PER_ROW  # = 3
+LOGO_H = 3
+STATUS_H = 2
+SPARKLINE_H = 2
+LATENCY_H = 2
+CARD_H = LOGO_H + STATUS_H + SPARKLINE_H + LATENCY_H  # = 9
 
 TOP_H = 3
 
@@ -66,16 +63,20 @@ def zbx_target(name_filter, ref="A"):
     }
 
 
-def downdetector_service_url(service):
-    country = service.get("country", "br")
-    slug = service["slug"]
+def downdetector_service_url(svc: dict) -> str:
+    country = svc.get("country", "br")
+    slug = svc["slug"]
     if country == "com":
         return f"https://downdetector.com/status/{slug}/"
-    return f"https://downdetector.com.{country}/status/{slug}/"
+    return f"https://downdetector.com.br/status/{slug}/"
 
 
-def panel_link(url):
-    return [{"title": "Abrir no Downdetector", "url": url, "targetBlank": True}]
+def panel_links(svc: dict) -> list[dict]:
+    return [{
+        "title": svc["name"],
+        "url": downdetector_service_url(svc),
+        "targetBlank": True,
+    }]
 
 
 def total_panel():
@@ -83,7 +84,7 @@ def total_panel():
         "id": 1, "type": "stat", "title": "Total",
         "gridPos": {"h": TOP_H, "w": 2, "x": 0, "y": 0},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/.*: status$/")],
+        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
         ],
@@ -107,7 +108,7 @@ def status_count_panel(pid, title, status_value, color, gx, gw):
         "id": pid, "type": "stat", "title": title,
         "gridPos": {"h": TOP_H, "w": gw, "x": gx, "y": 0},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/.*: status$/")],
+        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
             {"id": "filterByValue", "options": {
@@ -152,12 +153,11 @@ def health_stat(pid, title, item, unit, color, gx, gw, thresholds=None):
 
 
 def active_incidents_panel(pid, y):
-    """Painel no topo destacando serviços com instabilidade ou falha."""
     return {
         "id": pid, "type": "stat", "title": "🚨 Serviços em Estado de Alerta / Falha",
         "gridPos": {"h": 4, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/.*: status$/")],
+        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
         "transformations": [
             {"id": "reduce", "options": {"reducers": ["last"], "mode": "seriesToRows", "includeTimeField": False}},
             {"id": "filterByValue", "options": {
@@ -190,47 +190,41 @@ def row_header(pid, title, y):
     }
 
 
-def card_logo(pid, name, logo_url, service_url, x, y):
-    safe_name = escape(name)
-    safe_logo_url = escape(logo_url, quote=True)
-    safe_service_url = escape(service_url, quote=True)
+def card_logo(pid, svc, logo_url, x, y):
     return {
         "id": pid, "type": "text", "title": "",
         "gridPos": {"h": LOGO_H, "w": CARD_W, "x": x, "y": y},
-        "links": panel_link(service_url),
+        "links": panel_links(svc),
         "options": {
             "mode": "html",
             "content": (
-                f'<a href="{safe_service_url}" target="_blank" rel="noopener noreferrer" '
-                'style="display:flex;flex-direction:column;align-items:center;'
-                'justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;'
-                'background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;'
-                'box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;">'
-                '<div style="font-size:15px;font-weight:500;align-self:flex-start;'
-                'line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;'
-                'text-overflow:ellipsis;white-space:nowrap;">'
-                f'{safe_name}</div>'
-                '<div style="display:flex;align-items:center;justify-content:center;'
-                'width:100%;height:100%;">'
-                f'<img src="{safe_logo_url}" style="max-height:78px;max-width:86%;'
+                '<div style="display:flex;flex-direction:column;align-items:center;'
+                'justify-content:center;height:100%;padding:4px;gap:2px;'
+                'background:#181b1f;border-radius:6px 6px 0 0;">'
+                '<div style="background:#ffffff;padding:2px;border-radius:6px;'
+                'display:flex;align-items:center;justify-content:center;'
+                'width:36px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.4);">'
+                f'<img src="{logo_url}" style="max-height:30px;max-width:30px;'
                 'object-fit:contain;" />'
                 '</div>'
-                '<div style="font-size:11px;color:#68717d;align-self:flex-end;">'
-                'Abrir</div>'
-                '</a>'
+                '<div style="font-size:11px;font-weight:600;text-align:center;'
+                'line-height:1.1;color:#ffffff;max-width:100%;overflow:hidden;'
+                'text-overflow:ellipsis;white-space:nowrap;padding:0 2px;">'
+                f'{svc["name"]}</div>'
+                '</div>'
             ),
         },
         "transparent": True,
     }
 
 
-def card_status(pid, name, service_url, x, y):
+def card_status(pid, svc, x, y):
     return {
         "id": pid, "type": "stat", "title": "",
         "gridPos": {"h": STATUS_H, "w": CARD_W, "x": x, "y": y},
+        "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "links": panel_link(service_url),
-        "targets": [zbx_target(f"{name}: status")],
+        "targets": [zbx_target(f"/downdetector\\.status\\[{svc['slug']}\\]/")],
         "options": {
             "reduceOptions": {"calcs": ["last"], "fields": "", "values": False},
             "colorMode": "background", "graphMode": "none", "textMode": "value", "justifyMode": "center",
@@ -247,85 +241,61 @@ def card_status(pid, name, service_url, x, y):
     }
 
 
-def card_reports(pid, name, service_url, x, y):
+def card_sparkline_reports(pid, svc, x, y):
     return {
         "id": pid, "type": "timeseries", "title": "Historico Downdetector",
-        "gridPos": {"h": REPORTS_H, "w": CARD_W, "x": x, "y": y},
+        "gridPos": {"h": SPARKLINE_H, "w": CARD_W, "x": x, "y": y},
+        "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "links": panel_link(service_url),
-        "targets": [zbx_target(f"{name}: reports last hour")],
+        "targets": [zbx_target(f"/downdetector\\.reports\\[{svc['slug']}\\]/")],
         "options": {
-            "tooltip": {"mode": "single", "sort": "none"},
-            "legend": {"displayMode": "hidden", "placement": "bottom", "calcs": []},
+            "legend": {"displayMode": "hidden"},
+            "tooltip": {"mode": "single"},
         },
         "fieldConfig": {
             "defaults": {
-                "color": {"mode": "fixed", "fixedColor": "#15AABF"},
                 "custom": {
                     "drawStyle": "line",
                     "lineInterpolation": "smooth",
-                    "lineWidth": 2,
-                    "fillOpacity": 0,
+                    "fillOpacity": 20,
+                    "axisPlacement": "none",
                     "showPoints": "never",
-                    "axisPlacement": "hidden",
-                    "hideFrom": {"tooltip": False, "viz": False, "legend": False},
                 },
-                "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                        {"color": "#15AABF", "value": None},
-                        {"color": COLOR_ATTN, "value": 30},
-                        {"color": COLOR_PROB, "value": 100},
-                    ],
-                },
+                "color": {"mode": "fixed", "fixedColor": "#3498DB"},
                 "unit": "short",
-                "decimals": 0,
                 "min": 0,
             },
             "overrides": [],
         },
-        "transparent": True,
     }
 
 
-def card_latency(pid, name, service_url, x, y):
+def card_sparkline_latency(pid, svc, x, y):
     return {
         "id": pid, "type": "timeseries", "title": "Latencia ate o servico oficial",
         "gridPos": {"h": LATENCY_H, "w": CARD_W, "x": x, "y": y},
+        "links": panel_links(svc),
         "datasource": ZBX_DS,
-        "links": panel_link(service_url),
-        "targets": [zbx_target(f"{name}: latency to official service")],
+        "targets": [zbx_target(f"/downdetector\\.latency_ms\\[{svc['slug']}\\]/")],
         "options": {
-            "tooltip": {"mode": "single", "sort": "none"},
-            "legend": {"displayMode": "hidden", "placement": "bottom", "calcs": []},
+            "legend": {"displayMode": "hidden"},
+            "tooltip": {"mode": "single"},
         },
         "fieldConfig": {
             "defaults": {
-                "color": {"mode": "fixed", "fixedColor": "#7C3AED"},
                 "custom": {
                     "drawStyle": "line",
                     "lineInterpolation": "smooth",
-                    "lineWidth": 2,
-                    "fillOpacity": 0,
+                    "fillOpacity": 15,
+                    "axisPlacement": "none",
                     "showPoints": "never",
-                    "axisPlacement": "hidden",
-                    "hideFrom": {"tooltip": False, "viz": False, "legend": False},
                 },
-                "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                        {"color": "#2EB85C", "value": None},
-                        {"color": COLOR_ATTN, "value": 500},
-                        {"color": COLOR_PROB, "value": 1500},
-                    ],
-                },
+                "color": {"mode": "fixed", "fixedColor": "#F39C12"},
                 "unit": "ms",
-                "decimals": 0,
                 "min": 0,
             },
             "overrides": [],
         },
-        "transparent": True,
     }
 
 
@@ -336,20 +306,13 @@ def build_service_grid(services, start_y, start_pid):
     col = 0
     for svc in services:
         x = col * CARD_W
-        service_url = downdetector_service_url(svc)
-        panels.append(card_logo(pid, svc["name"], svc["logo"], service_url, x=x, y=y))
+        panels.append(card_logo(pid, svc, svc["logo"], x=x, y=y))
         pid += 1
-        panels.append(card_status(pid, svc["name"], service_url, x=x, y=y + LOGO_H))
+        panels.append(card_status(pid, svc, x=x, y=y + LOGO_H))
         pid += 1
-        panels.append(card_reports(pid, svc["name"], service_url, x=x, y=y + LOGO_H + STATUS_H))
+        panels.append(card_sparkline_reports(pid, svc, x=x, y=y + LOGO_H + STATUS_H))
         pid += 1
-        panels.append(card_latency(
-            pid,
-            svc["name"],
-            service_url,
-            x=x,
-            y=y + LOGO_H + STATUS_H + REPORTS_H,
-        ))
+        panels.append(card_sparkline_latency(pid, svc, x=x, y=y + LOGO_H + STATUS_H + SPARKLINE_H))
         pid += 1
         col += 1
         if col >= CARDS_PER_ROW:
@@ -360,13 +323,36 @@ def build_service_grid(services, start_y, start_pid):
     return panels, y, pid
 
 
+def status_history_panel(pid, y):
+    return {
+        "id": pid, "type": "state-timeline", "title": "⏱️ Histórico de Status dos Serviços (Últimas 24h)",
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": y},
+        "datasource": ZBX_DS,
+        "targets": [zbx_target("/downdetector\\.status\\[.*\\]/")],
+        "options": {
+            "showValue": "never",
+            "mergeValues": True,
+            "rowHeight": 0.8,
+            "alignValue": "center",
+            "tooltip": {"mode": "single"},
+        },
+        "fieldConfig": {
+            "defaults": {
+                "color": {"mode": "thresholds"},
+                "mappings": STATUS_MAPPINGS,
+                "thresholds": STATUS_THRESHOLDS,
+            },
+            "overrides": [],
+        },
+    }
+
+
 def reports_timeline_panel(pid, y):
-    """Gráfico de tendência de relatos das últimas 24h."""
     return {
         "id": pid, "type": "timeseries", "title": "📊 Histórico de Relatos de Problemas (Últimas 24h)",
         "gridPos": {"h": 8, "w": 24, "x": 0, "y": y},
         "datasource": ZBX_DS,
-        "targets": [zbx_target("/.*: reports last hour$/")],
+        "targets": [zbx_target("/downdetector\\.reports\\[.*\\]/")],
         "options": {
             "tooltip": {"mode": "multi", "sort": "desc"},
             "legend": {"displayMode": "table", "placement": "right", "calcs": ["max", "last"]},
@@ -386,18 +372,55 @@ def reports_timeline_panel(pid, y):
     }
 
 
+def latency_timeline_panel(pid, y):
+    return {
+        "id": pid, "type": "timeseries", "title": "⚡ Latência de Resposta Direta aos Serviços (ms)",
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": y},
+        "datasource": ZBX_DS,
+        "targets": [zbx_target("/downdetector\\.latency_ms\\[.*\\]/")],
+        "options": {
+            "tooltip": {"mode": "multi", "sort": "desc"},
+            "legend": {"displayMode": "table", "placement": "right", "calcs": ["mean", "max", "last"]},
+        },
+        "fieldConfig": {
+            "defaults": {
+                "custom": {
+                    "drawStyle": "line",
+                    "lineInterpolation": "smooth",
+                    "fillOpacity": 10,
+                },
+                "unit": "ms",
+                "min": 0,
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {"color": "green", "value": None},
+                        {"color": COLOR_ATTN, "value": 500},
+                        {"color": COLOR_PROB, "value": 2000},
+                    ],
+                },
+            },
+            "overrides": [],
+        },
+    }
+
+
 def categorize_services(services):
     categories = {
         "📱 Redes Sociais & Comunicação": [],
         "📺 Streaming & Vídeo": [],
         "🏦 Bancos & Fintechs": [],
+        "☁️ Cloud & Infraestrutura": [],
+        "🤖 Inteligência Artificial": [],
         "🏛️ Governo & Serviços Fiscais": [],
         "🌐 Outros Serviços": [],
     }
 
     social_slugs = {"instagram", "whatsapp", "facebook", "twitter", "telegram", "discord", "facebook-messenger", "linkedin", "snapchat"}
     video_slugs = {"youtube", "netflix", "spotify"}
-    bank_slugs = {"banco-do-brasil", "banco-inter", "banco-itau", "bradesco", "nubank", "bcb", "sicoob", "sicredi", "banrisul", "caixa", "mercadopago"}
+    bank_slugs = {"pix", "banco-do-brasil", "banco-inter", "banco-itau", "bradesco", "nubank", "bcb", "sicoob", "sicredi", "banrisul", "caixa", "mercadopago"}
+    cloud_slugs = {"google", "google-cloud", "google-drive", "aws-amazon-web-services", "microsoft-365", "microsoft-account", "outlook", "hostgator"}
+    ai_slugs = {"claude-ai", "openai", "googlegemini"}
     gov_slugs = {"sefaz", "nota-fiscal-eletronica", "receita-federal", "gov-br"}
 
     for s in services:
@@ -408,6 +431,10 @@ def categorize_services(services):
             categories["📺 Streaming & Vídeo"].append(s)
         elif slug in bank_slugs:
             categories["🏦 Bancos & Fintechs"].append(s)
+        elif slug in cloud_slugs:
+            categories["☁️ Cloud & Infraestrutura"].append(s)
+        elif slug in ai_slugs:
+            categories["🤖 Inteligência Artificial"].append(s)
         elif slug in gov_slugs:
             categories["🏛️ Governo & Serviços Fiscais"].append(s)
         else:
@@ -461,16 +488,27 @@ def main():
         cat_panels, current_y, current_pid = build_service_grid(cat_services, start_y=current_y, start_pid=current_pid)
         panels.extend(cat_panels)
 
-    # Gráfico de Tendências das últimas 24h
-    panels.append(row_header(current_pid, "📈 Tendências & Histórico", current_y))
+    # Seção de Desempenho & Latência
+    panels.append(row_header(current_pid, "⚡ Desempenho & Latência de Rede", current_y))
     current_pid += 1
     current_y += 1
+    panels.append(latency_timeline_panel(current_pid, current_y))
+    current_pid += 1
+    current_y += 8
+
+    # Seção de Históricos & Tendências
+    panels.append(row_header(current_pid, "📈 Histórico de Status & Relatos", current_y))
+    current_pid += 1
+    current_y += 1
+    panels.append(status_history_panel(current_pid, current_y))
+    current_pid += 1
+    current_y += 10
     panels.append(reports_timeline_panel(current_pid, current_y))
 
     dashboard = {
         "title": "DASHBOARD DOWNDETECTOR",
         "uid": "downdetector-main",
-        "schemaVersion": 41, "version": 21,
+        "schemaVersion": 41, "version": 24,
         "editable": True, "refresh": "1m",
         "time": {"from": "now-1h", "to": "now"},
         "timezone": "America/Sao_Paulo", "tags": ["downdetector"],

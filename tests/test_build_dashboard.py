@@ -57,12 +57,12 @@ def test_service_grid_renders_logo_status_and_sparkline():
     assert [panel["type"] for panel in panels] == ["text", "stat", "timeseries", "timeseries"]
     sparkline = panels[2]
     assert sparkline["title"] == "Historico Downdetector"
-    assert sparkline["targets"][0]["item"]["filter"] == "Instagram: reports last hour"
+    assert sparkline["targets"][0]["item"]["filter"] == "/downdetector\\.reports\\[instagram\\]/"
     assert sparkline["options"]["legend"]["displayMode"] == "hidden"
     assert sparkline["fieldConfig"]["defaults"]["custom"]["drawStyle"] == "line"
     latency = panels[3]
     assert latency["title"] == "Latencia ate o servico oficial"
-    assert latency["targets"][0]["item"]["filter"] == "Instagram: latency to official service"
+    assert latency["targets"][0]["item"]["filter"] == "/downdetector\\.latency_ms\\[instagram\\]/"
     assert latency["fieldConfig"]["defaults"]["unit"] == "ms"
     assert next_y == 1 + dashboard.CARD_H
     assert next_pid == 14

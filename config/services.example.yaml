@@ -58,14 +58,20 @@ services:
     logo: /public/img/downdetector/snapchat.svg
     target_url: https://www.snapchat.com/
 
-  # === YouTube ===
+  # === Streaming & Vídeo ===
   - name: YouTube
     slug: youtube
     id: 0
     logo: /public/img/downdetector/youtube.svg
     target_url: https://www.youtube.com/
 
-  # === Bancos ===
+  # === Bancos & Fintechs ===
+  - name: Pix
+    slug: pix
+    id: 38066
+    logo: /public/img/downdetector/pix.svg
+    target_url: https://www.bcb.gov.br/
+
   - name: Banco do Brasil
     slug: banco-do-brasil
     id: 0
@@ -131,6 +137,74 @@ services:
     id: 0
     logo: /public/img/downdetector/mercadopago.svg
     target_url: https://www.mercadopago.com.br/
+
+  # === Cloud & Infraestrutura ===
+  - name: Google
+    slug: google
+    id: 0
+    logo: /public/img/downdetector/google.svg
+    target_url: https://www.google.com/
+
+  - name: Google Cloud
+    slug: google-cloud
+    id: 0
+    logo: /public/img/downdetector/google-cloud.svg
+    target_url: https://cloud.google.com/
+
+  - name: Google Drive
+    slug: google-drive
+    id: 0
+    logo: /public/img/downdetector/google-drive.svg
+    target_url: https://drive.google.com/
+
+  - name: AWS Amazon Web Services
+    slug: aws-amazon-web-services
+    id: 0
+    logo: /public/img/downdetector/aws-amazon-web-services.svg
+    target_url: https://aws.amazon.com/
+
+  - name: Microsoft 365
+    slug: microsoft-365
+    id: 0
+    logo: /public/img/downdetector/microsoft-365.svg
+    target_url: https://www.microsoft.com/
+
+  - name: Microsoft Account
+    slug: microsoft-account
+    id: 0
+    logo: /public/img/downdetector/microsoft-account.svg
+    target_url: https://account.microsoft.com/
+
+  - name: Outlook
+    slug: outlook
+    id: 0
+    logo: /public/img/downdetector/outlook.svg
+    target_url: https://outlook.com/
+
+  - name: Hostgator
+    slug: hostgator
+    id: 0
+    logo: /public/img/downdetector/hostgator.svg
+    target_url: https://www.hostgator.com.br/
+
+  # === Inteligência Artificial ===
+  - name: Claude AI
+    slug: claude-ai
+    id: 0
+    logo: /public/img/downdetector/claude-ai.svg
+    target_url: https://claude.ai/
+
+  - name: OpenAI
+    slug: openai
+    id: 0
+    logo: /public/img/downdetector/openai.svg
+    target_url: https://status.openai.com/
+
+  - name: Google Gemini
+    slug: googlegemini
+    id: 0
+    logo: /public/img/downdetector/googlegemini.svg
+    target_url: https://gemini.google.com/
 
   # === Serviços Públicos / Sefaz ===
   - name: Sefaz (Nacional)

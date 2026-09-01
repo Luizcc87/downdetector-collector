@@ -58,6 +58,8 @@ DOMAIN_MAP = {
     "banco-inter": "bancointer.com.br",
     "banco-itau": "itau.com.br",
     "bradesco": "bradesco.com.br",
+    "sicredi": "sicredi.com.br",
+    "banrisul": "banrisul.com.br",
     "free-fire": "ff.garena.com",
     "globo": "globo.com",
     "globoplay": "globoplay.globo.com",
@@ -135,9 +137,18 @@ async def fetch_one(client, slug):
 
 
 async def main():
-    cfg = yaml.safe_load(Path("/etc/downdetector-collector/services.yaml").read_text())
+    global LOGO_DIR
+    if not LOGO_DIR.exists():
+        LOGO_DIR = Path(__file__).parents[1] / "grafana" / "logos"
+        LOGO_DIR.mkdir(parents=True, exist_ok=True)
+
+    services_yaml = Path("/etc/downdetector-collector/services.yaml")
+    if not services_yaml.exists():
+        services_yaml = Path(__file__).parents[1] / "config" / "services.example.yaml"
+
+    cfg = yaml.safe_load(services_yaml.read_text(encoding="utf-8"))
     slugs = [s["slug"] for s in cfg["services"]]
-    print(f"Fetching logos for {len(slugs)} services...")
+    print(f"Fetching logos for {len(slugs)} services to {LOGO_DIR}...")
     async with httpx.AsyncClient(http2=False, headers={"User-Agent": "downdetector-collector/1.0"}) as client:
         sem = asyncio.Semaphore(6)
 

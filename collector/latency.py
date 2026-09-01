@@ -30,7 +30,10 @@ class LatencyChecker:
         self._client: httpx.AsyncClient | None = None
 
     async def start(self) -> None:
-        self._client = httpx.AsyncClient(timeout=self._timeout_seconds)
+        self._client = httpx.AsyncClient(
+            timeout=self._timeout_seconds,
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
+        )
 
     async def stop(self) -> None:
         if self._client is not None:
@@ -47,6 +50,7 @@ class LatencyChecker:
                 available=False,
                 error="target_url_missing",
             )
+
         assert self._client is not None, "call start() first"
 
         started = monotonic()
@@ -70,7 +74,7 @@ class LatencyChecker:
                 error=exc.__class__.__name__,
             )
 
-        elapsed_ms = max(0, round((monotonic() - started) * 1000))
+        elapsed_ms = max(1, round((monotonic() - started) * 1000))
         return LatencyResult(
             slug=service.slug,
             target_url=service.target_url,
