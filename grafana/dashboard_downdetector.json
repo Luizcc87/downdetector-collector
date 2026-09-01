@@ -2,14 +2,14 @@
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
   "schemaVersion": 41,
-  "version": 16,
+  "version": 21,
   "editable": true,
-  "refresh": "1h",
+  "refresh": "1m",
   "time": {
     "from": "now-1h",
     "to": "now"
   },
-  "timezone": "browser",
+  "timezone": "America/Sao_Paulo",
   "tags": [
     "downdetector"
   ],
@@ -23,10 +23,10 @@
     {
       "id": 1,
       "type": "stat",
-      "title": "Total de Serviços",
+      "title": "Total",
       "gridPos": {
-        "h": 6,
-        "w": 5,
+        "h": 3,
+        "w": 2,
         "x": 0,
         "y": 0
       },
@@ -63,7 +63,7 @@
           "id": "reduce",
           "options": {
             "reducers": [
-              "lastNotNull"
+              "last"
             ],
             "mode": "seriesToRows",
             "includeTimeField": false
@@ -107,11 +107,11 @@
     {
       "id": 2,
       "type": "stat",
-      "title": "Serviços Ok",
+      "title": "Ok",
       "gridPos": {
-        "h": 6,
-        "w": 5,
-        "x": 5,
+        "h": 3,
+        "w": 2,
+        "x": 2,
         "y": 0
       },
       "datasource": {
@@ -147,7 +147,7 @@
           "id": "reduce",
           "options": {
             "reducers": [
-              "lastNotNull"
+              "last"
             ],
             "mode": "seriesToRows",
             "includeTimeField": false
@@ -209,11 +209,11 @@
     {
       "id": 3,
       "type": "stat",
-      "title": "Serviços em Atenção",
+      "title": "Atenção",
       "gridPos": {
-        "h": 6,
-        "w": 5,
-        "x": 10,
+        "h": 3,
+        "w": 2,
+        "x": 4,
         "y": 0
       },
       "datasource": {
@@ -249,7 +249,7 @@
           "id": "reduce",
           "options": {
             "reducers": [
-              "lastNotNull"
+              "last"
             ],
             "mode": "seriesToRows",
             "includeTimeField": false
@@ -311,11 +311,11 @@
     {
       "id": 4,
       "type": "stat",
-      "title": "Serviços com Problema",
+      "title": "Problema",
       "gridPos": {
-        "h": 6,
-        "w": 5,
-        "x": 15,
+        "h": 3,
+        "w": 3,
+        "x": 6,
         "y": 0
       },
       "datasource": {
@@ -351,7 +351,7 @@
           "id": "reduce",
           "options": {
             "reducers": [
-              "lastNotNull"
+              "last"
             ],
             "mode": "seriesToRows",
             "includeTimeField": false
@@ -411,658 +411,14 @@
       }
     },
     {
-      "id": 6,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 20,
-        "y": 0
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;text-align:center;\"><div style=\"font-size:26px;font-weight:700;letter-spacing:-1px;\"><span style=\"color:#E74C3C;\">Down</span><span style=\"color:#8a8a8a;\">detector</span><span style=\"color:#E74C3C;font-size:18px;vertical-align:top;\">●</span></div><div style=\"font-size:11px;color:#888;letter-spacing:2px;margin-top:4px;\">by Ookla®</div></div>"
-      },
-      "transparent": true
-    },
-    {
-      "id": 500,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 6
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:flex-start;height:100%;padding-left:8px;\"><h2 style=\"margin:0;font-size:22px;font-weight:700;letter-spacing:0.5px;\">Painel Downdetector</h2></div>"
-      },
-      "transparent": true
-    },
-    {
-      "id": 100,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:flex-start;height:100%;gap:18px;padding:8px 16px;border-bottom:1px solid #333;\"><img src=\"/public/img/downdetector/google.png\" style=\"max-height:48px;max-width:120px;object-fit:contain;flex-shrink:0;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:22px;font-weight:700;line-height:1;\">Google <span style=\"color:#888;font-weight:400;font-size:18px;\">(10200)</span></div></div>"
-      },
-      "transparent": true
-    },
-    {
-      "id": 101,
-      "type": "stat",
-      "title": "Status",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 12
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Google: status"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "background",
-        "graphMode": "none",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "0": {
-                  "text": "🟢 Ok",
-                  "color": "#2EB85C",
-                  "index": 0
-                },
-                "1": {
-                  "text": "🟠 Atenção",
-                  "color": "#F9B115",
-                  "index": 1
-                },
-                "2": {
-                  "text": "🔴 Problema",
-                  "color": "#E55353",
-                  "index": 2
-                },
-                "3": {
-                  "text": "⚪ Desconhecido",
-                  "color": "#9B59B6",
-                  "index": 3
-                }
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 1
-              },
-              {
-                "color": "#E55353",
-                "value": 2
-              },
-              {
-                "color": "#9B59B6",
-                "value": 3
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 102,
-      "type": "stat",
-      "title": "Relatos (última hora)",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Google: reports last hour"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 50
-              },
-              {
-                "color": "#E55353",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "short",
-          "decimals": 0
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 103,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:flex-start;height:100%;gap:18px;padding:8px 16px;border-bottom:1px solid #333;\"><img src=\"/public/img/downdetector/cloudflare.png\" style=\"max-height:48px;max-width:120px;object-fit:contain;flex-shrink:0;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:22px;font-weight:700;line-height:1;\">Cloudflare <span style=\"color:#888;font-weight:400;font-size:18px;\">(32542)</span></div></div>"
-      },
-      "transparent": true
-    },
-    {
-      "id": 104,
-      "type": "stat",
-      "title": "Status",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 20
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Cloudflare: status"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "background",
-        "graphMode": "none",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "0": {
-                  "text": "🟢 Ok",
-                  "color": "#2EB85C",
-                  "index": 0
-                },
-                "1": {
-                  "text": "🟠 Atenção",
-                  "color": "#F9B115",
-                  "index": 1
-                },
-                "2": {
-                  "text": "🔴 Problema",
-                  "color": "#E55353",
-                  "index": 2
-                },
-                "3": {
-                  "text": "⚪ Desconhecido",
-                  "color": "#9B59B6",
-                  "index": 3
-                }
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 1
-              },
-              {
-                "color": "#E55353",
-                "value": 2
-              },
-              {
-                "color": "#9B59B6",
-                "value": 3
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 105,
-      "type": "stat",
-      "title": "Relatos (última hora)",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 20
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "Cloudflare: reports last hour"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 50
-              },
-              {
-                "color": "#E55353",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "short",
-          "decimals": 0
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 106,
-      "type": "text",
-      "title": "",
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 25
-      },
-      "options": {
-        "mode": "html",
-        "content": "<div style=\"display:flex;align-items:center;justify-content:flex-start;height:100%;gap:18px;padding:8px 16px;border-bottom:1px solid #333;\"><img src=\"/public/img/downdetector/whatsapp.png\" style=\"max-height:48px;max-width:120px;object-fit:contain;flex-shrink:0;\" alt=\"\" onerror=\"this.style.visibility='hidden'\" /><div style=\"font-size:22px;font-weight:700;line-height:1;\">WhatsApp <span style=\"color:#888;font-weight:400;font-size:18px;\">(10136)</span></div></div>"
-      },
-      "transparent": true
-    },
-    {
-      "id": 107,
-      "type": "stat",
-      "title": "Status",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 28
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "WhatsApp: status"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "background",
-        "graphMode": "none",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "type": "value",
-              "options": {
-                "0": {
-                  "text": "🟢 Ok",
-                  "color": "#2EB85C",
-                  "index": 0
-                },
-                "1": {
-                  "text": "🟠 Atenção",
-                  "color": "#F9B115",
-                  "index": 1
-                },
-                "2": {
-                  "text": "🔴 Problema",
-                  "color": "#E55353",
-                  "index": 2
-                },
-                "3": {
-                  "text": "⚪ Desconhecido",
-                  "color": "#9B59B6",
-                  "index": 3
-                }
-              }
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 1
-              },
-              {
-                "color": "#E55353",
-                "value": 2
-              },
-              {
-                "color": "#9B59B6",
-                "value": 3
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 108,
-      "type": "stat",
-      "title": "Relatos (última hora)",
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 28
-      },
-      "datasource": {
-        "type": "alexanderzobnin-zabbix-datasource",
-        "uid": "downdetector-zabbix"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "queryType": "0",
-          "resultFormat": "time_series",
-          "datasource": {
-            "type": "alexanderzobnin-zabbix-datasource",
-            "uid": "downdetector-zabbix"
-          },
-          "group": {
-            "filter": "Downdetector"
-          },
-          "host": {
-            "filter": "Downdetector"
-          },
-          "application": {
-            "filter": ""
-          },
-          "item": {
-            "filter": "WhatsApp: reports last hour"
-          },
-          "functions": []
-        }
-      ],
-      "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 50
-              },
-              {
-                "color": "#E55353",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "short",
-          "decimals": 0
-        },
-        "overrides": []
-      }
-    },
-    {
       "id": 900,
       "type": "stat",
       "title": "Uptime",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 0,
-        "y": 34
+        "h": 3,
+        "w": 3,
+        "x": 9,
+        "y": 0
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1130,10 +486,10 @@
       "type": "stat",
       "title": "Duração do ciclo",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 6,
-        "y": 34
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 0
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1209,10 +565,10 @@
       "type": "stat",
       "title": "Bloqueios CF (5m)",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 12,
-        "y": 34
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 0
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1286,12 +642,12 @@
     {
       "id": 903,
       "type": "stat",
-      "title": "Reinícios do browser",
+      "title": "Restarts browser",
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 18,
-        "y": 34
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 0
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -1350,6 +706,5772 @@
               }
             ]
           }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 10,
+      "type": "stat",
+      "title": "🚨 Serviços em Estado de Alerta / Falha",
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: status$/"
+          },
+          "functions": []
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "last"
+            ],
+            "mode": "seriesToRows",
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "fieldName": "Last",
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                }
+              }
+            ],
+            "type": "include",
+            "match": "any"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value_and_name",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "noValue": "Nenhum incidente ativo no momento 🟢"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 11,
+      "type": "row",
+      "title": "📱 Redes Sociais & Comunicação",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "panels": []
+    },
+    {
+      "id": 12,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 8
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/instagram/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/instagram/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Instagram</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/instagram.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 13,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 13
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/instagram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Instagram: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 14,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/instagram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Instagram: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 15,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 8
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/whatsapp/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/whatsapp/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">WhatsApp</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 16,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 13
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/whatsapp/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "WhatsApp: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 17,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 14
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/whatsapp/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "WhatsApp: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 18,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/facebook/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Facebook</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/facebook.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 19,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 12,
+        "y": 13
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 20,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 14
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 21,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/twitter/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/twitter/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">X (Twitter)</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/twitter.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 22,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/twitter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "X (Twitter): status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 23,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 14
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/twitter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "X (Twitter): reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 24,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 17
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/telegram/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/telegram/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Telegram</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/telegram.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 25,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 22
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/telegram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Telegram: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 26,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 23
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/telegram/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Telegram: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 27,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 17
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/discord/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/discord/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Discord</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/discord.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 28,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 22
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/discord/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Discord: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 29,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 23
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/discord/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Discord: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 30,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook-messenger/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/facebook-messenger/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Facebook Messenger</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/facebook-messenger.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 31,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 12,
+        "y": 22
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook-messenger/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook Messenger: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 32,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 23
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/facebook-messenger/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Facebook Messenger: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 33,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/linkedin/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/linkedin/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">LinkedIn</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/linkedin.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 34,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 22
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/linkedin/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "LinkedIn: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 35,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 23
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/linkedin/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "LinkedIn: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 36,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 26
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/snapchat/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/snapchat/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Snapchat</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/snapchat.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 37,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 31
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/snapchat/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Snapchat: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 38,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 32
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/snapchat/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Snapchat: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 39,
+      "type": "row",
+      "title": "📺 Streaming & Vídeo",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "panels": []
+    },
+    {
+      "id": 40,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 36
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/youtube/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/youtube/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">YouTube</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/youtube.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 41,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 41
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/youtube/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "YouTube: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 42,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 42
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/youtube/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "YouTube: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 43,
+      "type": "row",
+      "title": "🏦 Bancos & Fintechs",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "panels": []
+    },
+    {
+      "id": 44,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 46
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-do-brasil/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/banco-do-brasil/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Banco do Brasil</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/banco-do-brasil.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 45,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 51
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-do-brasil/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco do Brasil: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 46,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 52
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-do-brasil/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco do Brasil: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 47,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 46
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-inter/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/banco-inter/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Banco Inter</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/banco-inter.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 48,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 51
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-inter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Inter: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 49,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 52
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-inter/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Inter: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 50,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 46
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-itau/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/banco-itau/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Banco Itaú</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/banco-itau.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 51,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 12,
+        "y": 51
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-itau/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Itaú: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 52,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 52
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banco-itau/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Itaú: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 53,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 46
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bradesco/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/bradesco/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Bradesco</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/bradesco.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 54,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 51
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bradesco/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Bradesco: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 55,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 52
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bradesco/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Bradesco: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 56,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 55
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nubank/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/nubank/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Nubank</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/nubank.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 57,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 60
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nubank/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nubank: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 58,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 61
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nubank/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nubank: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 59,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 55
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bcb/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/bcb/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Banco Central do Brasil</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/bcb.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 60,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 60
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bcb/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Central do Brasil: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 61,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 61
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/bcb/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banco Central do Brasil: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 62,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 55
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicoob/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/sicoob/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Sicoob</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/sicoob.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 63,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 12,
+        "y": 60
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicoob/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicoob: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 64,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 61
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicoob/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicoob: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 65,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 55
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicredi/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/sicredi/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Sicredi</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/sicredi.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 66,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 60
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicredi/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicredi: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 67,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 61
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sicredi/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sicredi: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 68,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 64
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banrisul/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/banrisul/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Banrisul</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/banrisul.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 69,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 69
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banrisul/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banrisul: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 70,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 70
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/banrisul/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Banrisul: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 71,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 64
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/caixa/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/caixa/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Caixa Econômica Federal</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/caixa.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 72,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 69
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/caixa/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Caixa Econômica Federal: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 73,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 70
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/caixa/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Caixa Econômica Federal: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 74,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 64
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/mercadopago/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/mercadopago/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Mercado Pago</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/mercadopago.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 75,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 12,
+        "y": 69
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/mercadopago/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Mercado Pago: status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 76,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 70
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/mercadopago/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Mercado Pago: reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 77,
+      "type": "row",
+      "title": "🏛️ Governo & Serviços Fiscais",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 73
+      },
+      "panels": []
+    },
+    {
+      "id": 78,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 74
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sefaz/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/sefaz/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Sefaz (Nacional)</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/sefaz.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 79,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 0,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sefaz/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sefaz (Nacional): status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 80,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 80
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/sefaz/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Sefaz (Nacional): reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 81,
+      "type": "text",
+      "title": "",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 74
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nota-fiscal-eletronica/",
+          "targetBlank": true
+        }
+      ],
+      "options": {
+        "mode": "html",
+        "content": "<a href=\"https://downdetector.com.br/status/nota-fiscal-eletronica/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:14px 16px 6px;gap:10px;background:#ffffff;border-radius:6px 6px 0 0;text-decoration:none;box-sizing:border-box;border:1px solid #d7dbe0;border-bottom:0;\"><div style=\"font-size:15px;font-weight:500;align-self:flex-start;line-height:1.2;color:#20242a;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">Nota Fiscal Eletrônica (NF-e)</div><div style=\"display:flex;align-items:center;justify-content:center;width:100%;height:100%;\"><img src=\"/public/img/downdetector/nota-fiscal-eletronica.svg\" style=\"max-height:78px;max-width:86%;object-fit:contain;\" /></div><div style=\"font-size:11px;color:#68717d;align-self:flex-end;\">Abrir</div></a>"
+      },
+      "transparent": true
+    },
+    {
+      "id": 82,
+      "type": "stat",
+      "title": "",
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 6,
+        "y": 79
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nota-fiscal-eletronica/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nota Fiscal Eletrônica (NF-e): status"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value",
+        "justifyMode": "center"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "Ok",
+                  "color": "#2EB85C",
+                  "index": 0
+                },
+                "1": {
+                  "text": "Atenção",
+                  "color": "#F9B115",
+                  "index": 1
+                },
+                "2": {
+                  "text": "Problema",
+                  "color": "#E55353",
+                  "index": 2
+                },
+                "3": {
+                  "text": "N/D",
+                  "color": "#9B59B6",
+                  "index": 3
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2EB85C",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 1
+              },
+              {
+                "color": "#E55353",
+                "value": 2
+              },
+              {
+                "color": "#9B59B6",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 83,
+      "type": "timeseries",
+      "title": "",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 80
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "links": [
+        {
+          "title": "Abrir no Downdetector",
+          "url": "https://downdetector.com.br/status/nota-fiscal-eletronica/",
+          "targetBlank": true
+        }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "Nota Fiscal Eletrônica (NF-e): reports last hour"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "calcs": []
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#15AABF"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "axisPlacement": "hidden",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#15AABF",
+                "value": null
+              },
+              {
+                "color": "#F9B115",
+                "value": 30
+              },
+              {
+                "color": "#E55353",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "transparent": true
+    },
+    {
+      "id": 84,
+      "type": "row",
+      "title": "📈 Tendências & Histórico",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 83
+      },
+      "panels": []
+    },
+    {
+      "id": 85,
+      "type": "timeseries",
+      "title": "📊 Histórico de Relatos de Problemas (Últimas 24h)",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 84
+      },
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "downdetector-zabbix"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "0",
+          "resultFormat": "time_series",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "downdetector-zabbix"
+          },
+          "group": {
+            "filter": "Downdetector"
+          },
+          "host": {
+            "filter": "Downdetector"
+          },
+          "application": {
+            "filter": ""
+          },
+          "item": {
+            "filter": "/.*: reports last hour$/"
+          },
+          "functions": []
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        },
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": [
+            "max",
+            "last"
+          ]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 10
+          },
+          "unit": "short",
+          "min": 0
         },
         "overrides": []
       }
