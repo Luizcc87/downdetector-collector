@@ -520,7 +520,7 @@ def main():
         "uid": "downdetector-main",
         "schemaVersion": 41, "version": 24,
         "editable": True, "refresh": "1m",
-        "time": {"from": "now-1h", "to": "now"},
+        "time": {"from": "now-6h", "to": "now"},
         "timezone": "America/Sao_Paulo", "tags": ["downdetector"],
         "annotations": {"list": []}, "templating": {"list": []},
         "panels": panels,
