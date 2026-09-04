@@ -4,9 +4,17 @@
 # estiver habilitado e restrito por ACL em cada roteador (Ponto em Aberto 6.6
 # da proposta). Ate la, este arquivo serve so de referencia de schema.
 #
-# routing_table: nome da tabela (v7, "to_<link>") ou routing-mark (v6) ja
-# criado no Mikrotik pelo esquema de PBR (secao 2 da proposta). branch
-# decide qual parametro de API usar -- ver mikrotik/config.py.
+# routing_table: nome real do routing-mark/routing-table ja criado no
+# Mikrotik pelo esquema de PBR (secao 2 da proposta). CONFIRMADO em campo
+# em 2026-09-04 que o parametro do /ping/tool traceroute e sempre
+# `routing-table=`, em v6 e v7 (ver mikrotik/config.py) -- so a sintaxe de
+# CRIACAO da tabela em /ip route muda por branch, nao o nome usado aqui.
+#
+# ATENCAO -- os nomes dos marks NAO sao padronizados entre unidades:
+#   Filial (v6, ja em producao, confirmado via API 2026-09-04): to_globoinfo / to_brphonia
+#   Frigorifico (v7, ja em producao, conforme diagrama de topologia): to_globo / to_brphonia
+#   Matriz: NAO CONFIRMADO -- nao presumir nenhum dos dois padroes acima
+#   antes de verificar via API (Ponto em Aberto 6.10 da proposta).
 
 defaults:
   api_port: 8729
@@ -15,26 +23,26 @@ defaults:
 
 routers:
   - unit: filial
-    host: 192.168.42.2  # gateway da ether5-LAN, IP interno -- confirmar antes de usar
+    host: 192.168.42.2  # gateway da ether5-LAN -- confirmado alcancavel via api-ssl em 2026-09-04
     branch: v6
     username: zabbix-probe
-    password: "TROCAR_ANTES_DE_USAR"
+    password: "TROCAR_ANTES_DE_USAR"  # ver README -- nunca reutilizar entre unidades
     zabbix_host: "Mikrotik-Filial"
     links:
       - name: globoinfo
-        routing_table: to_globo
+        routing_table: to_globoinfo  # confirmado via /ip route real em 2026-09-04 -- NAO "to_globo"
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          # gateway do ISP (1o hop) -- preencher com o gateway real do PPPoE
+          - "100.65.0.1"  # gateway PPPoE real, confirmado por traceroute em 2026-09-04
       - name: brphonia
-        routing_table: to_brphonia
+        routing_table: to_brphonia  # confirmado via /ip route real em 2026-09-04
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          # gateway 177.74.144.109 (ver topologia da Filial) -- confirmar antes de usar
+          - "177.74.144.109"  # gateway P2P real -- nao responde traceroute (silencioso), mas e o gateway configurado
       - name: starlink
-        routing_table: to_star
+        routing_table: to_star  # AINDA NAO EXISTE -- Starlink fora do WANGROUP (Fase 3 do roadmap); preencher so depois de criado
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
@@ -47,12 +55,12 @@ routers:
     zabbix_host: "Mikrotik-Matriz"
     links:
       - name: globoinfo
-        routing_table: to_globo
+        routing_table: to_globoinfo  # NAO CONFIRMADO -- placeholder por analogia com a Filial, verificar antes de usar (Ponto em Aberto 6.10)
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
       - name: brphonia
-        routing_table: to_brphonia
+        routing_table: to_brphonia  # NAO CONFIRMADO -- idem acima
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
@@ -65,7 +73,7 @@ routers:
     zabbix_host: "Mikrotik-Frigorifico"
     links:
       - name: globoinfo
-        routing_table: to_globo
+        routing_table: to_globo  # conforme diagrama de topologia do Frigorifico -- ainda nao confirmado via API como a Filial
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
@@ -74,9 +82,9 @@ routers:
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          # gateway 138.94.76.236 -- confirmar antes de usar
+          - "138.94.76.236"  # gateway P2P documentado -- confirmar via API antes de usar
       - name: starlink
-        routing_table: to_star
+        routing_table: to_star  # AINDA NAO EXISTE -- Starlink fora do WAN list (Fase 3 do roadmap)
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
