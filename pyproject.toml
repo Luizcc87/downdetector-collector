@@ -20,10 +20,14 @@ dev = [
     "ruff>=0.3",
     "mypy>=1.8",
 ]
+mikrotik = [
+    "librouteros>=3.4",
+]
 
 [project.scripts]
 downdetector-collector = "collector.__main__:main"
 downdetector-discover = "bin.discover:main"
+mikrotik-link-monitor = "mikrotik.__main__:main"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -34,7 +38,7 @@ line-length = 100
 target-version = "py311"
 
 [tool.setuptools.packages.find]
-include = ["collector*"]
+include = ["collector*", "mikrotik*"]
 
 [build-system]
 requires = ["setuptools>=68"]
