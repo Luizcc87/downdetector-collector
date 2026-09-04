@@ -2,7 +2,7 @@
   "title": "DASHBOARD DOWNDETECTOR",
   "uid": "downdetector-main",
   "schemaVersion": 41,
-  "version": 26,
+  "version": 27,
   "editable": true,
   "refresh": "1m",
   "time": {
@@ -869,7 +869,7 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 0,
         "y": 8
@@ -883,7 +883,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pix.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Pix</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pix.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Pix</div></div>"
       },
       "transparent": true
     },
@@ -895,7 +895,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "links": [
         {
@@ -1005,13 +1005,13 @@
     },
     {
       "id": 14,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 15
+        "y": 14
       },
       "links": [
         {
@@ -1049,55 +1049,57 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 15,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
         "y": 17
@@ -1138,47 +1140,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -1189,7 +1193,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 19
+        "y": 20
       },
       "links": [
         {
@@ -1228,7 +1232,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -1252,7 +1260,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -1260,7 +1281,7 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 4,
         "y": 8
@@ -1274,7 +1295,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sefaz.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Sefaz (Nacional)</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sefaz.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Sefaz (Nacional)</div></div>"
       },
       "transparent": true
     },
@@ -1286,7 +1307,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 13
+        "y": 12
       },
       "links": [
         {
@@ -1396,13 +1417,13 @@
     },
     {
       "id": 19,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 15
+        "y": 14
       },
       "links": [
         {
@@ -1440,55 +1461,57 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 20,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
         "y": 17
@@ -1529,47 +1552,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -1580,7 +1605,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 19
+        "y": 20
       },
       "links": [
         {
@@ -1619,7 +1644,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -1643,7 +1672,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -1651,7 +1693,7 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 8,
         "y": 8
@@ -1665,7 +1707,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nota-fiscal-eletronica.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Nota Fiscal Eletrônica (NF-e)</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/nota-fiscal-eletronica.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Nota Fiscal Eletrônica (NF-e)</div></div>"
       },
       "transparent": true
     },
@@ -1677,7 +1719,7 @@
         "h": 2,
         "w": 4,
         "x": 8,
-        "y": 13
+        "y": 12
       },
       "links": [
         {
@@ -1787,13 +1829,13 @@
     },
     {
       "id": 24,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 15
+        "y": 14
       },
       "links": [
         {
@@ -1831,55 +1873,57 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 25,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
         "y": 17
@@ -1920,47 +1964,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -1971,7 +2017,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 19
+        "y": 20
       },
       "links": [
         {
@@ -2010,7 +2056,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -2034,7 +2084,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -2042,7 +2105,7 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 12,
         "y": 8
@@ -2056,7 +2119,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bcb.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Banco Central do Brasil</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/bcb.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Banco Central do Brasil</div></div>"
       },
       "transparent": true
     },
@@ -2068,7 +2131,7 @@
         "h": 2,
         "w": 4,
         "x": 12,
-        "y": 13
+        "y": 12
       },
       "links": [
         {
@@ -2178,13 +2241,13 @@
     },
     {
       "id": 29,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 15
+        "y": 14
       },
       "links": [
         {
@@ -2222,55 +2285,57 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 30,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
         "y": 17
@@ -2311,47 +2376,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -2362,7 +2429,7 @@
         "h": 3,
         "w": 4,
         "x": 12,
-        "y": 19
+        "y": 20
       },
       "links": [
         {
@@ -2401,7 +2468,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -2425,7 +2496,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -2437,7 +2521,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 23
       },
       "panels": []
     },
@@ -2446,10 +2530,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 0,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -2460,7 +2544,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/cielo.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Cielo</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/cielo.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Cielo</div></div>"
       },
       "transparent": true
     },
@@ -2582,10 +2666,10 @@
     },
     {
       "id": 35,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
         "y": 30
@@ -2626,58 +2710,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 36,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -2715,47 +2801,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -2766,7 +2854,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -2805,7 +2893,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -2829,7 +2921,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -2837,10 +2942,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 4,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -2851,7 +2956,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/rede.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Rede</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/rede.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Rede</div></div>"
       },
       "transparent": true
     },
@@ -2973,10 +3078,10 @@
     },
     {
       "id": 40,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
         "y": 30
@@ -3017,58 +3122,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 41,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -3106,47 +3213,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -3157,7 +3266,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -3196,7 +3305,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -3220,7 +3333,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -3228,10 +3354,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 8,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -3242,7 +3368,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/stone.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Stone</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/stone.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Stone</div></div>"
       },
       "transparent": true
     },
@@ -3364,10 +3490,10 @@
     },
     {
       "id": 45,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
         "y": 30
@@ -3408,58 +3534,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 46,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -3497,47 +3625,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -3548,7 +3678,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -3587,7 +3717,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -3611,7 +3745,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -3619,10 +3766,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 12,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -3633,7 +3780,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pagseguro.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">PagBank</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/pagseguro.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">PagBank</div></div>"
       },
       "transparent": true
     },
@@ -3755,10 +3902,10 @@
     },
     {
       "id": 50,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
         "y": 30
@@ -3799,58 +3946,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 51,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -3888,47 +4037,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -3939,7 +4090,7 @@
         "h": 3,
         "w": 4,
         "x": 12,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -3978,7 +4129,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -4002,7 +4157,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -4010,10 +4178,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 16,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -4024,7 +4192,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/getnet.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Getnet</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/getnet.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Getnet</div></div>"
       },
       "transparent": true
     },
@@ -4146,10 +4314,10 @@
     },
     {
       "id": 55,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 16,
         "y": 30
@@ -4190,58 +4358,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 56,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 16,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -4279,47 +4449,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -4330,7 +4502,7 @@
         "h": 3,
         "w": 4,
         "x": 16,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -4369,7 +4541,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -4393,7 +4569,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -4401,10 +4590,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 20,
-        "y": 23
+        "y": 24
       },
       "links": [
         {
@@ -4415,7 +4604,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/mercadopago.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Mercado Pago</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/mercadopago.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Mercado Pago</div></div>"
       },
       "transparent": true
     },
@@ -4537,10 +4726,10 @@
     },
     {
       "id": 60,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 20,
         "y": 30
@@ -4581,58 +4770,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 61,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 20,
-        "y": 32
+        "y": 33
       },
       "links": [
         {
@@ -4670,47 +4861,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -4721,7 +4914,7 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 34
+        "y": 36
       },
       "links": [
         {
@@ -4760,7 +4953,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -4784,7 +4981,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -4796,7 +5006,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 39
       },
       "panels": []
     },
@@ -4805,10 +5015,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 0,
-        "y": 38
+        "y": 40
       },
       "links": [
         {
@@ -4819,7 +5029,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/starlink.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Starlink</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/starlink.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Starlink</div></div>"
       },
       "transparent": true
     },
@@ -4831,7 +5041,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 43
+        "y": 44
       },
       "links": [
         {
@@ -4941,13 +5151,13 @@
     },
     {
       "id": 66,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 45
+        "y": 46
       },
       "links": [
         {
@@ -4985,58 +5195,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 67,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 47
+        "y": 49
       },
       "links": [
         {
@@ -5074,47 +5286,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -5125,7 +5339,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 49
+        "y": 52
       },
       "links": [
         {
@@ -5164,7 +5378,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -5188,7 +5406,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -5196,10 +5427,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 4,
-        "y": 38
+        "y": 40
       },
       "links": [
         {
@@ -5210,7 +5441,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/claro.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Claro</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/claro.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Claro</div></div>"
       },
       "transparent": true
     },
@@ -5222,7 +5453,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 43
+        "y": 44
       },
       "links": [
         {
@@ -5332,13 +5563,13 @@
     },
     {
       "id": 71,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 45
+        "y": 46
       },
       "links": [
         {
@@ -5376,58 +5607,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 72,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 47
+        "y": 49
       },
       "links": [
         {
@@ -5465,47 +5698,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -5516,7 +5751,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 49
+        "y": 52
       },
       "links": [
         {
@@ -5555,7 +5790,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -5579,7 +5818,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -5587,10 +5839,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 8,
-        "y": 38
+        "y": 40
       },
       "links": [
         {
@@ -5601,7 +5853,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/vivo.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Vivo</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/vivo.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Vivo</div></div>"
       },
       "transparent": true
     },
@@ -5613,7 +5865,7 @@
         "h": 2,
         "w": 4,
         "x": 8,
-        "y": 43
+        "y": 44
       },
       "links": [
         {
@@ -5723,13 +5975,13 @@
     },
     {
       "id": 76,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 45
+        "y": 46
       },
       "links": [
         {
@@ -5767,58 +6019,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 77,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 47
+        "y": 49
       },
       "links": [
         {
@@ -5856,47 +6110,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -5907,7 +6163,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 49
+        "y": 52
       },
       "links": [
         {
@@ -5946,7 +6202,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -5970,7 +6230,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -5978,10 +6251,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 12,
-        "y": 38
+        "y": 40
       },
       "links": [
         {
@@ -5992,7 +6265,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/tim.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">TIM</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/tim.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">TIM</div></div>"
       },
       "transparent": true
     },
@@ -6004,7 +6277,7 @@
         "h": 2,
         "w": 4,
         "x": 12,
-        "y": 43
+        "y": 44
       },
       "links": [
         {
@@ -6114,13 +6387,13 @@
     },
     {
       "id": 81,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 45
+        "y": 46
       },
       "links": [
         {
@@ -6158,58 +6431,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 82,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 47
+        "y": 49
       },
       "links": [
         {
@@ -6247,47 +6522,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -6298,7 +6575,7 @@
         "h": 3,
         "w": 4,
         "x": 12,
-        "y": 49
+        "y": 52
       },
       "links": [
         {
@@ -6337,7 +6614,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -6361,7 +6642,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -6373,7 +6667,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 55
       },
       "panels": []
     },
@@ -6382,10 +6676,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 0,
-        "y": 53
+        "y": 56
       },
       "links": [
         {
@@ -6396,7 +6690,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-do-brasil.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Banco do Brasil</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/banco-do-brasil.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Banco do Brasil</div></div>"
       },
       "transparent": true
     },
@@ -6408,7 +6702,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 58
+        "y": 60
       },
       "links": [
         {
@@ -6518,13 +6812,13 @@
     },
     {
       "id": 87,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 60
+        "y": 62
       },
       "links": [
         {
@@ -6562,58 +6856,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 88,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 62
+        "y": 65
       },
       "links": [
         {
@@ -6651,47 +6947,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -6702,7 +7000,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 64
+        "y": 68
       },
       "links": [
         {
@@ -6741,7 +7039,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -6765,7 +7067,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -6773,10 +7088,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 4,
-        "y": 53
+        "y": 56
       },
       "links": [
         {
@@ -6787,7 +7102,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicredi.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Sicredi</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicredi.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Sicredi</div></div>"
       },
       "transparent": true
     },
@@ -6799,7 +7114,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 58
+        "y": 60
       },
       "links": [
         {
@@ -6909,13 +7224,13 @@
     },
     {
       "id": 92,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 60
+        "y": 62
       },
       "links": [
         {
@@ -6953,58 +7268,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 93,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 62
+        "y": 65
       },
       "links": [
         {
@@ -7042,47 +7359,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -7093,7 +7412,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 64
+        "y": 68
       },
       "links": [
         {
@@ -7132,7 +7451,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -7156,7 +7479,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -7164,10 +7500,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 8,
-        "y": 53
+        "y": 56
       },
       "links": [
         {
@@ -7178,7 +7514,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicoob.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Sicoob</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/sicoob.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Sicoob</div></div>"
       },
       "transparent": true
     },
@@ -7190,7 +7526,7 @@
         "h": 2,
         "w": 4,
         "x": 8,
-        "y": 58
+        "y": 60
       },
       "links": [
         {
@@ -7300,13 +7636,13 @@
     },
     {
       "id": 97,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 60
+        "y": 62
       },
       "links": [
         {
@@ -7344,58 +7680,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 98,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 62
+        "y": 65
       },
       "links": [
         {
@@ -7433,47 +7771,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -7484,7 +7824,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 64
+        "y": 68
       },
       "links": [
         {
@@ -7523,7 +7863,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -7547,7 +7891,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -7555,10 +7912,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 12,
-        "y": 53
+        "y": 56
       },
       "links": [
         {
@@ -7569,7 +7926,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/caixa.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Caixa Econômica Federal</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/caixa.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Caixa Econômica Federal</div></div>"
       },
       "transparent": true
     },
@@ -7581,7 +7938,7 @@
         "h": 2,
         "w": 4,
         "x": 12,
-        "y": 58
+        "y": 60
       },
       "links": [
         {
@@ -7691,13 +8048,13 @@
     },
     {
       "id": 102,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 60
+        "y": 62
       },
       "links": [
         {
@@ -7735,58 +8092,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 103,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 62
+        "y": 65
       },
       "links": [
         {
@@ -7824,47 +8183,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -7875,7 +8236,7 @@
         "h": 3,
         "w": 4,
         "x": 12,
-        "y": 64
+        "y": 68
       },
       "links": [
         {
@@ -7914,7 +8275,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -7938,7 +8303,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -7950,7 +8328,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 71
       },
       "panels": []
     },
@@ -7959,10 +8337,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 0,
-        "y": 68
+        "y": 72
       },
       "links": [
         {
@@ -7973,7 +8351,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">WhatsApp</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/whatsapp.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">WhatsApp</div></div>"
       },
       "transparent": true
     },
@@ -7985,7 +8363,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 73
+        "y": 76
       },
       "links": [
         {
@@ -8095,13 +8473,13 @@
     },
     {
       "id": 108,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 75
+        "y": 78
       },
       "links": [
         {
@@ -8139,58 +8517,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 109,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 0,
-        "y": 77
+        "y": 81
       },
       "links": [
         {
@@ -8228,47 +8608,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -8279,7 +8661,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 79
+        "y": 84
       },
       "links": [
         {
@@ -8318,7 +8700,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -8342,7 +8728,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -8350,10 +8749,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 4,
-        "y": 68
+        "y": 72
       },
       "links": [
         {
@@ -8364,7 +8763,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-365.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Microsoft 365</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/microsoft-365.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Microsoft 365</div></div>"
       },
       "transparent": true
     },
@@ -8376,7 +8775,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 73
+        "y": 76
       },
       "links": [
         {
@@ -8486,13 +8885,13 @@
     },
     {
       "id": 113,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 75
+        "y": 78
       },
       "links": [
         {
@@ -8530,58 +8929,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 114,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 4,
-        "y": 77
+        "y": 81
       },
       "links": [
         {
@@ -8619,47 +9020,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -8670,7 +9073,7 @@
         "h": 3,
         "w": 4,
         "x": 4,
-        "y": 79
+        "y": 84
       },
       "links": [
         {
@@ -8709,7 +9112,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -8733,7 +9140,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -8741,10 +9161,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 8,
-        "y": 68
+        "y": 72
       },
       "links": [
         {
@@ -8755,7 +9175,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/outlook.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Outlook</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/outlook.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Outlook</div></div>"
       },
       "transparent": true
     },
@@ -8767,7 +9187,7 @@
         "h": 2,
         "w": 4,
         "x": 8,
-        "y": 73
+        "y": 76
       },
       "links": [
         {
@@ -8877,13 +9297,13 @@
     },
     {
       "id": 118,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 75
+        "y": 78
       },
       "links": [
         {
@@ -8921,58 +9341,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 119,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 8,
-        "y": 77
+        "y": 81
       },
       "links": [
         {
@@ -9010,47 +9432,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -9061,7 +9485,7 @@
         "h": 3,
         "w": 4,
         "x": 8,
-        "y": 79
+        "y": 84
       },
       "links": [
         {
@@ -9100,7 +9524,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -9124,7 +9552,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -9132,10 +9573,10 @@
       "type": "text",
       "title": "",
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 4,
         "x": 12,
-        "y": 68
+        "y": 72
       },
       "links": [
         {
@@ -9146,7 +9587,7 @@
       ],
       "options": {
         "mode": "html",
-        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:8px 6px 4px;gap:6px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:4px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;width:64px;height:52px;box-shadow:0 3px 8px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:44px;max-width:54px;object-fit:contain;\" /></div><div style=\"font-size:13px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;letter-spacing:0.2px;\">Google</div></div>"
+        "content": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:4px 4px 2px;gap:4px;background:linear-gradient(180deg, #1f2329 0%, #16181d 100%);border-radius:8px 8px 0 0;border:1px solid #2d333b;border-bottom:none;\"><div style=\"background:#ffffff;padding:2px 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;width:56px;height:44px;box-shadow:0 2px 6px rgba(0,0,0,0.4);\"><img src=\"/public/img/downdetector/google.svg\" style=\"max-height:38px;max-width:48px;object-fit:contain;\" /></div><div style=\"font-size:12px;font-weight:700;text-align:center;line-height:1.2;color:#ffffff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px;letter-spacing:0.2px;\">Google</div></div>"
       },
       "transparent": true
     },
@@ -9158,7 +9599,7 @@
         "h": 2,
         "w": 4,
         "x": 12,
-        "y": 73
+        "y": 76
       },
       "links": [
         {
@@ -9268,13 +9709,13 @@
     },
     {
       "id": 123,
-      "type": "stat",
-      "title": "⚡ Tempo de Resposta HTTP",
+      "type": "timeseries",
+      "title": "⚡ Resposta HTTP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 75
+        "y": 78
       },
       "links": [
         {
@@ -9312,58 +9753,60 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#eb6834"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 500
-              },
-              {
-                "color": "#E55353",
-                "value": 1500
+                "id": "displayName",
+                "value": "HTTP"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
       "id": 124,
-      "type": "stat",
-      "title": "🌐 Ping TCP (Rede)",
+      "type": "timeseries",
+      "title": "🌐 Ping TCP (ms)",
       "gridPos": {
-        "h": 2,
+        "h": 3,
         "w": 4,
         "x": 12,
-        "y": 77
+        "y": 81
       },
       "links": [
         {
@@ -9401,47 +9844,49 @@
         }
       ],
       "options": {
-        "reduceOptions": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
           "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "last"
+          ]
         },
-        "colorMode": "value",
-        "graphMode": "area",
-        "textMode": "value",
-        "justifyMode": "center"
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "fillOpacity": 30
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "axisPlacement": "none",
+            "showPoints": "auto",
+            "pointSize": 3
           },
           "color": {
-            "mode": "thresholds"
+            "mode": "fixed",
+            "fixedColor": "#2EB85C"
           },
           "unit": "ms",
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
               {
-                "color": "#2EB85C",
-                "value": null
-              },
-              {
-                "color": "#F9B115",
-                "value": 150
-              },
-              {
-                "color": "#E55353",
-                "value": 500
+                "id": "displayName",
+                "value": "Ping"
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       }
     },
     {
@@ -9452,7 +9897,7 @@
         "h": 3,
         "w": 4,
         "x": 12,
-        "y": 79
+        "y": 84
       },
       "links": [
         {
@@ -9491,7 +9936,11 @@
       ],
       "options": {
         "legend": {
-          "displayMode": "hidden"
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
         },
         "tooltip": {
           "mode": "single"
@@ -9515,7 +9964,20 @@
           "unit": "short",
           "min": 0
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Relatos"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -9527,7 +9989,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 87
       },
       "panels": []
     },
@@ -9539,7 +10001,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 88
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -9622,7 +10084,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 97
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -9706,7 +10168,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 106
       },
       "panels": []
     },
@@ -9718,7 +10180,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 102
+        "y": 107
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
@@ -9822,7 +10284,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 112
+        "y": 117
       },
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
