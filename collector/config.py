@@ -17,6 +17,7 @@ class ServiceConfig:
     poll_interval: int
     country: str
     target_url: str | None = None
+    ping_host: str | None = None
 
     def url(self) -> str:
         if self.country == "com":
@@ -68,6 +69,7 @@ def load_services_from_path(path: Path) -> list[ServiceConfig]:
                 poll_interval=int(merged.get("poll_interval", 60)),
                 country=merged.get("country", "br"),
                 target_url=merged.get("target_url"),
+                ping_host=merged.get("ping_host"),
             )
         )
     return result

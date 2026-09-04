@@ -18,6 +18,7 @@ import structlog
 from collector.config import ServiceConfig, load_services_from_path
 from collector.health import HealthState
 from collector.latency import LatencyChecker
+from collector.tcp_ping import TcpPingChecker
 from collector.scheduler import Scheduler
 from collector.scraper import ScrapeResult, Scraper
 from collector.zabbix_sink import Metric, ZabbixSink
@@ -57,6 +58,7 @@ class Collector:
         self._services: list[ServiceConfig] = []
         self._scraper = Scraper(args.flaresolverr_url)
         self._latency = LatencyChecker()
+        self._tcp_ping = TcpPingChecker()
         self._sink = ZabbixSink(args.zabbix_server, args.zabbix_port, args.zabbix_host_name)
         self._health = HealthState()
         self._scheduler: Scheduler | None = None
@@ -87,6 +89,9 @@ class Collector:
         latency = await self._latency.check(service)
         if latency.latency_ms is not None:
             metrics.append((f"downdetector.latency_ms[{service.slug}]", latency.latency_ms))
+        tcp = await self._tcp_ping.check(service)
+        metrics.append((f"downdetector.tcp_ping_ms[{service.slug}]", tcp.tcp_ping_ms if tcp.tcp_ping_ms is not None else -1))
+        metrics.append((f"downdetector.tcp_ping_ok[{service.slug}]", 1 if tcp.available else 0))
         # name e company_id raramente mudam — envia a cada N
         count = self._scrape_counts.get(service.slug, 0) + 1
         self._scrape_counts[service.slug] = count
