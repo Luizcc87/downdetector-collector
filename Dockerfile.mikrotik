@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# zabbix-sender: mesmo binario usado por collector/zabbix_sink.py (reaproveitado
+# por mikrotik/__main__.py) -- ver AGENTS.md, secao de armadilhas do collector/
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    zabbix-sender \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml .
+COPY collector/ collector/
+COPY mikrotik/ mikrotik/
+COPY bin/ bin/
+COPY config/ config/
+
+RUN pip install --no-cache-dir ".[mikrotik]"
+
+CMD ["python", "-m", "mikrotik", "--config", "config/routers.yaml", "--zabbix-server", "127.0.0.1", "--zabbix-port", "10051"]

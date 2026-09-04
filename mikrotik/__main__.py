@@ -21,7 +21,7 @@ import structlog
 
 from collector.zabbix_sink import Metric, ZabbixSink
 from mikrotik.client import MikrotikClient
-from mikrotik.config import RouterConfig, load_routers_from_path
+from mikrotik.config import GATEWAY_SENTINEL, RouterConfig, load_routers_from_path
 from mikrotik.scheduler import FixedIntervalScheduler
 
 structlog.configure(
@@ -44,9 +44,10 @@ def parse_args() -> argparse.Namespace:
     return ap.parse_args()
 
 
-def _metric_suffix(link_name: str, target: str) -> str:
-    # target pode ser IP ou hostname -- normaliza pra nao quebrar a chave Zabbix
-    return f"{link_name}.{target.replace(':', '_')}"
+def _metric_suffix(link_name: str, target_label: str) -> str:
+    # target_label pode ser IP, hostname, ou "gateway" (alvo dinamico) --
+    # normaliza pra nao quebrar a chave Zabbix.
+    return f"{link_name}.{target_label.replace(':', '_')}"
 
 
 async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
@@ -57,8 +58,26 @@ async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
 
     for link in router.links:
         for target in link.targets:
-            result = await asyncio.to_thread(client.ping_link, link, target)
-            suffix = _metric_suffix(link.name, target)
+            if target == GATEWAY_SENTINEL:
+                resolved = await asyncio.to_thread(client.resolve_gateway, link)
+                if resolved is None:
+                    log.warning(
+                        "gateway_resolve_skipped",
+                        unit=router.unit,
+                        link=link.name,
+                    )
+                    continue
+                actual_target = resolved
+                # chave Zabbix estavel ("gateway"), independente do IP CGNAT
+                # mudar entre reconexoes PPPoE -- so o log mostra o IP real
+                # resolvido nesta rodada.
+                metric_label = "gateway"
+            else:
+                actual_target = target
+                metric_label = target
+
+            result = await asyncio.to_thread(client.ping_link, link, actual_target)
+            suffix = _metric_suffix(link.name, metric_label)
             metrics.append((f"mikrotik.link.available[{suffix}]", 1 if result.ok else 0))
             metrics.append((f"mikrotik.link.loss_pct[{suffix}]", result.packet_loss_pct))
             if result.avg_rtt_ms is not None:
@@ -68,7 +87,8 @@ async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
                 "link_probe_done",
                 unit=router.unit,
                 link=link.name,
-                target=target,
+                target=actual_target,
+                target_label=metric_label,
                 ok=result.ok,
                 rtt_ms=result.avg_rtt_ms,
                 loss_pct=result.packet_loss_pct,

@@ -15,6 +15,14 @@
 #   Frigorifico (v7, ja em producao, conforme diagrama de topologia): to_globo / to_brphonia
 #   Matriz: NAO CONFIRMADO -- nao presumir nenhum dos dois padroes acima
 #   antes de verificar via API (Ponto em Aberto 6.10 da proposta).
+#
+# "__gateway__" nos targets: sentinela especial (ver mikrotik/config.py,
+# GATEWAY_SENTINEL) -- o coletor resolve o IP do gateway ATUAL do link a
+# cada ciclo, em vez de um IP fixo aqui. OBRIGATORIO para links PPPoE
+# (GloboInfo nas 3 unidades): o gateway fica na faixa CGNAT 100.64.0.0/10,
+# atribuido pelo provedor a cada negociacao PPPoE, pode mudar. Links com IP
+# fixo por contrato (Brphonia Link Full, P2P) podem usar o IP literal --
+# nao muda sozinho.
 
 defaults:
   api_port: 8729
@@ -34,13 +42,13 @@ routers:
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          - "100.65.0.1"  # gateway PPPoE real, confirmado por traceroute em 2026-09-04
+          - "__gateway__"  # PPPoE -- resolvido em runtime (era 100.65.0.1 em 2026-09-04, CGNAT, pode mudar)
       - name: brphonia
         routing_table: to_brphonia  # confirmado via /ip route real em 2026-09-04
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          - "177.74.144.109"  # gateway P2P real -- nao responde traceroute (silencioso), mas e o gateway configurado
+          - "177.74.144.109"  # IP P2P fixo por contrato -- nao usa sentinela
       - name: starlink
         routing_table: to_star  # AINDA NAO EXISTE -- Starlink fora do WANGROUP (Fase 3 do roadmap); preencher so depois de criado
         targets:
@@ -59,6 +67,7 @@ routers:
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
+          - "__gateway__"  # assumindo PPPoE tambem -- confirmar
       - name: brphonia
         routing_table: to_brphonia  # NAO CONFIRMADO -- idem acima
         targets:
@@ -77,12 +86,13 @@ routers:
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
+          - "__gateway__"  # PPPoE -- mesmo caso da Filial
       - name: brphonia
         routing_table: to_brphonia
         targets:
           - "1.1.1.1"
           - "8.8.8.8"
-          - "138.94.76.236"  # gateway P2P documentado -- confirmar via API antes de usar
+          - "138.94.76.236"  # IP P2P fixo documentado -- confirmar via API antes de usar
       - name: starlink
         routing_table: to_star  # AINDA NAO EXISTE -- Starlink fora do WAN list (Fase 3 do roadmap)
         targets:

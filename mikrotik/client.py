@@ -10,6 +10,7 @@ servico api-ssl for habilitado, antes de dar como pronto.
 """
 from __future__ import annotations
 
+import ipaddress
 import re
 import ssl
 from dataclasses import dataclass
@@ -18,11 +19,19 @@ import structlog
 from librouteros import connect
 from librouteros.exceptions import LibRouterosError
 
-from mikrotik.config import LinkConfig, RouterConfig
+from mikrotik.config import RouterConfig, LinkConfig
 
 log = structlog.get_logger(__name__)
 
 _RTT_RE = re.compile(r"(?:(\d+)ms)?(?:(\d+)us)?")
+
+
+def _is_ip(value: str) -> bool:
+    try:
+        ipaddress.ip_address(value)
+        return True
+    except ValueError:
+        return False
 
 
 def _parse_rtt_ms(time_str: str) -> float | None:
@@ -82,6 +91,95 @@ class MikrotikClient:
             ssl_wrapper=ctx.wrap_socket,
             timeout=self._timeout_s,
         )
+
+    def resolve_gateway(self, link: LinkConfig) -> str | None:
+        """Resolve o IP do gateway ATUAL do link, consultando a rota real em
+        vez de confiar num IP fixo no routers.yaml.
+
+        Necessario para links PPPoE/dinamicos (ex.: GloboInfo na Filial:
+        gateway na faixa CGNAT 100.64.0.0/10, atribuido pelo provedor a cada
+        negociacao PPPoE -- pode mudar). Dois casos, vistos na Filial real:
+
+        1. `gateway` da rota ja e um IP (ex.: Brphonia, P2P fixo) -> usa direto.
+        2. `gateway` da rota e um NOME DE INTERFACE (ex.: "pppoe-globoinfo",
+           rota point-to-point) -> consulta `/interface/pppoe-client/monitor`
+           dessa interface e pega o campo `remote-address` (o peer atual).
+
+        Retorna None se nao conseguir resolver -- quem chama decide o que
+        fazer (normalmente: pular esse alvo neste ciclo, nao travar o resto).
+        """
+        try:
+            api = self._connect()
+        except (LibRouterosError, OSError) as exc:
+            log.warning(
+                "mikrotik_gateway_resolve_connect_failed",
+                unit=self._router.unit,
+                link=link.name,
+                error=str(exc),
+            )
+            return None
+
+        try:
+            # Busca tudo e filtra em Python -- mais robusto que depender da
+            # sintaxe exata de filtro de campo da API (`?campo=valor` deu
+            # "unknown parameter" em teste real contra RouterOS 6.49.10;
+            # tabela de rotas e pequena, custo de trazer tudo e desprezivel.
+            routes = [
+                r for r in api("/ip/route/print")
+                if r.get("routing-mark") == link.routing_table
+                and r.get("dst-address") == "0.0.0.0/0"
+            ]
+            if not routes:
+                log.warning(
+                    "mikrotik_gateway_no_route",
+                    unit=self._router.unit,
+                    link=link.name,
+                    routing_table=link.routing_table,
+                )
+                return None
+
+            gateway = routes[0].get("gateway")
+            if not gateway:
+                return None
+            if _is_ip(gateway):
+                return gateway
+
+            # gateway e nome de interface (PPPoE ou similar) -- resolver peer real
+            monitor = list(
+                api("/interface/pppoe-client/monitor", **{".id": gateway, "once": ""})
+            )
+            if not monitor:
+                log.warning(
+                    "mikrotik_gateway_monitor_empty",
+                    unit=self._router.unit,
+                    link=link.name,
+                    interface=gateway,
+                )
+                return None
+            remote = monitor[0].get("remote-address")
+            if not remote or not _is_ip(remote):
+                log.warning(
+                    "mikrotik_gateway_monitor_no_remote_address",
+                    unit=self._router.unit,
+                    link=link.name,
+                    interface=gateway,
+                    monitor=monitor[0],
+                )
+                return None
+            return remote
+        except LibRouterosError as exc:
+            log.warning(
+                "mikrotik_gateway_resolve_failed",
+                unit=self._router.unit,
+                link=link.name,
+                error=str(exc),
+            )
+            return None
+        finally:
+            try:
+                api.close()
+            except Exception:
+                pass
 
     def ping_link(self, link: LinkConfig, target: str) -> LinkPingResult:
         """Roda /ping contra `target`, forcando a rota da tabela/mark do link.

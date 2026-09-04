@@ -17,3 +17,5 @@ config/services.yaml
 # Claude Code work artifacts
 .claude/
 skills-lock.json
+.zabbix_api_token
+config-live/

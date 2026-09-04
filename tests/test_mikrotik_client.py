@@ -128,3 +128,72 @@ class TestPingLink:
 
         assert result.ok is False
         assert result.error == "ping_command_failed"
+
+
+def _dispatch_api(responses: dict):
+    """Mock que despacha por nome de comando (ignora kwargs de filtro --
+    suficiente pra testar os dois ramos de resolve_gateway)."""
+    api = MagicMock()
+    api.side_effect = lambda cmd, **kw: iter(responses.get(cmd, []))
+    api.close = MagicMock()
+    return api
+
+
+class TestResolveGateway:
+    def test_gateway_already_ip_returns_directly(self):
+        # Caso Brphonia real: gateway da rota ja e um IP fixo (P2P).
+        router = _router(branch="v6")
+        api = _dispatch_api({
+            "/ip/route/print": [
+                {"dst-address": "0.0.0.0/0", "gateway": "177.74.144.109", "routing-mark": "to_brphonia"},
+            ],
+        })
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            result = client.resolve_gateway(LinkConfig(name="brphonia", routing_table="to_brphonia", targets=["1.1.1.1"]))
+        assert result == "177.74.144.109"
+
+    def test_gateway_is_interface_name_resolves_via_pppoe_monitor(self):
+        # Caso GloboInfo real: gateway da rota e o NOME da interface PPPoE,
+        # resolvido via /interface/pppoe-client/monitor -> remote-address.
+        router = _router(branch="v6")
+        api = _dispatch_api({
+            "/ip/route/print": [
+                {"dst-address": "0.0.0.0/0", "gateway": "pppoe-globoinfo", "routing-mark": "to_globoinfo"},
+            ],
+            "/interface/pppoe-client/monitor": [
+                {"status": "connected", "remote-address": "100.65.0.1", "local-address": "138.94.183.96"},
+            ],
+        })
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            result = client.resolve_gateway(LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]))
+        assert result == "100.65.0.1"
+
+    def test_no_route_found_returns_none(self):
+        router = _router(branch="v6")
+        api = _dispatch_api({"/ip/route/print": []})
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            result = client.resolve_gateway(LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]))
+        assert result is None
+
+    def test_pppoe_monitor_without_remote_address_returns_none(self):
+        router = _router(branch="v6")
+        api = _dispatch_api({
+            "/ip/route/print": [
+                {"dst-address": "0.0.0.0/0", "gateway": "pppoe-globoinfo", "routing-mark": "to_globoinfo"},
+            ],
+            "/interface/pppoe-client/monitor": [{"status": "disconnected"}],
+        })
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            result = client.resolve_gateway(LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]))
+        assert result is None
+
+    def test_connect_failure_returns_none_without_raising(self):
+        router = _router(branch="v6")
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", side_effect=OSError("no route")):
+            result = client.resolve_gateway(LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]))
+        assert result is None

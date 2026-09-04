@@ -21,6 +21,15 @@ import yaml
 # receita de PBR aplicar no roteador), mas nao influencia mais o /ping.
 PING_ROUTING_PARAM = "routing-table"
 
+# Sentinela para "o gateway atual desse link, resolvido a cada ciclo" em vez
+# de um IP fixo em routers.yaml. Necessario para links PPPoE/dinamicos (ex.:
+# GloboInfo na Filial: gateway 100.65.0.1 esta na faixa CGNAT 100.64.0.0/10,
+# atribuido pelo provedor a cada negociacao PPPoE -- pode mudar numa
+# reconexao). Links com gateway fixo por contrato (ex.: Brphonia Link Full,
+# IP P2P) podem usar o IP literal direto, sem sentinela. Resolucao real em
+# mikrotik/client.py:MikrotikClient.resolve_gateway().
+GATEWAY_SENTINEL = "__gateway__"
+
 
 @dataclass(frozen=True)
 class LinkConfig:
