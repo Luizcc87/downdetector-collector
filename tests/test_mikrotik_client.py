@@ -103,7 +103,10 @@ class TestPingLink:
         assert kwargs["routing-table"] == "to_brphonia"
         assert "routing-mark" not in kwargs
 
-    def test_uses_routing_mark_param_for_v6(self):
+    def test_uses_routing_table_param_for_v6_too(self):
+        # Confirmado em campo em 2026-09-04 contra a Filial (v6.49.10, real):
+        # /ping usa routing-table= tanto em v6 quanto em v7 -- routing-mark=
+        # nao existe como parametro da ferramenta ("unknown parameter").
         router = _router(branch="v6")
         api = self._fake_api([{"time": "1ms"}])
         client = MikrotikClient(router, ping_count=1)
@@ -111,8 +114,8 @@ class TestPingLink:
             client.ping_link(_link(), "1.1.1.1")
 
         _, kwargs = api.call_args
-        assert kwargs["routing-mark"] == "to_brphonia"
-        assert "routing-table" not in kwargs
+        assert kwargs["routing-table"] == "to_brphonia"
+        assert "routing-mark" not in kwargs
 
     def test_ping_command_error_does_not_raise(self):
         router = _router(branch="v7")

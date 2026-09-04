@@ -11,14 +11,15 @@ from pathlib import Path
 
 import yaml
 
-# RouterOS v6 usa `routing-mark=` no /ping e /tool traceroute; v7 usa
-# `routing-table=` (tabela nomeada). Mesmo conceito, parametro de API diferente
-# -- ver 07-Propostas-Melhoria/2026-09-04_geral_monitoramento_links-wan-pbr-rotas-mikrotik.md
-# secao 2.2 no repo Analise-TI-CCZaleski.
-ROUTING_PARAM_BY_BRANCH = {
-    "v6": "routing-mark",
-    "v7": "routing-table",
-}
+# CORRIGIDO em 2026-09-04 apos teste de campo real contra a Filial
+# (192.168.42.2, RouterOS 6.49.10): /ping usa `routing-table=` tanto em v6
+# quanto em v7 -- `routing-mark=` nao existe como parametro da ferramenta
+# /ping em nenhuma das duas branches testadas ("unknown parameter").
+# O que muda entre v6/v7 e SO a sintaxe de criacao da tabela/mark em
+# /ip route (fora do escopo deste modulo -- ver secao 2.2 da proposta), nao
+# o parametro usado aqui. `branch` fica no schema por documentacao (qual
+# receita de PBR aplicar no roteador), mas nao influencia mais o /ping.
+PING_ROUTING_PARAM = "routing-table"
 
 
 @dataclass(frozen=True)
@@ -36,22 +37,18 @@ class RouterConfig:
     use_ssl: bool
     username: str
     password: str
-    branch: str  # "v6" ou "v7" -- decide o nome do parametro de rota
+    branch: str  # "v6" ou "v7" -- so documentacao, ver PING_ROUTING_PARAM acima
     zabbix_host: str  # host Zabbix que recebe as metricas desta unidade
     poll_interval: int
     links: list[LinkConfig] = field(default_factory=list)
 
     def routing_param(self) -> str:
-        try:
-            return ROUTING_PARAM_BY_BRANCH[self.branch]
-        except KeyError as exc:
-            raise ValueError(
-                f"branch desconhecido: {self.branch!r} (esperado 'v6' ou 'v7')"
-            ) from exc
+        return PING_ROUTING_PARAM
 
 
 _REQUIRED_ROUTER_FIELDS = ("unit", "host", "username", "password", "branch", "zabbix_host")
 _REQUIRED_LINK_FIELDS = ("name", "routing_table", "targets")
+_VALID_BRANCHES = ("v6", "v7")
 
 
 def _merge_defaults(item: dict, defaults: dict) -> dict:
@@ -64,7 +61,7 @@ def _validate_router(item: dict) -> None:
     missing = [f for f in _REQUIRED_ROUTER_FIELDS if f not in item or item[f] in (None, "")]
     if missing:
         raise ValueError(f"router missing required fields: {missing}; got: {item}")
-    if item["branch"] not in ROUTING_PARAM_BY_BRANCH:
+    if item["branch"] not in _VALID_BRANCHES:
         raise ValueError(f"router {item.get('unit')!r}: branch invalido {item['branch']!r}")
 
 

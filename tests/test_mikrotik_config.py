@@ -74,15 +74,15 @@ def test_load_parses_links(example_yaml):
     assert brphonia.targets == ["1.1.1.1"]
 
 
-def test_routing_param_v6_uses_routing_mark(example_yaml):
+def test_routing_param_is_routing_table_regardless_of_branch(example_yaml):
+    # Confirmado em campo em 2026-09-04 contra a Filial (v6.49.10, real):
+    # /ping usa routing-table= em v6 E v7 -- routing-mark= nao existe como
+    # parametro da ferramenta ("unknown parameter"). So a sintaxe de CRIACAO
+    # da tabela em /ip route muda entre branches, nao o parametro do /ping.
     routers = load_routers_from_path(example_yaml)
-    filial = next(r for r in routers if r.unit == "filial")
-    assert filial.routing_param() == "routing-mark"
-
-
-def test_routing_param_v7_uses_routing_table(example_yaml):
-    routers = load_routers_from_path(example_yaml)
-    frigo = next(r for r in routers if r.unit == "frigorifico")
+    filial = next(r for r in routers if r.unit == "filial")  # v6
+    frigo = next(r for r in routers if r.unit == "frigorifico")  # v7
+    assert filial.routing_param() == "routing-table"
     assert frigo.routing_param() == "routing-table"
 
 

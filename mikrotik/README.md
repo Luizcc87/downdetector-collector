@@ -27,9 +27,11 @@ por unidade (`Mikrotik-Filial`, `Mikrotik-Matriz`, `Mikrotik-Frigorifico`).
 3. Esquema de PBR (mangle mark-connection/mark-routing + tabelas nomeadas)
    ja aplicado no roteador — sem isso, `routing-table=`/`routing-mark=`
    nao tem o que apontar.
-4. Confirmar em campo que `/ping` aceita `routing-table=`/`routing-mark=`
-   na versao de RouterOS de cada unidade (ver `mikrotik/client.py`, docstring
-   do modulo — nao validado ainda contra roteador real).
+4. ~~Confirmar em campo que `/ping` aceita `routing-table=`/`routing-mark=`~~
+   — **feito em 2026-09-04** contra a Filial (v6.49.10, real): `/ping` usa
+   `routing-table=` em v6 **e** v7 (`routing-mark=` não existe como parâmetro
+   da ferramenta — "unknown parameter"). `mikrotik/config.py` já reflete isso
+   (`PING_ROUTING_PARAM` constante, sem diferenciação por branch).
 
 ## Uso local
 
