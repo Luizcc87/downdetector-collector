@@ -36,6 +36,13 @@ routers:
     username: zabbix-probe
     password: "TROCAR_ANTES_DE_USAR"  # ver README -- nunca reutilizar entre unidades
     zabbix_host: "Mikrotik-Filial"
+    # Interfaces monitoradas para trafego (rx/tx bps via /interface/monitor-traffic).
+    # Sem lista automatica de proposito -- so o que importa pra cada unidade.
+    monitored_interfaces:
+      - ether1-Globoinfo
+      - ether2-BRPhonia
+      - ether4-Servidores
+      - ether5-LAN
     links:
       - name: globoinfo
         routing_table: to_globoinfo  # confirmado via /ip route real em 2026-09-04 -- NAO "to_globo"

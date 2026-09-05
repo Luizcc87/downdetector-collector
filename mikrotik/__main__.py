@@ -22,6 +22,7 @@ import structlog
 from collector.zabbix_sink import Metric, ZabbixSink
 from mikrotik.client import MikrotikClient
 from mikrotik.config import GATEWAY_SENTINEL, RouterConfig, load_routers_from_path
+from mikrotik.health import RouterHealthClient
 from mikrotik.scheduler import FixedIntervalScheduler
 
 structlog.configure(
@@ -34,6 +35,12 @@ structlog.configure(
 log = structlog.get_logger("mikrotik")
 
 DEFAULT_CONFIG = Path("/etc/downdetector-collector/routers.yaml")
+
+# Estado de paginacao dos logs por unidade -- vive no processo, nao e
+# persistido entre restarts do coletor (aceitavel: na pior hipotese perde-se
+# o log do intervalo entre a queda e o restart, nao um dado critico de
+# disponibilidade como o teste de link).
+_last_log_id: dict[str, str | None] = {}
 
 
 def parse_args() -> argparse.Namespace:
@@ -50,28 +57,17 @@ def _metric_suffix(link_name: str, target_label: str) -> str:
     return f"{link_name}.{target_label.replace(':', '_')}"
 
 
-async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
-    sink = ZabbixSink(args.zabbix_server, args.zabbix_port, router.zabbix_host)
-    client = MikrotikClient(router)
-    metrics: list[Metric] = []
+async def _collect_links(router: RouterConfig, client: MikrotikClient, metrics: list[Metric]) -> bool:
     any_link_ok = False
-
     for link in router.links:
         for target in link.targets:
             if target == GATEWAY_SENTINEL:
                 resolved = await asyncio.to_thread(client.resolve_gateway, link)
                 if resolved is None:
-                    log.warning(
-                        "gateway_resolve_skipped",
-                        unit=router.unit,
-                        link=link.name,
-                    )
+                    log.warning("gateway_resolve_skipped", unit=router.unit, link=link.name)
                     continue
                 actual_target = resolved
-                # chave Zabbix estavel ("gateway"), independente do IP CGNAT
-                # mudar entre reconexoes PPPoE -- so o log mostra o IP real
-                # resolvido nesta rodada.
-                metric_label = "gateway"
+                metric_label = "gateway"  # chave estavel -- ver mikrotik/config.py
             else:
                 actual_target = target
                 metric_label = target
@@ -85,18 +81,68 @@ async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
             any_link_ok = any_link_ok or result.ok
             log.info(
                 "link_probe_done",
-                unit=router.unit,
-                link=link.name,
-                target=actual_target,
-                target_label=metric_label,
-                ok=result.ok,
-                rtt_ms=result.avg_rtt_ms,
-                loss_pct=result.packet_loss_pct,
+                unit=router.unit, link=link.name, target=actual_target, target_label=metric_label,
+                ok=result.ok, rtt_ms=result.avg_rtt_ms, loss_pct=result.packet_loss_pct,
             )
+    return any_link_ok
 
-    # Heartbeat sempre enviado, mesmo se todos os links falharem -- distingue
-    # "link caido" (dado chegou, valor ruim) de "coletor quebrado" (dado nao
-    # chega mais), mesmo padrao ja usado no template Downdetector.
+
+async def _collect_health(router: RouterConfig, health: RouterHealthClient, metrics: list[Metric]) -> None:
+    resource = await asyncio.to_thread(health.get_system_resource)
+    if resource is not None:
+        metrics.append(("mikrotik.system.cpu_load_pct", resource.cpu_load_pct))
+        metrics.append(("mikrotik.system.free_memory_bytes", resource.free_memory_bytes))
+        metrics.append(("mikrotik.system.total_memory_bytes", resource.total_memory_bytes))
+        if resource.uptime_seconds is not None:
+            metrics.append(("mikrotik.system.uptime_seconds", resource.uptime_seconds))
+        log.info(
+            "system_resource_collected", unit=router.unit,
+            cpu_load_pct=resource.cpu_load_pct, free_memory_bytes=resource.free_memory_bytes,
+        )
+    else:
+        log.warning("system_resource_skipped", unit=router.unit)
+
+    if router.monitored_interfaces:
+        traffic = await asyncio.to_thread(health.get_interface_traffic, router.monitored_interfaces)
+        for t in traffic:
+            metrics.append((f"mikrotik.interface.rx_bps[{t.name}]", t.rx_bps))
+            metrics.append((f"mikrotik.interface.tx_bps[{t.name}]", t.tx_bps))
+        log.info("interface_traffic_collected", unit=router.unit, count=len(traffic))
+
+    tunnels = await asyncio.to_thread(health.get_vpn_tunnels)
+    for tun in tunnels:
+        metrics.append((f"mikrotik.vpn.tunnel_up[{tun.name}]", 1 if tun.up else 0))
+    if tunnels:
+        log.info(
+            "vpn_tunnels_collected", unit=router.unit, count=len(tunnels),
+            down=[t.name for t in tunnels if not t.up],
+        )
+
+    since_id = _last_log_id.get(router.unit)
+    entries, new_since_id = await asyncio.to_thread(health.get_new_logs, since_id)
+    _last_log_id[router.unit] = new_since_id
+    for entry in entries:
+        # item tipo Log no Zabbix -- valor e o texto, timestamp e "agora"
+        # (o clock exato do roteador nao chega ao zabbix_sender sem usar o
+        # protocolo trapper com -T, fora do escopo do ZabbixSink atual;
+        # aceitavel, a ordem relativa entre entradas se mantem).
+        metrics.append((f"mikrotik.log.entry", f"[{entry.topics}] {entry.message}"))
+    if entries:
+        log.info("log_entries_collected", unit=router.unit, count=len(entries))
+
+
+async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
+    sink = ZabbixSink(args.zabbix_server, args.zabbix_port, router.zabbix_host)
+    client = MikrotikClient(router)
+    health = RouterHealthClient(router)
+    metrics: list[Metric] = []
+
+    any_link_ok = await _collect_links(router, client, metrics)
+    await _collect_health(router, health, metrics)
+
+    # Heartbeat sempre enviado, mesmo se tudo mais falhar -- distingue
+    # "link/servico caido" (dado chegou, valor ruim) de "coletor quebrado"
+    # (dado nao chega mais), mesmo padrao ja usado no template Downdetector.
     metrics.append(("mikrotik.collector_heartbeat", int(time.time())))
     if not any_link_ok and router.links:
         log.warning("router_all_links_down", unit=router.unit)

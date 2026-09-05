@@ -50,6 +50,10 @@ class RouterConfig:
     zabbix_host: str  # host Zabbix que recebe as metricas desta unidade
     poll_interval: int
     links: list[LinkConfig] = field(default_factory=list)
+    # Interfaces pra medir trafego (rx/tx bps) via /interface/monitor-traffic.
+    # Sem lista automatica de proposito -- evita medir VLAN/interface
+    # irrelevante; unidade decide o que importa (normalmente WAN + LAN principais).
+    monitored_interfaces: list[str] = field(default_factory=list)
 
     def routing_param(self) -> str:
         return PING_ROUTING_PARAM
@@ -136,6 +140,7 @@ def load_routers_from_path(path: Path) -> list[RouterConfig]:
                 zabbix_host=merged["zabbix_host"],
                 poll_interval=int(merged.get("poll_interval", 90)),
                 links=links,
+                monitored_interfaces=list(merged.get("monitored_interfaces", []) or []),
             )
         )
     return result
