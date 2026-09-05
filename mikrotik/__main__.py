@@ -138,6 +138,10 @@ async def _collect_traceroute(router: RouterConfig, client: MikrotikClient, metr
                     metrics.append((f"mikrotik.traceroute.hop_rtt_ms[{suffix},{h.hop}]", h.avg_rtt_ms))
                 if h.loss_pct is not None:
                     metrics.append((f"mikrotik.traceroute.hop_loss_pct[{suffix},{h.hop}]", h.loss_pct))
+            # Total de saltos ate o destino (ou ate TRACEROUTE_MAX_HOPS, se
+            # nao alcancou) -- metrica numerica simples, direto pro Zabbix
+            # sem precisar contar linhas na hora de exibir.
+            metrics.append((f"mikrotik.traceroute.hop_count[{suffix}]", len(hops)))
             log.info(
                 "traceroute_collected", unit=router.unit, link=link.name, target=target,
                 hop_count=len(hops), last_hop=hops[-1].address if hops else None,

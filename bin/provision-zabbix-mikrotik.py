@@ -161,6 +161,7 @@ def main() -> int:
                 continue
             s = link_suffix(link.name, tgt)
             label = "gateway" if tgt == GATEWAY_SENTINEL else tgt
+            ensure_item(token, host_id, f"mikrotik.traceroute.hop_count[{s}]", f"Traceroute {link.name}->{label} -- total de saltos", 3)
             for hop in range(1, TRACEROUTE_MAX_HOPS + 1):
                 ensure_item(token, host_id, f"mikrotik.traceroute.hop_address[{s},{hop}]", f"Traceroute {link.name}->{label} hop {hop} -- endereco", 1)
                 ensure_item(token, host_id, f"mikrotik.traceroute.hop_rtt_ms[{s},{hop}]", f"Traceroute {link.name}->{label} hop {hop} -- RTT (ms)", 0, "ms")
