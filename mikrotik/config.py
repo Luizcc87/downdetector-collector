@@ -54,6 +54,11 @@ class RouterConfig:
     # Sem lista automatica de proposito -- evita medir VLAN/interface
     # irrelevante; unidade decide o que importa (normalmente WAN + LAN principais).
     monitored_interfaces: list[str] = field(default_factory=list)
+    # Intervalo entre rodadas de /tool/traceroute por link -- BEM maior que
+    # poll_interval (ping curto) de proposito: hop-a-hop constante sobrecarrega
+    # a CPU de um RB750Gr3 (ver secao 4.4 da proposta). Roda contra o primeiro
+    # target de cada link (normalmente a ancora publica 1.1.1.1).
+    traceroute_interval_s: int = 900
 
     def routing_param(self) -> str:
         return PING_ROUTING_PARAM
@@ -141,6 +146,7 @@ def load_routers_from_path(path: Path) -> list[RouterConfig]:
                 poll_interval=int(merged.get("poll_interval", 90)),
                 links=links,
                 monitored_interfaces=list(merged.get("monitored_interfaces", []) or []),
+                traceroute_interval_s=int(merged.get("traceroute_interval_s", 900)),
             )
         )
     return result

@@ -89,6 +89,16 @@ real acessível.
 | `mikrotik.interface.rx_bps[<iface>]` / `tx_bps[<iface>]` | int | Tráfego instantâneo por porta (bps), só para interfaces em `monitored_interfaces` |
 | `mikrotik.vpn.tunnel_up[<tunel>]` | 0/1 | Status do túnel (descoberto automaticamente, ignora túneis desabilitados de propósito) |
 | `mikrotik.log.entry` | texto | Última linha de log nova — ver limitação abaixo |
+| `mikrotik.traceroute.hop_address[<link>,<hop>]` | texto | Endereço do hop N (posição no caminho, não IP fixo) |
+| `mikrotik.traceroute.hop_rtt_ms[<link>,<hop>]` | float | RTT médio do hop N — ausente se o hop não respondeu |
+| `mikrotik.traceroute.hop_loss_pct[<link>,<hop>]` | float | Perda no hop N |
+
+Traceroute roda num intervalo **bem maior** que o ping (`traceroute_interval_s`,
+padrão 900s/15min) — hop-a-hop constante sobrecarrega a CPU de um RB750Gr3.
+Roda contra o primeiro target de cada link (a âncora pública, ex.: `1.1.1.1`),
+objetivo é comparar o **caminho** entre links, não repetir o teste de
+disponibilidade que o ping já cobre. `TRACEROUTE_MAX_HOPS` (15) limita
+quantos items existem por link — caminhos mais longos são truncados.
 
 ## Limitações conhecidas
 
@@ -114,7 +124,8 @@ real acessível.
 
 ## Próximos passos (fora do escopo deste módulo)
 
-- Traceroute/MTR sob gatilho (Fase 5 da proposta) — não implementado ainda;
-  hoje só cobre o teste de ping curto (Fase 4).
 - Estender para Matriz e Frigorífico (código já é genérico por unidade —
   só falta aplicar o guia operacional a cada uma).
+- Traceroute hoje usa intervalo fixo (Fase 5 da proposta previa "intervalo
+  maior OU sob gatilho") — disparar sob gatilho quando o ping detectar
+  degradação é uma evolução futura, não implementada ainda.

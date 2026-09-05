@@ -42,6 +42,13 @@ DEFAULT_CONFIG = Path("/etc/downdetector-collector/routers.yaml")
 # disponibilidade como o teste de link).
 _last_log_id: dict[str, str | None] = {}
 
+# Timestamp (monotonic) da ultima rodada de traceroute por unidade -- controla
+# o intervalo maior (router.traceroute_interval_s), independente do
+# poll_interval do ping. Tambem em memoria, mesmo raciocinio do log acima.
+_last_traceroute_run: dict[str, float] = {}
+
+TRACEROUTE_MAX_HOPS = 15
+
 
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser(prog="mikrotik-link-monitor")
@@ -85,6 +92,39 @@ async def _collect_links(router: RouterConfig, client: MikrotikClient, metrics: 
                 ok=result.ok, rtt_ms=result.avg_rtt_ms, loss_pct=result.packet_loss_pct,
             )
     return any_link_ok
+
+
+async def _collect_traceroute(router: RouterConfig, client: MikrotikClient, metrics: list[Metric]) -> None:
+    """Roda /tool/traceroute por link, num intervalo BEM maior que o ping
+    (router.traceroute_interval_s) -- Fase 5 da proposta, "traceroute sob
+    gatilho ou intervalo maior". MVP usa intervalo fixo (mais simples e
+    robusto que decidir gatilho dinamico); intervalo tipico 15min evita
+    sobrecarregar a CPU do roteador com hop-a-hop constante.
+
+    Roda contra o primeiro target de cada link (normalmente a ancora
+    publica 1.1.1.1) -- o objetivo aqui e comparar o CAMINHO entre links,
+    nao repetir o teste de disponibilidade que o ping ja cobre.
+    """
+    last_run = _last_traceroute_run.get(router.unit, 0.0)
+    if time.monotonic() - last_run < router.traceroute_interval_s:
+        return
+    _last_traceroute_run[router.unit] = time.monotonic()
+
+    for link in router.links:
+        if not link.targets:
+            continue
+        target = link.targets[0]
+        hops = await asyncio.to_thread(client.traceroute_link, link, target, 3, TRACEROUTE_MAX_HOPS)
+        for h in hops:
+            metrics.append((f"mikrotik.traceroute.hop_address[{link.name},{h.hop}]", h.address or ""))
+            if h.avg_rtt_ms is not None:
+                metrics.append((f"mikrotik.traceroute.hop_rtt_ms[{link.name},{h.hop}]", h.avg_rtt_ms))
+            if h.loss_pct is not None:
+                metrics.append((f"mikrotik.traceroute.hop_loss_pct[{link.name},{h.hop}]", h.loss_pct))
+        log.info(
+            "traceroute_collected", unit=router.unit, link=link.name, target=target,
+            hop_count=len(hops), last_hop=hops[-1].address if hops else None,
+        )
 
 
 async def _collect_health(router: RouterConfig, health: RouterHealthClient, metrics: list[Metric]) -> None:
@@ -138,6 +178,7 @@ async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
     metrics: list[Metric] = []
 
     any_link_ok = await _collect_links(router, client, metrics)
+    await _collect_traceroute(router, client, metrics)
     await _collect_health(router, health, metrics)
 
     # Heartbeat sempre enviado, mesmo se tudo mais falhar -- distingue

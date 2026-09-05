@@ -34,6 +34,10 @@ from mikrotik.health import RouterHealthClient
 
 ZABBIX_API_URL = os.environ.get("ZABBIX_API_URL", "http://zabbix-web:8080/api_jsonrpc.php")
 GROUP_NAME = "Rede/Mikrotik"
+# Mesmo valor de mikrotik/__main__.py:TRACEROUTE_MAX_HOPS -- se um mudar, o
+# outro tem que acompanhar (nao importado direto pra nao acoplar o script
+# de provisionamento ao runtime do coletor).
+TRACEROUTE_MAX_HOPS = 15
 
 
 def call(token: str, method: str, params: dict):
@@ -137,6 +141,13 @@ def main() -> int:
         for iface in router.monitored_interfaces:
             ensure_item(token, host_id, f"mikrotik.interface.rx_bps[{iface}]", f"Trafego RX {iface} (bps)", 3, "bps")
             ensure_item(token, host_id, f"mikrotik.interface.tx_bps[{iface}]", f"Trafego TX {iface} (bps)", 3, "bps")
+
+    print("\n-- Items de traceroute (comparacao de rota por link) --")
+    for link in router.links:
+        for hop in range(1, TRACEROUTE_MAX_HOPS + 1):
+            ensure_item(token, host_id, f"mikrotik.traceroute.hop_address[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- endereco", 1)
+            ensure_item(token, host_id, f"mikrotik.traceroute.hop_rtt_ms[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- RTT (ms)", 0, "ms")
+            ensure_item(token, host_id, f"mikrotik.traceroute.hop_loss_pct[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- perda (%)", 0, "%")
 
     print("\n-- Items de VPN (descoberta ao vivo no roteador) --")
     health = RouterHealthClient(router)

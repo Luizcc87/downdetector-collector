@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from librouteros.exceptions import LibRouterosError
 
-from mikrotik.client import MikrotikClient, _parse_rtt_ms
+from mikrotik.client import MikrotikClient, _parse_rtt_ms, _to_float
 from mikrotik.config import LinkConfig, RouterConfig
 
 
@@ -197,3 +197,100 @@ class TestResolveGateway:
         with patch.object(MikrotikClient, "_connect", side_effect=OSError("no route")):
             result = client.resolve_gateway(LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]))
         assert result is None
+
+
+class TestToFloat:
+    def test_string_decimal(self):
+        assert _to_float("21.1") == 21.1
+
+    def test_int(self):
+        assert _to_float(2) == 2.0
+
+    def test_none_returns_none(self):
+        assert _to_float(None) is None
+
+    def test_empty_string_returns_none(self):
+        assert _to_float("") is None
+
+    def test_unparseable_returns_none(self):
+        assert _to_float("timeout") is None
+
+
+class TestTracerouteLink:
+    def test_uses_last_section_and_numbers_hops_by_position(self):
+        # Replica o formato real observado contra a Filial em 2026-09-04:
+        # multiplas secoes (uma por repeticao de count), usa a ultima.
+        router = _router(branch="v7")
+        api = _dispatch_api({
+            "/tool/traceroute": [
+                {"address": "", "loss": 100, ".section": 0},
+                {"address": "172.30.30.106", "avg": "21.1", "loss": 0, ".section": 0},
+                {"address": "", "loss": 100, ".section": 1},
+                {"address": "172.30.30.106", "avg": "2.1", "loss": 0, ".section": 1},
+                {"address": "1.1.1.1", "avg": 14, "loss": 0, ".section": 1},
+            ],
+        })
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            hops = client.traceroute_link(
+                LinkConfig(name="brphonia", routing_table="to_brphonia", targets=["1.1.1.1"]),
+                "1.1.1.1",
+            )
+
+        assert len(hops) == 3
+        assert hops[0].hop == 1
+        assert hops[0].address is None  # hop 1 nao respondeu (timeout)
+        assert hops[0].ok is False
+        assert hops[1].hop == 2
+        assert hops[1].address == "172.30.30.106"
+        assert hops[1].avg_rtt_ms == 2.1
+        assert hops[2].hop == 3
+        assert hops[2].address == "1.1.1.1"
+        assert hops[2].avg_rtt_ms == 14.0
+
+    def test_respects_max_hops(self):
+        router = _router(branch="v7")
+        rows = [{"address": f"10.0.0.{i}", "avg": "1", "loss": 0, ".section": 0} for i in range(20)]
+        api = _dispatch_api({"/tool/traceroute": rows})
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            hops = client.traceroute_link(
+                LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]),
+                "1.1.1.1",
+                max_hops=5,
+            )
+        assert len(hops) == 5
+
+    def test_empty_response_returns_empty_list(self):
+        router = _router(branch="v7")
+        api = _dispatch_api({"/tool/traceroute": []})
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            hops = client.traceroute_link(
+                LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]),
+                "1.1.1.1",
+            )
+        assert hops == []
+
+    def test_connect_failure_returns_empty_list(self):
+        router = _router(branch="v7")
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", side_effect=OSError("no route")):
+            hops = client.traceroute_link(
+                LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]),
+                "1.1.1.1",
+            )
+        assert hops == []
+
+    def test_command_error_returns_empty_list(self):
+        router = _router(branch="v7")
+        api = MagicMock()
+        api.side_effect = LibRouterosError("bad command")
+        api.close = MagicMock()
+        client = MikrotikClient(router)
+        with patch.object(MikrotikClient, "_connect", return_value=api):
+            hops = client.traceroute_link(
+                LinkConfig(name="globoinfo", routing_table="to_globoinfo", targets=["1.1.1.1"]),
+                "1.1.1.1",
+            )
+        assert hops == []

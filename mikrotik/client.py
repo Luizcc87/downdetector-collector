@@ -34,6 +34,17 @@ def _is_ip(value: str) -> bool:
         return False
 
 
+def _to_float(value) -> float | None:
+    """Converte campos do reply de /tool/traceroute (int, str tipo '21.1',
+    ou vazio/None) em float. Nunca lanca -- retorna None se irreconhecivel."""
+    if value in (None, ""):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
 def _parse_rtt_ms(time_str: str) -> float | None:
     """Converte o campo `time` do reply de /ping (ex.: '1ms200us', '3ms') em ms.
 
@@ -46,6 +57,15 @@ def _parse_rtt_ms(time_str: str) -> float | None:
     ms = int(match.group(1)) if match.group(1) else 0
     us = int(match.group(2)) if match.group(2) else 0
     return ms + us / 1000
+
+
+@dataclass(frozen=True)
+class TracerouteHop:
+    hop: int  # posicao dentro da secao, nao um campo real do RouterOS
+    address: str | None  # None = hop nao respondeu (timeout)
+    avg_rtt_ms: float | None
+    loss_pct: float | None
+    ok: bool  # True se o hop respondeu (tem endereco)
 
 
 @dataclass(frozen=True)
@@ -267,3 +287,64 @@ class MikrotikClient:
             avg_rtt_ms=avg_rtt,
             ok=received > 0,
         )
+
+    def traceroute_link(
+        self, link: LinkConfig, target: str, count: int = 3, max_hops: int = 15
+    ) -> list[TracerouteHop]:
+        """Roda /tool/traceroute contra `target`, forcando a rota do link
+        (mesmo mecanismo de ping_link -- routing_param).
+
+        RouterOS agrupa replies por `.section` (uma rodada completa de
+        hops por repeticao de `count`); dentro de uma secao, a ORDEM das
+        linhas E o numero do hop (nao ha campo "hop" explicito). Usa-se a
+        ULTIMA secao (rodada mais recente/completa) como fonte da tabela
+        de hops. Confirmado contra a Filial real em 2026-09-04.
+        """
+        routing_param = self._router.routing_param()
+        try:
+            api = self._connect()
+        except (LibRouterosError, OSError) as exc:
+            log.warning(
+                "mikrotik_traceroute_connect_failed",
+                unit=self._router.unit, link=link.name, error=str(exc),
+            )
+            return []
+
+        try:
+            replies = list(
+                api(
+                    "/tool/traceroute",
+                    address=target,
+                    count=str(count),
+                    **{routing_param: link.routing_table},
+                )
+            )
+        except LibRouterosError as exc:
+            log.warning(
+                "mikrotik_traceroute_failed",
+                unit=self._router.unit, link=link.name, target=target, error=str(exc),
+            )
+            return []
+        finally:
+            try:
+                api.close()
+            except Exception:
+                pass
+
+        if not replies:
+            return []
+
+        last_section = max((r.get(".section", 0) for r in replies), default=0)
+        rows = [r for r in replies if r.get(".section") == last_section]
+
+        hops: list[TracerouteHop] = []
+        for i, row in enumerate(rows[:max_hops], start=1):
+            address = row.get("address") or None
+            hops.append(TracerouteHop(
+                hop=i,
+                address=address,
+                avg_rtt_ms=_to_float(row.get("avg")),
+                loss_pct=_to_float(row.get("loss")),
+                ok=address is not None,
+            ))
+        return hops
