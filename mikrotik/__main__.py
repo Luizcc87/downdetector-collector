@@ -20,7 +20,7 @@ from pathlib import Path
 import structlog
 
 from collector.zabbix_sink import Metric, ZabbixSink
-from mikrotik.client import MikrotikClient
+from mikrotik.client import MikrotikClient, _is_ip
 from mikrotik.config import GATEWAY_SENTINEL, RouterConfig, load_routers_from_path
 from mikrotik.health import RouterHealthClient
 from mikrotik.scheduler import FixedIntervalScheduler
@@ -94,6 +94,20 @@ async def _collect_links(router: RouterConfig, client: MikrotikClient, metrics: 
     return any_link_ok
 
 
+def _is_traceroute_target(target: str, is_first: bool) -> bool:
+    """Decide quais targets de um link ganham traceroute (nao TODOS -- custo
+    de CPU escala com quantidade). Sempre traca o primeiro (a ancora publica,
+    referencia geral do link); alem disso, qualquer target que seja um
+    HOSTNAME (nao IP, nao o sentinela de gateway) -- e um servico critico
+    nomeado de proposito (ex.: nfe.svrs.rs.gov.br), nao uma ancora generica,
+    entao vale a pena ver o caminho ate ele especificamente."""
+    if is_first:
+        return True
+    if target == GATEWAY_SENTINEL:
+        return False
+    return not _is_ip(target)
+
+
 async def _collect_traceroute(router: RouterConfig, client: MikrotikClient, metrics: list[Metric]) -> None:
     """Roda /tool/traceroute por link, num intervalo BEM maior que o ping
     (router.traceroute_interval_s) -- Fase 5 da proposta, "traceroute sob
@@ -101,9 +115,11 @@ async def _collect_traceroute(router: RouterConfig, client: MikrotikClient, metr
     robusto que decidir gatilho dinamico); intervalo tipico 15min evita
     sobrecarregar a CPU do roteador com hop-a-hop constante.
 
-    Roda contra o primeiro target de cada link (normalmente a ancora
-    publica 1.1.1.1) -- o objetivo aqui e comparar o CAMINHO entre links,
-    nao repetir o teste de disponibilidade que o ping ja cobre.
+    Traca a ancora publica de cada link (comparar o CAMINHO entre links) E
+    qualquer servico critico nomeado por hostname (ex.: SEFAZ) -- ver
+    _is_traceroute_target(). Chave do item inclui o alvo (mesmo padrao de
+    _metric_suffix do ping), porque agora pode haver mais de um traceroute
+    por link.
     """
     last_run = _last_traceroute_run.get(router.unit, 0.0)
     if time.monotonic() - last_run < router.traceroute_interval_s:
@@ -111,20 +127,21 @@ async def _collect_traceroute(router: RouterConfig, client: MikrotikClient, metr
     _last_traceroute_run[router.unit] = time.monotonic()
 
     for link in router.links:
-        if not link.targets:
-            continue
-        target = link.targets[0]
-        hops = await asyncio.to_thread(client.traceroute_link, link, target, 3, TRACEROUTE_MAX_HOPS)
-        for h in hops:
-            metrics.append((f"mikrotik.traceroute.hop_address[{link.name},{h.hop}]", h.address or ""))
-            if h.avg_rtt_ms is not None:
-                metrics.append((f"mikrotik.traceroute.hop_rtt_ms[{link.name},{h.hop}]", h.avg_rtt_ms))
-            if h.loss_pct is not None:
-                metrics.append((f"mikrotik.traceroute.hop_loss_pct[{link.name},{h.hop}]", h.loss_pct))
-        log.info(
-            "traceroute_collected", unit=router.unit, link=link.name, target=target,
-            hop_count=len(hops), last_hop=hops[-1].address if hops else None,
-        )
+        for i, target in enumerate(link.targets):
+            if not _is_traceroute_target(target, is_first=(i == 0)):
+                continue
+            hops = await asyncio.to_thread(client.traceroute_link, link, target, 3, TRACEROUTE_MAX_HOPS)
+            suffix = _metric_suffix(link.name, target)
+            for h in hops:
+                metrics.append((f"mikrotik.traceroute.hop_address[{suffix},{h.hop}]", h.address or ""))
+                if h.avg_rtt_ms is not None:
+                    metrics.append((f"mikrotik.traceroute.hop_rtt_ms[{suffix},{h.hop}]", h.avg_rtt_ms))
+                if h.loss_pct is not None:
+                    metrics.append((f"mikrotik.traceroute.hop_loss_pct[{suffix},{h.hop}]", h.loss_pct))
+            log.info(
+                "traceroute_collected", unit=router.unit, link=link.name, target=target,
+                hop_count=len(hops), last_hop=hops[-1].address if hops else None,
+            )
 
 
 async def _collect_health(router: RouterConfig, health: RouterHealthClient, metrics: list[Metric]) -> None:

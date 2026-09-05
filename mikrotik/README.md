@@ -95,10 +95,16 @@ real acessível.
 
 Traceroute roda num intervalo **bem maior** que o ping (`traceroute_interval_s`,
 padrão 900s/15min) — hop-a-hop constante sobrecarrega a CPU de um RB750Gr3.
-Roda contra o primeiro target de cada link (a âncora pública, ex.: `1.1.1.1`),
-objetivo é comparar o **caminho** entre links, não repetir o teste de
-disponibilidade que o ping já cobre. `TRACEROUTE_MAX_HOPS` (15) limita
-quantos items existem por link — caminhos mais longos são truncados.
+Roda contra a âncora pública (primeiro target de cada link, ex.: `1.1.1.1`) E
+contra qualquer target em formato **hostname** (não IP, não `__gateway__`) —
+tratado como serviço crítico nomeado de propósito (ex.: `nfe.svrs.rs.gov.br`,
+webservice de autorização SEFAZ-RS). Objetivo é comparar o **caminho** entre
+links até um destino específico, não repetir o teste de disponibilidade que
+o ping já cobre. `TRACEROUTE_MAX_HOPS` (15) limita quantos items existem por
+(link, alvo) — caminhos mais longos são truncados (achado real: o caminho
+globoinfo→SEFAZ passou de 15 hops sem alcançar o destino dentro do limite,
+enquanto brphonia→SEFAZ completou em 11 — diferença real de rota entre as
+duas operadoras).
 
 ## Limitações conhecidas
 

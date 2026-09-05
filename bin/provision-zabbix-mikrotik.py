@@ -29,6 +29,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from mikrotik.client import _is_ip
 from mikrotik.config import GATEWAY_SENTINEL, load_routers_from_path
 from mikrotik.health import RouterHealthClient
 
@@ -38,6 +39,17 @@ GROUP_NAME = "Rede/Mikrotik"
 # outro tem que acompanhar (nao importado direto pra nao acoplar o script
 # de provisionamento ao runtime do coletor).
 TRACEROUTE_MAX_HOPS = 15
+
+
+def _is_traceroute_target(target: str, is_first: bool) -> bool:
+    # Mesma logica de mikrotik/__main__.py:_is_traceroute_target -- duplicada
+    # de proposito (script de provisionamento nao deve importar do runtime
+    # do coletor alem do estritamente necessario para ler config/discovery).
+    if is_first:
+        return True
+    if target == GATEWAY_SENTINEL:
+        return False
+    return not _is_ip(target)
 
 
 def call(token: str, method: str, params: dict):
@@ -142,12 +154,17 @@ def main() -> int:
             ensure_item(token, host_id, f"mikrotik.interface.rx_bps[{iface}]", f"Trafego RX {iface} (bps)", 3, "bps")
             ensure_item(token, host_id, f"mikrotik.interface.tx_bps[{iface}]", f"Trafego TX {iface} (bps)", 3, "bps")
 
-    print("\n-- Items de traceroute (comparacao de rota por link) --")
+    print("\n-- Items de traceroute (comparacao de rota por link/alvo) --")
     for link in router.links:
-        for hop in range(1, TRACEROUTE_MAX_HOPS + 1):
-            ensure_item(token, host_id, f"mikrotik.traceroute.hop_address[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- endereco", 1)
-            ensure_item(token, host_id, f"mikrotik.traceroute.hop_rtt_ms[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- RTT (ms)", 0, "ms")
-            ensure_item(token, host_id, f"mikrotik.traceroute.hop_loss_pct[{link.name},{hop}]", f"Traceroute {link.name} hop {hop} -- perda (%)", 0, "%")
+        for i, tgt in enumerate(link.targets):
+            if not _is_traceroute_target(tgt, is_first=(i == 0)):
+                continue
+            s = link_suffix(link.name, tgt)
+            label = "gateway" if tgt == GATEWAY_SENTINEL else tgt
+            for hop in range(1, TRACEROUTE_MAX_HOPS + 1):
+                ensure_item(token, host_id, f"mikrotik.traceroute.hop_address[{s},{hop}]", f"Traceroute {link.name}->{label} hop {hop} -- endereco", 1)
+                ensure_item(token, host_id, f"mikrotik.traceroute.hop_rtt_ms[{s},{hop}]", f"Traceroute {link.name}->{label} hop {hop} -- RTT (ms)", 0, "ms")
+                ensure_item(token, host_id, f"mikrotik.traceroute.hop_loss_pct[{s},{hop}]", f"Traceroute {link.name}->{label} hop {hop} -- perda (%)", 0, "%")
 
     print("\n-- Items de VPN (descoberta ao vivo no roteador) --")
     health = RouterHealthClient(router)
