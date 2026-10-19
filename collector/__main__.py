@@ -19,7 +19,7 @@ from collector.config import ServiceConfig, load_services_from_path
 from collector.health import HealthState
 from collector.latency import LatencyChecker
 from collector.tcp_ping import TcpPingChecker
-from collector.scheduler import Scheduler
+from collector.scheduler import RateLimited, Scheduler
 from collector.scraper import ScrapeResult, Scraper
 from collector.zabbix_sink import Metric, ZabbixSink
 
@@ -74,12 +74,12 @@ class Collector:
         self._health.record_cycle_duration(result.duration_seconds)
         if result.cloudflare_blocked:
             self._health.record_block()
-            raise RuntimeError("cloudflare_blocked")  # triggers scheduler backoff
+            raise RateLimited("cloudflare_blocked")  # pausa global no scheduler
         if result.rate_limited:
             # Não envia métrica nessa iteração (não sobrescrever último valor bom
-            # com UNKNOWN). Backoff exponencial do scheduler assume.
+            # com UNKNOWN). O scheduler pausa todas as consultas (limite é por IP).
             self._health.record_block()
-            raise RuntimeError("rate_limited")
+            raise RateLimited("rate_limited")
         metrics: list[Metric] = [
             (f"downdetector.status[{service.slug}]", int(result.parse.status)),
             (f"downdetector.last_check[{service.slug}]", int(time.time())),
@@ -153,6 +153,9 @@ class Collector:
                 self._scheduler = Scheduler(
                     self._services, self._on_scrape,
                     backoff_initial=300.0, backoff_max=7200.0,
+                    # Limite do Downdetector é por IP: espaça as consultas (23 serviços ~8 min)
+                    # e, se bloqueado, pausa todos (10 min, dobra até 1 h). 2026-10-19.
+                    min_gap=20.0, cooldown_initial=600.0, cooldown_max=3600.0,
                 )
                 await self._scheduler.run()
                 # Scheduler.run() só retorna em SIGHUP (recarrega config) ou stop;
