@@ -19,6 +19,7 @@ import structlog
 from librouteros import connect
 from librouteros.exceptions import LibRouterosError
 
+from mikrotik.sessao import ConexaoDoCiclo
 from mikrotik.config import RouterConfig, LinkConfig
 
 log = structlog.get_logger(__name__)
@@ -81,10 +82,10 @@ class LinkPingResult:
     error: str | None = None
 
 
-class MikrotikClient:
-    """Uma conexao API por roteador. Nao e thread-safe -- um MikrotikClient
-    por RouterConfig, reaberta a cada ciclo (roteadores caem, a conexao TCP
-    tem que ser descartavel)."""
+class MikrotikClient(ConexaoDoCiclo):
+    """Uma conexao API por roteador e por ciclo (sessao(), mikrotik/sessao.py).
+    Nao e thread-safe -- um MikrotikClient por RouterConfig, conexao reaberta
+    a cada ciclo (roteadores caem, a conexao TCP tem que ser descartavel)."""
 
     def __init__(self, router: RouterConfig, ping_count: int = 5, timeout_s: int = 10) -> None:
         self._router = router
@@ -129,7 +130,7 @@ class MikrotikClient:
         fazer (normalmente: pular esse alvo neste ciclo, nao travar o resto).
         """
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning(
                 "mikrotik_gateway_resolve_connect_failed",
@@ -188,6 +189,7 @@ class MikrotikClient:
                 return None
             return remote
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning(
                 "mikrotik_gateway_resolve_failed",
                 unit=self._router.unit,
@@ -196,10 +198,7 @@ class MikrotikClient:
             )
             return None
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
     def ping_link(self, link: LinkConfig, target: str) -> LinkPingResult:
         """Roda /ping contra `target`, forcando a rota da tabela/mark do link.
@@ -209,7 +208,7 @@ class MikrotikClient:
         """
         routing_param = self._router.routing_param()
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning(
                 "mikrotik_connect_failed",
@@ -239,6 +238,7 @@ class MikrotikClient:
                 )
             )
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning(
                 "mikrotik_ping_failed",
                 unit=self._router.unit,
@@ -258,10 +258,7 @@ class MikrotikClient:
                 error="ping_command_failed",
             )
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
         rtts: list[float] = []
         for reply in replies:
@@ -302,7 +299,7 @@ class MikrotikClient:
         """
         routing_param = self._router.routing_param()
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning(
                 "mikrotik_traceroute_connect_failed",
@@ -320,16 +317,14 @@ class MikrotikClient:
                 )
             )
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning(
                 "mikrotik_traceroute_failed",
                 unit=self._router.unit, link=link.name, target=target, error=str(exc),
             )
             return []
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
         if not replies:
             return []

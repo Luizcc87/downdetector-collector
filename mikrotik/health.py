@@ -18,6 +18,7 @@ import structlog
 from librouteros import connect
 from librouteros.exceptions import LibRouterosError
 
+from mikrotik.sessao import ConexaoDoCiclo
 from mikrotik.config import RouterConfig
 
 log = structlog.get_logger(__name__)
@@ -68,10 +69,10 @@ class LogEntry:
     message: str
 
 
-class RouterHealthClient:
-    """Uma conexao API por chamada, mesma disciplina de mikrotik/client.py
-    (roteador pode cair a qualquer momento -- conexao tem que ser
-    descartavel, nao mantida aberta entre ciclos)."""
+class RouterHealthClient(ConexaoDoCiclo):
+    """Mesma disciplina de mikrotik/client.py: dentro de sessao(), uma conexao
+    para o ciclo inteiro; fora dela, uma por chamada. Nunca mantida aberta
+    entre ciclos (roteador pode cair a qualquer momento)."""
 
     def __init__(self, router: RouterConfig, timeout_s: int = 10) -> None:
         self._router = router
@@ -100,7 +101,7 @@ class RouterHealthClient:
 
     def get_system_resource(self) -> SystemResource | None:
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning("mikrotik_health_connect_failed", unit=self._router.unit, error=str(exc))
             return None
@@ -116,19 +117,17 @@ class RouterHealthClient:
                 uptime_seconds=_uptime_to_seconds(str(r.get("uptime", ""))),
             )
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning("mikrotik_system_resource_failed", unit=self._router.unit, error=str(exc))
             return None
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
     def get_interface_traffic(self, interfaces: list[str]) -> list[InterfaceTraffic]:
         if not interfaces:
             return []
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning("mikrotik_health_connect_failed", unit=self._router.unit, error=str(exc))
             return []
@@ -138,6 +137,7 @@ class RouterHealthClient:
                 try:
                     rows = list(api("/interface/monitor-traffic", **{"interface": iface, "once": ""}))
                 except LibRouterosError as exc:
+                    self._descartar_se_perdida(exc)
                     log.warning(
                         "mikrotik_interface_traffic_failed",
                         unit=self._router.unit, interface=iface, error=str(exc),
@@ -152,28 +152,23 @@ class RouterHealthClient:
                     tx_bps=int(r.get("tx-bits-per-second", 0)),
                 ))
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
         return results
 
     def get_vpn_tunnels(self) -> list[VpnTunnel]:
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning("mikrotik_health_connect_failed", unit=self._router.unit, error=str(exc))
             return []
         try:
             rows = list(api("/interface/print"))
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning("mikrotik_vpn_tunnels_failed", unit=self._router.unit, error=str(exc))
             return []
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
         tunnels = []
         for r in rows:
@@ -194,20 +189,18 @@ class RouterHealthClient:
         roteador na primeira execucao.
         """
         try:
-            api = self._connect()
+            api = self._abrir()
         except (LibRouterosError, OSError) as exc:
             log.warning("mikrotik_health_connect_failed", unit=self._router.unit, error=str(exc))
             return [], since_id
         try:
             rows = list(api("/log/print"))
         except LibRouterosError as exc:
+            self._descartar_se_perdida(exc)
             log.warning("mikrotik_log_print_failed", unit=self._router.unit, error=str(exc))
             return [], since_id
         finally:
-            try:
-                api.close()
-            except Exception:
-                pass
+            self._liberar(api)
 
         if not rows:
             return [], since_id

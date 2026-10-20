@@ -198,9 +198,12 @@ async def _run_router(router: RouterConfig, args: argparse.Namespace) -> None:
     health = RouterHealthClient(router)
     metrics: list[Metric] = []
 
-    any_link_ok = await _collect_links(router, client, metrics)
-    await _collect_traceroute(router, client, metrics)
-    await _collect_health(router, health, metrics)
+    # Uma conexao por cliente no ciclo inteiro (antes: uma por operacao, cada uma
+    # um login/logout no log da RB) -- ver mikrotik/sessao.py
+    with client.sessao(), health.sessao():
+        any_link_ok = await _collect_links(router, client, metrics)
+        await _collect_traceroute(router, client, metrics)
+        await _collect_health(router, health, metrics)
 
     # Heartbeat sempre enviado, mesmo se tudo mais falhar -- distingue
     # "link/servico caido" (dado chegou, valor ruim) de "coletor quebrado"
